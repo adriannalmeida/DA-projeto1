@@ -1,6 +1,4 @@
-"C:\Users\marta\OneDrive\Imagens\Ambiente de Trabalho\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" -S C:\Users\marta\OneDrive\Documentos\FEUP-Marta\ProjectDA\DA-projeto1 -B C:\Users\marta\OneDrive\Documentos\FEUP-Marta\ProjectDA\DA-projeto1\cmake-build-debug
-CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
-  CMake 3.27 or higher is required.  You are running version 3.26.4
-
-
--- Configuring incomplete, errors occurred!
+/snap/clion/265/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/265/bin/ninja/linux/x64/ninja -G Ninja -S /home/adriana/2leic/2S/DA/Projeto1 -B /home/adriana/2leic/2S/DA/Projeto1/cmake-build-debug
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/adriana/2leic/2S/DA/Projeto1/cmake-build-debug
