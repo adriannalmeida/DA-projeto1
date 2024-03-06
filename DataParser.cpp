@@ -79,7 +79,7 @@ void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht) 
 //FALTA TESTAR PARSER DE CITY E DE STATION!!!
 //Falta testar Pipes Parser!!
 
-void PipesParser(string path, Graph<string> &g){
+/*void PipesParser(string path, Graph<string> &g){
     ifstream csv(path);
     if(!csv.is_open()){
         cerr << "Error opening Pipes.csv" << endl;
@@ -107,4 +107,4 @@ void PipesParser(string path, Graph<string> &g){
         g.addEdge(E);
     }
 }
-
+*/

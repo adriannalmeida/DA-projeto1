@@ -8,7 +8,6 @@ include_directories(.)
 add_executable(Projeto1
         City.cpp
         City.h
-        Pipes.cpp
         DataParser.cpp
         data_structures/ufds.cpp
         data_structures/MutablePriorityQueue.h
