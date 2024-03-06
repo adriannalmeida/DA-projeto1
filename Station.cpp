@@ -1,9 +1,6 @@
-//
-// Created by marta on 05/03/2024.
-//
-
 #include "Station.h"
 
+Station::Station(){}
 Station::Station(int id_, string code_):
     id(id_), code(code_) {}
 

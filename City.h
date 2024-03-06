@@ -7,16 +7,17 @@ class City {
     string city;
     int id;
     string code;
-    int demand;
+    double demand;
     long int population;
 
 public:
-    City(string city, int id, string code, int demand, long int population);
+    City();
+    City(string city, int id, string code, double demand, long population);
     string getCity();
     int getId();
     string getCode();
-    int getDemand();
-    long int getPopulation();
+    double getDemand();
+    long getPopulation();
 };
 
 

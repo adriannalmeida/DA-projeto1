@@ -1,7 +1,7 @@
 #include "City.h"
 
-
-City::City(string city, int id, string code, int demand, long int population){
+City::City(){}
+City::City(string city, int id, string code, double demand, long population){
     this->city = city;
     this->id = id;
     this->code = code;
@@ -18,9 +18,9 @@ int City::getId() {
 string City::getCode() {
     return this->code;
 }
-int City::getDemand() {
+double City::getDemand() {
     return this->demand;
 }
-long int City::getPopulation() {
+long City::getPopulation() {
     return this->population;
 }
