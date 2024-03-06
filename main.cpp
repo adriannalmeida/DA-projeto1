@@ -4,7 +4,7 @@
 int main(){
     unordered_map<string, Reservoir> reservoirs_code;
     Graph<string> g;
-    string path = "/home/adriana/2leic/2S/DA/Projeto1/Project1DataSetSmall/Project1DataSetSmall/Reservoirs_Madeira.csv";
+    string path = "../Project1DataSetSmall/Project1DataSetSmall/Reservoirs_Madeira.csv";
     ReservoirParser(path, g, reservoirs_code);
 
     for(auto x: g.getVertexSet()){

@@ -14,4 +14,5 @@ add_executable(Projeto1
         data_structures/MutablePriorityQueue.h
         Reservoir.h
         Reservoir.cpp
-        main.cpp)
+        main.cpp
+        Station.cpp)

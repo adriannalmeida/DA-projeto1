@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/adriana/2leic/2S/DA/Projeto1/cmake-build-debug"
+			"value" : "/home/adriana/2leic/2S/DA/DA-projeto1/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -543,7 +543,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/adriana/2leic/2S/DA/Projeto1/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/home/adriana/2leic/2S/DA/DA-projeto1/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -603,7 +603,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/adriana/2leic/2S/DA/Projeto1"
+			"value" : "/home/adriana/2leic/2S/DA/DA-projeto1"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1151,7 +1151,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/adriana/2leic/2S/DA/Projeto1/cmake-build-debug"
+			"value" : "/home/adriana/2leic/2S/DA/DA-projeto1/cmake-build-debug"
 		},
 		{
 			"name" : "Projeto1_IS_TOP_LEVEL",
@@ -1175,7 +1175,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/adriana/2leic/2S/DA/Projeto1"
+			"value" : "/home/adriana/2leic/2S/DA/DA-projeto1"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
