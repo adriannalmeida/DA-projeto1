@@ -5,7 +5,6 @@
 #ifndef DA_PROJETO1_RESERVOIR_H
 #define DA_PROJETO1_RESERVOIR_H
 #include <string>
-#include
 using namespace std;
 
 class Reservoir {
@@ -17,6 +16,7 @@ class Reservoir {
 
 public:
     Reservoir(string reservoir_, string municipality_, string code, int id_, int maxDelivery_ );
+    Reservoir();
     string getReservoir() const;
     string getMunicipality() const;
     string getCode()const;
