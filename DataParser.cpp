@@ -80,7 +80,6 @@ void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht) 
 
 void PipesParser(string path, Graph<string> &g){
     ifstream csv(path);
-    //Edge(Vertex<T> *orig, Vertex<T> *dest, double w, bool d);
     if(!csv.is_open()){
         cerr << "Error opening Pipes.csv" << endl;
         return;
@@ -98,19 +97,13 @@ void PipesParser(string path, Graph<string> &g){
         getline(ss, d, ',');
 
         Vertex<string>* origin = findVertex(orig);
-        if(origin == nullptr){
-            origin = Vertex<string>(orig);
-            g.addVertex(origin);
-        }
+
 
         Vertex<string>* destination = findVertex(dest);
-        if(destination == nullptr){
-            destination = Vertex<string>(dest);
-            g.addVertex(destination);
-        }
+
 
         Edge<string> E = Edge(orig, dest, stoi(w), d - '0');
         g.addEdge(E);
     }
 }
-*/
+
