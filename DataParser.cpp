@@ -76,26 +76,41 @@ void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht) 
 }
 
 //FALTA TESTAR PARSER DE CITY E DE STATION!!!
+//Falta testar Pipes Parser!!
 
-/*
-    void PipesParser(string path, Graph<string> &g, unordered_map<string, Pipes> &ht){
-        ifstream csv(path);
-        if(!csv.is_open()){
-            cerr << "Error opening Pipes.csv" << endl;
-            return;
+void PipesParser(string path, Graph<string> &g){
+    ifstream csv(path);
+    //Edge(Vertex<T> *orig, Vertex<T> *dest, double w, bool d);
+    if(!csv.is_open()){
+        cerr << "Error opening Pipes.csv" << endl;
+        return;
+    }
+    string line;
+    getline(csv, line, '\n');
+
+    while(getline(csv, line, '\n')){
+        string orig, dest, w, d;
+        stringstream ss(line);
+
+        getline(ss, orig, ',');
+        getline(ss, dest, ',');
+        getline(ss, w, ',');
+        getline(ss, d, ',');
+
+        Vertex<string>* origin = findVertex(orig);
+        if(origin == nullptr){
+            origin = Vertex<string>(orig);
+            g.addVertex(origin);
         }
-        string line;
-        getline(csv, line, '\n');
 
-        while(getline(csv, line, '\n')){
-            string A, B, cap, dir;
-            stringstream ss(line);
-
-            getline(ss, A, ',');
-            getline(ss, B, ',');
-            getline(ss, cap, ',');
-            getline(ss, dir, ',');
-
-            Pipes P = Pipes(A,B, cap, dir);
+        Vertex<string>* destination = findVertex(dest);
+        if(destination == nullptr){
+            destination = Vertex<string>(dest);
+            g.addVertex(destination);
         }
+
+        Edge<string> E = Edge(orig, dest, stoi(w), d - '0');
+        g.addEdge(E);
+    }
+}
 */
