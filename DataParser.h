@@ -12,6 +12,7 @@
 using namespace std;
 
 void ReservoirParser(string path, Graph<string> &g, unordered_map<string, Reservoir> &ht);
-
+void StationParser(string path, Graph<string> &g, unordered_map<string, Reservoir> &ht);
+void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht);
 
 #endif //PROJETO1_DATAPARSER_H
