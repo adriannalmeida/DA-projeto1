@@ -60,16 +60,17 @@ void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht) 
     getline(csv, line, '\n');
 
     while (getline(csv, line, '\n')) {
-        string city, id, code, demand, population;
+        string city, id, code, demand, population, lixo;
         stringstream ss(line);
 
         getline(ss, city, ',');
         getline(ss, id, ',');
         getline(ss, code, ',');
         getline(ss, demand, ',');
-        getline(ss, population, ',');
+        getline(ss, lixo, '"');
+        getline(ss, population, '"');
 
-        City C = City(city, stoi(id), code, stoi(demand), stol(population));
+        City C = City(city, stoi(id), code, stod(demand), stoi(population));
         g.addVertex(code);
         ht.emplace(code, C);
     }

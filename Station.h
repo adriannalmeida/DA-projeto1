@@ -12,6 +12,7 @@ class Station {
     string code;
 
 public:
+    Station();
     Station(int id_, string code_);
     int getId() const;
     string getCode() const;
