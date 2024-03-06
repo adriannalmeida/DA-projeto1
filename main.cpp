@@ -13,7 +13,7 @@ int main(){
     CityParser(path_cities,g, cities_code);
     StationParser(path_station,g, stations_code);
 
-    for(auto x: g.getVertexSet()){
+    for(auto x : g.getVertexSet()){
         auto info = x->getInfo();
         switch (info[0]) {
             case 'R':{

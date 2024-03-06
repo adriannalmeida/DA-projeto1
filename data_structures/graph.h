@@ -68,7 +68,7 @@ protected:
 template <class T>
 class Edge {
 public:
-    Edge(Vertex<T> *orig, Vertex<T> *dest, double w);
+    Edge(Vertex<T> *orig, Vertex<T> *dest, double w, bool d);
 
     Vertex<T> * getDest() const;
     double getWeight() const;
@@ -79,10 +79,14 @@ public:
     void setSelected(bool selected);
     void setReverse(Edge<T> *reverse);
     void setFlow(double flow);
-protected:
-    Vertex<T> * dest; // destination vertex
-    double weight; // edge weight, can also be used for capacity
+    bool isDirected();
 
+protected:
+
+    Vertex<T> * dest; // destination bool direction;
+    //vertex
+    double weight; // edge weight, can also be used for capacity
+    bool direction;
     // auxiliary fields
     bool selected = false;
 
@@ -294,7 +298,7 @@ void Vertex<T>::deleteEdge(Edge<T> *edge) {
 /********************** Edge  ****************************/
 
 template <class T>
-Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double w): orig(orig), dest(dest), weight(w) {}
+Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double w, bool d): orig(orig), dest(dest), weight(w), direction(d) {}
 
 template <class T>
 Vertex<T> * Edge<T>::getDest() const {
@@ -341,6 +345,10 @@ void Edge<T>::setFlow(double flow) {
     this->flow = flow;
 }
 
+template <class T>
+bool Edge<T>::isDirected() {
+    return direction;
+}
 /********************** Graph  ****************************/
 
 template <class T>
