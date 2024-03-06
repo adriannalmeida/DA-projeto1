@@ -11,9 +11,7 @@
 #include <unordered_map>
 using namespace std;
 
-class DataParser {
-
-};
+void ReservoirParser(string path, Graph<string> &g, unordered_map<string, Reservoir> &ht);
 
 
 #endif //PROJETO1_DATAPARSER_H
