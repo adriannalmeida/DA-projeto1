@@ -7,7 +7,7 @@ int main(){
     string path = "../Project1DataSetSmall/Project1DataSetSmall/Reservoirs_Madeira.csv";
     ReservoirParser(path, g, reservoirs_code);
 
-    for(auto x: g.getVertexSet()){
+    for(auto x : g.getVertexSet()){
         auto info = x->getInfo();
         Reservoir r;
         r = reservoirs_code[info];
