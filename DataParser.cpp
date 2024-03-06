@@ -4,7 +4,7 @@ void ReservoirParser(string path, Graph<string> &g, unordered_map<string, Reserv
     ifstream csv(path);
 
     if(!csv.is_open()){
-        cerr << "Error opening flights.csv" << endl;
+        cerr << "Error opening Reservoir.csv" << endl;
         return;
     }
 
@@ -28,7 +28,7 @@ void ReservoirParser(string path, Graph<string> &g, unordered_map<string, Reserv
 
 }
 
-void StationParser(string path, Graph<string> &g, unordered_map<string, Reservoir> &ht) {
+void StationParser(string path, Graph<string> &g, unordered_map<string, Station> &ht) {
     ifstream csv(path);
     if (!csv.is_open()) {
         cerr << "Error opening Stations.csv" << endl;

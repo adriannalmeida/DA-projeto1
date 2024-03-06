@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Projeto1::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Projeto1-Debug-db5deb1dd33cc7be1773.json",
+					"jsonFile" : "target-Projeto1-Debug-36d5fc4044567f33a0ca.json",
 					"name" : "Projeto1",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/adriana/2leic/2S/DA/Projeto1/cmake-build-debug",
-		"source" : "/home/adriana/2leic/2S/DA/Projeto1"
+		"build" : "/home/adriana/2leic/2S/DA/DA-projeto1/cmake-build-debug",
+		"source" : "/home/adriana/2leic/2S/DA/DA-projeto1"
 	},
 	"version" : 
 	{

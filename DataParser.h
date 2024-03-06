@@ -9,6 +9,8 @@
 #include "Reservoir.h"
 #include "data_structures/graph.h"
 #include <unordered_map>
+#include "Station.h"
+#include "City.h"
 using namespace std;
 
 void ReservoirParser(string path, Graph<string> &g, unordered_map<string, Reservoir> &ht);
