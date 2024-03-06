@@ -6,7 +6,7 @@
  *      Author: Gonçalo Leão
  */
 
-#include "UFDS.h"
+#include "ufds.h"
 
 UFDS::UFDS(unsigned int N) {
     path.resize(N);

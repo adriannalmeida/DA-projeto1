@@ -1,6 +1,6 @@
 #include "DataParser.h"
 
-void ReservoirParser(string path, Graph<string> &g, unordered_map<string, Reservoir> ht){
+void ReservoirParser(string path, Graph<string> &g, unordered_map<string, Reservoir> &ht){
     ifstream csv(path);
     if(!csv.is_open()){
         cerr << "Error opening flights.csv" << endl;
