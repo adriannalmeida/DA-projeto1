@@ -1,11 +1,17 @@
 # ninja log v5
-2	230	1709749088914835452	CMakeFiles/Projeto1.dir/Reservoir.cpp.o	e7e50d5ba7089057
-1	711	1709753585857434144	CMakeFiles/Projeto1.dir/main.cpp.o	247e9cca0b67c0cf
-1	296	1709749088982841397	CMakeFiles/Projeto1.dir/Pipes.cpp.o	7dad90a417171c85
-2	267	1709749088954838949	CMakeFiles/Projeto1.dir/data_structures/ufds.cpp.o	c3a91e0d2303a1b4
-1	278	1709753485893698607	CMakeFiles/Projeto1.dir/Station.cpp.o	3a150bf52bbf19fc
-0	267	1709753485881699105	CMakeFiles/Projeto1.dir/City.cpp.o	6c1485c1b988cee9
-175	260	1709752986831083354	Projeto1	ff88718d65332801
-1	729	1709753656778298063	CMakeFiles/Projeto1.dir/DataParser.cpp.o	53a24714a0ed9ff1
-0	20	1709753745970261357	build.ninja	653af409f88e0651
 1	80	1709753746054257516	Projeto1	be22881bc59a2372
+0	20	7315257284136380	build.ninja	653af409f88e0651
+45	785	7315258623491914	CMakeFiles/Projeto1.dir/Station.cpp.obj	eaec37040ff95d99
+1	794	7315258623510167	CMakeFiles/Projeto1.dir/City.cpp.obj	ab6c98468c4a7969
+23	796	7315258623500576	CMakeFiles/Projeto1.dir/Reservoir.cpp.obj	93c7f7e17e1a1c73
+12	828	7315258623932195	CMakeFiles/Projeto1.dir/data_structures/ufds.cpp.obj	881d498ae14ffa69
+56	2300	7315258638642158	CMakeFiles/Projeto1.dir/main.cpp.obj	f854f0bfb40ede02
+34	2315	7315258638798692	CMakeFiles/Projeto1.dir/DataParser.cpp.obj	d6c29e511c9737e5
+2315	2786	7315258643449452	Projeto1.exe	7b04d214bb072886
+59	2994	7315340141782669	CMakeFiles/Projeto1.dir/main.cpp.obj	f854f0bfb40ede02
+43	3005	7315340141887164	CMakeFiles/Projeto1.dir/DataParser.cpp.obj	d6c29e511c9737e5
+3005	3619	7315340147979768	Projeto1.exe	7b04d214bb072886
+12	1763	7315341438277593	CMakeFiles/Projeto1.dir/main.cpp.obj	f854f0bfb40ede02
+1766	2227	7315341442835814	Projeto1.exe	7b04d214bb072886
+5	1386	7315343087142157	CMakeFiles/Projeto1.dir/main.cpp.obj	f854f0bfb40ede02
+1389	1746	7315343090676851	Projeto1.exe	7b04d214bb072886
