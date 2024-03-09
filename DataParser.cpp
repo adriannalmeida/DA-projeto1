@@ -1,6 +1,6 @@
 #include "DataParser.h"
 
-void ReservoirParser(string path, Graph<string> &g, unordered_map<string, Reservoir> &ht){
+void ReservoirParser(string path, Graph<string> &g, unordered_map<string, Reservoir> &ht, set<string> r_set){
     ifstream csv(path);
 
     if(!csv.is_open()){
@@ -22,13 +22,14 @@ void ReservoirParser(string path, Graph<string> &g, unordered_map<string, Reserv
         getline(s, mdelivery, ',');
 
         Reservoir R = Reservoir(r,m,c,stoi(id),stoi(mdelivery));
+        r_set.insert(c);
         g.addVertex(c);
         ht.emplace(c, R);
     }
 
 }
 
-void StationParser(string path, Graph<string> &g, unordered_map<string, Station> &ht) {
+void StationParser(string path, Graph<string> &g, unordered_map<string, Station> &ht, set<string> s_set) {
     ifstream csv(path);
     if (!csv.is_open()) {
         cerr << "Error opening Stations.csv" << endl;
@@ -45,12 +46,13 @@ void StationParser(string path, Graph<string> &g, unordered_map<string, Station>
         getline(ss, code, ',');
 
         Station S = Station(stoi(id), code);
+        s_set.insert(code);
         g.addVertex(code);
         ht.emplace(code, S);
     }
 }
 
-void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht) {
+void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht, set<string> c_set) {
     ifstream csv(path);
     if (!csv.is_open()) {
         cerr << "Error opening Cities.csv" << endl;
@@ -72,6 +74,7 @@ void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht) 
 
         City C = City(city, stoi(id), code, stod(demand), stoi(population));
         g.addVertex(code);
+        c_set.insert(code);
         ht.emplace(code, C);
     }
 }

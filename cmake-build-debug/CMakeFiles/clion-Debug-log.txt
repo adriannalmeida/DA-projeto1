@@ -1,16 +1,4 @@
-"C:\Users\marta\OneDrive\Imagens\Ambiente de Trabalho\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Users/marta/OneDrive/Imagens/Ambiente de Trabalho/CLion 2023.2.2/bin/ninja/win/x64/ninja.exe" -G Ninja -S C:\Users\marta\OneDrive\Documentos\FEUP-Marta\ProjectDA\Project2\DA-projeto1 -B C:\Users\marta\OneDrive\Documentos\FEUP-Marta\ProjectDA\Project2\DA-projeto1\cmake-build-debug
--- The C compiler identification is GNU 13.1.0
--- The CXX compiler identification is GNU 13.1.0
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Check for working C compiler: C:/Users/marta/OneDrive/Imagens/Ambiente de Trabalho/CLion 2023.2.2/bin/mingw/bin/gcc.exe - skipped
--- Detecting C compile features
--- Detecting C compile features - done
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: C:/Users/marta/OneDrive/Imagens/Ambiente de Trabalho/CLion 2023.2.2/bin/mingw/bin/g++.exe - skipped
--- Detecting CXX compile features
--- Detecting CXX compile features - done
--- Configuring done (5.7s)
+/snap/clion/265/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/265/bin/ninja/linux/x64/ninja -G Ninja -S /home/saracortez/FEUP/DA/DA-projeto1 -B /home/saracortez/FEUP/DA/DA-projeto1/cmake-build-debug
+-- Configuring done (0.0s)
 -- Generating done (0.0s)
--- Build files have been written to: C:/Users/marta/OneDrive/Documentos/FEUP-Marta/ProjectDA/Project2/DA-projeto1/cmake-build-debug
+-- Build files have been written to: /home/saracortez/FEUP/DA/DA-projeto1/cmake-build-debug

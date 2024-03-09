@@ -13,12 +13,12 @@ void calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> &city_
     }
 }
 
-void printNotFullySuppliedCities(unordered_map<string, City> &city_codes){
+void printNotFullySuppliedCities(unordered_map<string, City> &city_codes, set<string> &c_set){
 
         bool printColumnNames = 0;
-        //imprime os pares unordered
-        for (auto p: city_codes) {
-            auto c = p.second;
+        //imprime os pares ordered
+        for (auto code : c_set) {
+            auto c = city_codes[code];
             if (c.getReceived() < c.getDemand()) {
                 if (!printColumnNames) {
                     cout << "City Code" << '\t' << "Deficit";
