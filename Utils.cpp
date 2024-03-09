@@ -107,7 +107,7 @@ void setFlowPath (Vertex<string>* s, Vertex<string>* d, double flow){
     }
 }
 
-void maxFlow(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes){
+vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes){
     g.addVertex("source");
     Vertex<string>* src;
     for (auto v : g.getVertexSet()) {
@@ -136,6 +136,7 @@ void maxFlow(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_code
     }
 
 
+    vector<pair<string, double>> res;
     for(auto dest: destinations){
         //cout << src->getInfo() << "---->" << v->getInfo()<<endl;
         for(auto v: g.getVertexSet()){
@@ -144,9 +145,11 @@ void maxFlow(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_code
             }
         }
 
+        double maxFlow=0;
         while(findPath(g, src, dest)){
             double f= minResidual(src, dest);
             setFlowPath(src, dest, f);
+            maxFlow+=f;
         }
         /*Vertex<string>* currentV=dest;
         double maxFlow=0;
@@ -154,16 +157,46 @@ void maxFlow(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_code
             maxFlow+=currentV->getPath()->getFlow();
             currentV=currentV->getPath()->getOrig();
         }*/
-        double maxFlow=0;
+        /*double maxFlow=0;
         for(auto v: g.getVertexSet()){
             for(auto edge: v->getAdj()){
                 if(edge->getDest()==dest){
                     maxFlow+=edge->getFlow();
                 }
             }
-        }
+        }*/
+        res.push_back(make_pair(dest->getInfo(), maxFlow));
 
-        cout << dest->getInfo() <<": " << maxFlow<<endl;
+        //cout << dest->getInfo() <<": " << maxFlow<<endl;
+    }
+    return res;
+}
+
+void chooseCity(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string city){
+    vector<pair<string, double>> flows = maxFlow(g, reservoirs_codes);
+    if(city=="none"){
+        for(auto c: flows){
+            cout << c.first << ": "<< c.second<<endl;
+        }
+    }
+    else {
+        string code="";
+        for (auto c: cities_codes) {
+            if (c.second.getCity() == city) {
+                code = c.first;
+            }
+        }
+        if(code==""){
+            cout<< "City doesn´t exist"<<endl;
+        }
+        //cout << code;
+        else {
+            for (auto ci: flows) {
+                if (ci.first == code) {
+                    cout << city << ": " << ci.second;
+                }
+            }
+        }
     }
 
 }

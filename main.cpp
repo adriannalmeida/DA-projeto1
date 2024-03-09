@@ -52,6 +52,7 @@ int main() {
     printNotFullySuppliedCities(cities_code);*/
 
     //maxFlow
-    maxFlow(g, reservoirs_code);
+    //maxFlow(g, reservoirs_code);
+    chooseCity(g, reservoirs_code, cities_code, "Santana");
 }
 
