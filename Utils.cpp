@@ -29,3 +29,23 @@ void printNotFullySuppliedCities(unordered_map<string, City> &city_codes, set<st
         }
         if (!printColumnNames) cout << "All cities receive full demand!";
 }
+
+void maxFlow(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes){
+    g.addVertex("source");
+    for (auto v : g.getVertexSet()) {
+        if(v->getInfo()[0] == 'R'){
+            auto reservoir=reservoirs_codes[v->getInfo()];
+            g.addEdge("source", v->getInfo(), reservoir.getMaxDelivery());
+        }
+    }
+    //testar
+    for(auto v:g.getVertexSet()){
+        if(v->getInfo()=="source"){
+            for(auto edge: v->getAdj()){
+                auto reservoir=reservoirs_codes[edge->getDest()->getInfo()];
+                cout << v->getInfo() << "---->" << edge->getDest()->getInfo()<< "->" << edge->getWeight()<< "->" <<reservoir.getMaxDelivery()<<endl;
+            }
+        }
+    }
+
+}

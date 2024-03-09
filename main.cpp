@@ -42,14 +42,16 @@ int main() {
 
     }*/
 
-    for (auto v: g.getVertexSet()) {
+    /*for (auto v: g.getVertexSet()) {
         for (auto e: v->getAdj()) {
             cout << e->getOrig()->getInfo() << "----->" << e->getDest()->getInfo() << endl;
         }
-    }
+    }*/
     //t2.2
-    calculateReceivedSupply(cities_code);
-    printNotFullySuppliedCities(cities_code);
+    /*calculateReceivedSupply(cities_code);
+    printNotFullySuppliedCities(cities_code);*/
 
+    //maxFlow
+    maxFlow(g, reservoirs_code);
 }
 

@@ -11,4 +11,5 @@
 void calculateReceivedSupply(unordered_map<string, City> &city_codes);
 void printNotFullySuppliedCities(unordered_map<string, City> &city_codes);
 
+void maxFlow(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes);
 #endif //DA_PROJETO1_UTILS_H
