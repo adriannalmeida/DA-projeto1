@@ -200,3 +200,36 @@ void chooseCity(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_c
     }
 
 }
+
+
+// minimize the differences of flow to capacity
+
+void minDiffFlowCapacity(Graph<string> &g){
+    // metrics
+    // esta função tem de chamar o max flow ou só ser chamda depois do max flow
+
+    double maxDiff = 0,average;
+    double sum = 0, totaledges = 0, squareDdiffSum, variance;
+    set<pair<pair<string, string>, double>> srcDestDiff; //src dest diff
+    for(auto v: g.getVertexSet()){
+        for (auto e: v->getAdj()){
+            if(e->getFlow() > maxDiff)
+                maxDiff = e->getWeight() - e->getFlow();
+            srcDestDiff.insert(make_pair(make_pair(v->getInfo(), e->getDest()->getInfo()), e->getWeight()- e->getFlow()));
+            sum+= e->getWeight() - e->getFlow();
+            //squareDdiffSum = pow(e->getWeight() - e->getFlow(), 2);
+            totaledges+=1;
+        }
+    }
+    average = sum / totaledges;
+    for(auto x: srcDestDiff){
+        squareDdiffSum += pow(x.second - average, 2);
+    }
+    variance = squareDdiffSum / totaledges;
+    // variance esta bem ??
+    cout << endl << "max difference  " << maxDiff << "    averge  " << average << "   variance  " << variance << endl;
+
+
+
+
+}

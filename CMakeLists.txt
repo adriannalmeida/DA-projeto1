@@ -18,4 +18,6 @@ add_executable(Projeto1
         Station.cpp
         Utils.h
         Utils.cpp
+        menu.cpp
+        menu.h
 )

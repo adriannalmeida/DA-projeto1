@@ -1,6 +1,7 @@
 #include "DataParser.h"
 #include "data_structures/graph.h"
 #include "Utils.h"
+#include "menu.h"
 #include <set>
 
 int main() {
@@ -17,6 +18,10 @@ int main() {
     CityParser(path_cities, g, cities_code, c_set);
     StationParser(path_station, g, stations_code, s_set);
     PipesParser(path_pipes, g);
+
+    chooseCity(g, reservoirs_code, cities_code, "Santana");
+    minDiffFlowCapacity(g);
+    //mainMenu(g, cities_code,reservoirs_code);
 
     /*for(auto x : g.getVertexSet()){
         auto info = x->getInfo();
@@ -53,6 +58,6 @@ int main() {
 
     //maxFlow
     //maxFlow(g, reservoirs_code);
-    chooseCity(g, reservoirs_code, cities_code, "Santana");
+    //chooseCity(g, reservoirs_code, cities_code, "Santana");
 }
 
