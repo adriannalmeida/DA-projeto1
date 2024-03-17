@@ -107,16 +107,25 @@ void setFlowPath (Vertex<string>* s, Vertex<string>* d, double flow){
     }
 }
 
-vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes){
+vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
     g.addVertex("source");
+    g.addVertex("sink");
     Vertex<string>* src;
+    Vertex<string>* snk;
     for (auto v : g.getVertexSet()) {
         if(v->getInfo()[0] == 'R'){
             auto reservoir=reservoirs_codes[v->getInfo()];
             g.addEdge("source", v->getInfo(), reservoir.getMaxDelivery());
         }
+        if(v->getInfo()[0]=='C'){
+            auto city = cities_codes[v->getInfo()];
+            g.addEdge(v->getInfo(), "sink", INF);
+        }
         if(v->getInfo() == "source"){
             src=v;
+        }
+        if(v->getInfo() == "sink"){
+            snk=v;
         }
     }
     //testar
@@ -128,16 +137,29 @@ vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Res
             }
         }
     }*/
-    vector<Vertex<string>*> destinations;
+
+    /*for(auto v:g.getVertexSet()){
+        if(v->getInfo()[0]=='C'){
+            for(auto edge: v->getAdj()){
+                auto city=cities_codes[v->getInfo()];
+                cout << v->getInfo() << "---->" << edge->getDest()->getInfo();
+            }
+        }
+    }*/
+    // acabou testar
+
+
+    /*vector<Vertex<string>*> destinations;
     for(auto v: g.getVertexSet()){
         if(v->getInfo()[0] == 'C'){
             destinations.push_back(v);
         }
-    }
+    }*/
 
+    if(src==snk){cout<< "Invalid";}
 
     vector<pair<string, double>> res;
-    for(auto dest: destinations){
+    //for(auto dest: destinations){
         //cout << src->getInfo() << "---->" << v->getInfo()<<endl;
         for(auto v: g.getVertexSet()){
             for(auto edge: v->getAdj()){
@@ -145,11 +167,11 @@ vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Res
             }
         }
 
-        double maxFlow=0;
-        while(findPath(g, src, dest)){
-            double f= minResidual(src, dest);
-            setFlowPath(src, dest, f);
-            maxFlow+=f;
+        //double maxFlow=0;
+        while(findPath(g, src, snk)){
+            double f= minResidual(src, snk);
+            setFlowPath(src, snk, f);
+            //maxFlow+=f;
         }
         /*Vertex<string>* currentV=dest;
         double maxFlow=0;
@@ -165,15 +187,26 @@ vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Res
                 }
             }
         }*/
-        res.push_back(make_pair(dest->getInfo(), maxFlow));
+
+    for(auto v: g.getVertexSet()){
+        if(v->getInfo()[0]=='C'){
+            for(auto edge: v->getAdj()){
+                if(edge->getDest()->getInfo()=="sink"){
+                    res.push_back(make_pair(v->getInfo(), edge->getFlow()));
+                }
+            }
+        }
+    }
+
+        //res.push_back(make_pair(dest->getInfo(), maxFlow));
 
         //cout << dest->getInfo() <<": " << maxFlow<<endl;
-    }
+
     return res;
 }
 
-void chooseCity(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string city){
-    vector<pair<string, double>> flows = maxFlow(g, reservoirs_codes);
+void chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string city){
+    vector<pair<string, double>> flows = maxFlow(g, reservoirs_codes, cities_codes);
     if(city=="none"){
         for(auto c: flows){
             cout << c.first << ": "<< c.second<<endl;
@@ -197,6 +230,29 @@ void chooseCity(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_c
                 }
             }
         }
+    }
+
+}
+
+void chooseCityByCode(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string code){
+    vector<pair<string, double>> flows = maxFlow(g, reservoirs_codes, cities_codes);
+    if(code=="none"){
+        for(auto c: flows){
+            cout << c.first << ": "<< c.second<<endl;
+        }
+    }
+    else {
+        bool c=false;
+        for (auto co: flows) {
+            if (co.first == code) {
+                cout << code << ": " << co.second;
+                c=true;
+            }
+        }
+        if(!c){
+            cout<< "City doesn´t exist"<<endl;
+        }
+
     }
 
 }
