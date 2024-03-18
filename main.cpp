@@ -53,8 +53,10 @@ int main() {
 
     //maxFlow
     //maxFlow(g, reservoirs_code);
-    chooseCityByName(g, reservoirs_code, cities_code, "C_6");
+    //chooseCityByName(g, reservoirs_code, cities_code, "C_6");
 
     //maxFlow(g, reservoirs_code, cities_code);
+
+    removePumpingStations(g, cities_code, stations_code, reservoirs_code);
 }
 

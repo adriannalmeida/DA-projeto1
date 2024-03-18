@@ -18,4 +18,6 @@ bool findPath(Graph<string>* g, Vertex<string>*s, Vertex<string>*d);
 double minResidual(Vertex<string>* s, Vertex<string>* d);
 void setFlowPath (Vertex<string>* s, Vertex<string>* d, double flow);
 void chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string city);
+
+void removePumpingStations(Graph<string> &g, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code, unordered_map<string, Reservoir> &reservoirs_code);
 #endif //DA_PROJETO1_UTILS_H

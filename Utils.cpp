@@ -201,7 +201,8 @@ vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Res
         //res.push_back(make_pair(dest->getInfo(), maxFlow));
 
         //cout << dest->getInfo() <<": " << maxFlow<<endl;
-
+    g.removeVertex("source");
+    g.removeVertex("sink");
     return res;
 }
 
@@ -253,6 +254,73 @@ void chooseCityByCode(Graph<string> &g, unordered_map<string, Reservoir> &reserv
             cout<< "City doesn´t exist"<<endl;
         }
 
+    }
+
+}
+
+void removePumpingStations(Graph<string> &g, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code, unordered_map<string, Reservoir> &reservoirs_code){
+
+    std::vector<Vertex<string>*> stations;
+    for(auto v: g.getVertexSet()){
+        if(v->getInfo()[0]=='P'){
+            stations.push_back(v);
+        }
+    }
+
+    vector<pair<string, double>> maxiFlow = maxFlow(g, reservoirs_code, cities_codes);
+
+
+    for(auto s: stations){
+
+        vector<pair<Vertex<string>*, double>> outcomingEdges;
+        vector<pair<Vertex<string>*, double>> incomingEdges;
+        for(auto edge: s->getAdj()){
+            outcomingEdges.push_back(make_pair(edge->getDest(), edge->getWeight()));
+        }
+        for(auto edge: s->getIncoming()){
+            incomingEdges.push_back(make_pair(edge->getOrig(), edge->getWeight()));
+        }
+
+        string info=s->getInfo();
+        g.removeVertex(s->getInfo());
+
+        vector<pair<string, double>> currentFlow = maxFlow(g, reservoirs_code, cities_codes);
+
+        //testar
+        /*int n=currentFlow.size();
+        int a=maxiFlow.size();
+        cout <<n << endl;
+        cout <<a <<endl;
+        for(auto w: currentFlow){
+            cout<< w.first<< "---->" <<w.second<<endl;
+        }*/
+
+        g.addVertex(info);
+
+        for(auto edge: outcomingEdges){
+            g.addEdge(info, edge.first->getInfo(), edge.second);
+        }
+        
+        for(auto edge: incomingEdges){
+            g.addEdge(edge.first->getInfo(), info, edge.second);
+        }
+
+        int n=maxiFlow.size();
+        bool affected=false;
+
+        cout << "Affected cities by " << info<<": "<<endl;
+        for(int i=0; i<n; i++){
+
+            if(maxiFlow[i].second != currentFlow[i].second){
+                affected=true;
+                int dif=maxiFlow[i].second - currentFlow[i].second;
+                cout << maxiFlow[i].first << "---->" << dif <<endl;
+            }
+
+        }
+        if(!affected){
+            cout << "No cities affected"<< endl;
+        }
     }
 
 }
