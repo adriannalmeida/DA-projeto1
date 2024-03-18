@@ -3,7 +3,11 @@
 #include <iostream>
 using namespace std;
 
-void calculateReceivedSupply(Graph<string> g,unordered_map<string, City> &city_codes){
+int calculateReceivedSupply(Graph<string> g,unordered_map<string, City> &city_codes){
+    int notSupplied = 0;
+    for(auto p : city_codes){
+        p.second.setReceived(0);
+    }
     for (auto v : g.getVertexSet()) {
         if(v->getInfo()[0] == 'C'){
             double res = 0;
@@ -11,12 +15,16 @@ void calculateReceivedSupply(Graph<string> g,unordered_map<string, City> &city_c
                 res += e->getFlow();
             }
             city_codes[v->getInfo()].setReceived(res);
+            if(res < city_codes[v->getInfo()].getDemand()){
+                notSupplied++;
+            }
         }
     }
+    return notSupplied;
 }
 
-void printNotFullySuppliedCities(unordered_map<string, City> &city_codes, set<string> &c_set){
 
+void printNotFullySuppliedCities(unordered_map<string, City> &city_codes, set<string> &c_set){
     bool printColumnNames = 0;
     //imprime os pares ordered
     for (auto code : c_set) {
@@ -257,7 +265,7 @@ void chooseCityByCode(Graph<string> &g, unordered_map<string, Reservoir> &reserv
 
 }
 
-void chooseFailingReservor(Graph<string> g, string code, unordered_map<string, Reservoir> reservoirs_codes, unordered_map<string, City> &city_codes, set<string> &c_set){
+void chooseFailingReservoir(Graph<string> g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes, set<string> &c_set){
     try {
         Reservoir R = reservoirs_codes.at(code);
     } catch (const std::out_of_range& e) {
@@ -268,16 +276,35 @@ void chooseFailingReservor(Graph<string> g, string code, unordered_map<string, R
         //pus g passado por valor por referencia nas funcoes que ela chama.
         //medir a complexidade para ver se é melhor só readicionar o vértice no fim.
     }
+
     /*
     Vertex<string>* saved = new Vertex<string>(code);
     Vertex<string>* v = g.findVertex(code);
     saved->getAdj() = v->getAdj();
-    *///ou fazer um hide vertex?
+    */
 
+    //ou fazer um hide vertex?
+    //acho que só funciona com o max-flow sempre, uma vez que ao flow de todas as edges está suscetível a mudanças
+    //
     g.removeVertex(code);
 
     maxFlow(g, reservoirs_codes, city_codes);
     /*do we have to? I think that city_codes are dispensable*/
     calculateReceivedSupply(g, city_codes);
+    cout << "Cities for which demand is not met:" <<endl;
     printNotFullySuppliedCities(city_codes, c_set);
+}
+//3.2
+void chooseFailingPumpingStation(Graph<string> g, string code, unordered_map<string, Reservoir> &ps_codes, unordered_map<string, City> &city_codes, set<string> &c_set){
+    try {
+        Station S = ps_codes.at(code);
+    } catch (const std::out_of_range& e) {
+        cout << "Station does not exist!: " << endl;
+        return;
+        //OU cout << "Do you want to try again?\nYes\nNo";´
+        //ver como funciona o menu aqui. ver se ter os set faz sentido
+        //pus g passado por valor por referencia nas funcoes que ela chama.
+        //medir a complexidade para ver se é melhor só readicionar o vértice no fim.
+    }
+
 }
