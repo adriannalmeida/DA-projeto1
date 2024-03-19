@@ -63,7 +63,7 @@ void auxprintMenu(vector<string> options, int & size, int &select, string menuNa
 }
 
 void mainMenu(Graph<string> g, unordered_map<string ,City> cities, unordered_map<string, Reservoir> reservoirs){
-    vector<string> opt = {"Max Flow", "B", "C"};
+    vector<string> opt = {"Max Flow", "Pipes can remove", "C"};
     int select = 0, size = 3;
     nonBlockingEntrance();
     auxprintMenu(opt, size, select,"Main Menu");
@@ -74,7 +74,7 @@ void mainMenu(Graph<string> g, unordered_map<string ,City> cities, unordered_map
             //wait();
             break;
         case 1:
-            cout << "ahahah" << endl;
+            pipeFailure("Santana", g, reservoirs, cities);
             //wait();
             break;
         case 2:

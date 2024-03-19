@@ -228,8 +228,39 @@ void minDiffFlowCapacity(Graph<string> &g){
     variance = squareDdiffSum / totaledges;
     // variance esta bem ??
     cout << endl << "max difference  " << maxDiff << "    averge  " << average << "   variance  " << variance << endl;
+}
 
 
+//função 3.3
 
+void pipeFailure(string city, Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
+    vector<pair<string, string>> res; //src dest of the edges that can be removed
+    Graph<string> tempGraph = g;
+    int eW = 0;
+    vector<pair<string, double>> flows = maxFlow(g, reservoirs_codes);
+    double initialValue;
+    for(auto x: flows){
+        if(x.first == city)
+            initialValue = x.second;
+    }
 
+    for(auto src: g.getVertexSet()){
+        for(auto e: src->getAdj()){
+            tempGraph.removeEdge(src->getInfo(), e->getDest()->getInfo());
+            vector<pair<string, double>> newFlows = maxFlow(tempGraph, reservoirs_codes);
+            double newValue;
+            for(auto x: flows){
+                if(x.first == city)
+                    newValue = x.second;
+            }
+            if(initialValue == newValue)
+                res.push_back(make_pair(src->getInfo(), e->getDest()->getInfo()));
+            tempGraph = g;
+            tempGraph.addEdge(src->getInfo(), e->getDest()->getInfo(), eW);
+
+        }
+    }
+    for(auto x: res){
+        cout << "The edge connecting " << x.first << " to" << x.second << " can be removed" << endl;
+    }
 }

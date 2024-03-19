@@ -10,10 +10,10 @@ int main() {
     unordered_map<string, Station> stations_code;
     set<string> r_set, s_set, c_set;
     Graph<string> g;
-    string path_reser = "../Project1DataSetSmall/Project1DataSetSmall/Reservoirs_Madeira.csv";
-    string path_station = "../Project1DataSetSmall/Project1DataSetSmall/Stations_Madeira.csv";
-    string path_cities = "../Project1DataSetSmall/Project1DataSetSmall/Cities_Madeira.csv";
-    string path_pipes = "../Project1DataSetSmall/Project1DataSetSmall/Pipes_Madeira.csv";
+    string path_reser = "/home/adriana/2leic/2S/DA/DA-projeto1/Project1DataSetSmall/Project1DataSetSmall/Reservoirs_Madeira.csv";
+    string path_station = "/home/adriana/2leic/2S/DA/DA-projeto1/Project1DataSetSmall/Project1DataSetSmall/Stations_Madeira.csv";
+    string path_cities = "/home/adriana/2leic/2S/DA/DA-projeto1/Project1DataSetSmall/Project1DataSetSmall/Cities_Madeira.csv";
+    string path_pipes = "/home/adriana/2leic/2S/DA/DA-projeto1/Project1DataSetSmall/Project1DataSetSmall/Pipes_Madeira.csv";
     ReservoirParser(path_reser, g, reservoirs_code, r_set);
     CityParser(path_cities, g, cities_code, c_set);
     StationParser(path_station, g, stations_code, s_set);
@@ -21,7 +21,7 @@ int main() {
 
     chooseCity(g, reservoirs_code, cities_code, "Santana");
     minDiffFlowCapacity(g);
-    //mainMenu(g, cities_code,reservoirs_code);
+    mainMenu(g, cities_code,reservoirs_code);
 
     /*for(auto x : g.getVertexSet()){
         auto info = x->getInfo();
