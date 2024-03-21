@@ -119,7 +119,7 @@ vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Res
         }
         if(v->getInfo()[0]=='C'){
             auto city = cities_codes[v->getInfo()];
-            g.addEdge(v->getInfo(), "sink", INF);
+            g.addEdge(v->getInfo(), "sink", city.getDemand());
         }
         if(v->getInfo() == "source"){
             src=v;
@@ -189,28 +189,35 @@ vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Res
         }*/
 
     for(auto v: g.getVertexSet()){
+        int sumFlow=0;
         if(v->getInfo()[0]=='C'){
-            for(auto edge: v->getAdj()){
-                if(edge->getDest()->getInfo()=="sink"){
-                    res.push_back(make_pair(v->getInfo(), edge->getFlow()));
-                }
+            for(auto edge: v->getIncoming()){
+                sumFlow+=edge->getFlow();
+                //if(edge->getDest()->getInfo()=="sink"){
+                    //res.push_back(make_pair(v->getInfo(), edge->getFlow()));
+                //}
             }
+            res.push_back(make_pair(v->getInfo(), sumFlow));
         }
     }
 
         //res.push_back(make_pair(dest->getInfo(), maxFlow));
 
         //cout << dest->getInfo() <<": " << maxFlow<<endl;
-
+    g.removeVertex("source");
+    g.removeVertex("sink");
     return res;
 }
 
 void chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string city){
     vector<pair<string, double>> flows = maxFlow(g, reservoirs_codes, cities_codes);
+    int sum=0;
     if(city=="none"){
         for(auto c: flows){
             cout << c.first << ": "<< c.second<<endl;
+            sum+=c.second;
         }
+        cout<<"max flow: "<<sum<<endl;
     }
     else {
         string code="";
@@ -255,4 +262,132 @@ void chooseCityByCode(Graph<string> &g, unordered_map<string, Reservoir> &reserv
 
     }
 
+}
+
+void removePumpingStations(Graph<string> &g, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code, unordered_map<string, Reservoir> &reservoirs_code){
+
+    std::vector<Vertex<string>*> stations;
+    for(auto v: g.getVertexSet()){
+        if(v->getInfo()[0]=='P'){
+            stations.push_back(v);
+        }
+    }
+
+    vector<pair<string, double>> maxiFlow = maxFlow(g, reservoirs_code, cities_codes);
+
+
+    for(auto s: stations){
+
+        vector<pair<Vertex<string>*, double>> outcomingEdges;
+        vector<pair<Vertex<string>*, double>> incomingEdges;
+        for(auto edge: s->getAdj()){
+            outcomingEdges.push_back(make_pair(edge->getDest(), edge->getWeight()));
+        }
+        for(auto edge: s->getIncoming()){
+            incomingEdges.push_back(make_pair(edge->getOrig(), edge->getWeight()));
+        }
+
+        string info=s->getInfo();
+        g.removeVertex(s->getInfo());
+
+        vector<pair<string, double>> currentFlow = maxFlow(g, reservoirs_code, cities_codes);
+
+        //testar
+        /*int n=currentFlow.size();
+        int a=maxiFlow.size();
+        cout <<n << endl;
+        cout <<a <<endl;
+        for(auto w: currentFlow){
+            cout<< w.first<< "---->" <<w.second<<endl;
+        }*/
+
+        g.addVertex(info);
+
+        for(auto edge: outcomingEdges){
+            g.addEdge(info, edge.first->getInfo(), edge.second);
+        }
+        
+        for(auto edge: incomingEdges){
+            g.addEdge(edge.first->getInfo(), info, edge.second);
+        }
+
+        int n=maxiFlow.size();
+        bool affected=false;
+
+        cout << "Affected cities by " << info<<": "<<endl;
+        for(int i=0; i<n; i++){
+
+            if(maxiFlow[i].second != currentFlow[i].second){
+                affected=true;
+                int dif=maxiFlow[i].second - currentFlow[i].second;
+                cout << maxiFlow[i].first << "---->" << dif <<endl;
+            }
+
+        }
+        if(!affected){
+            cout << "No cities affected"<< endl;
+        }
+    }
+
+}
+
+
+void pipeFailure(string city, Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
+    vector<pair<string, string>> res; //src dest of the edges that can be removed
+
+    vector<pair<string, double>> flows = maxFlow(g, reservoirs_codes, cities_codes);
+
+    double initialValue;
+    for(auto x: flows){
+        if(x.first == city)
+            initialValue = x.second;
+    }
+
+    for(auto src: g.getVertexSet()){
+        for(auto e: src->getAdj()){
+            string desti = e->getDest()->getInfo();
+
+            g.removeEdge(src->getInfo(), e->getDest()->getInfo());
+            vector<pair<string, double>> newFlows = maxFlow(g, reservoirs_codes, cities_codes);
+
+            double newValue;
+            for(auto x: flows){
+                if(x.first == city)
+                    newValue = x.second;
+            }
+
+            if(initialValue == newValue){
+                res.push_back(make_pair(src->getInfo(), desti));
+            }
+
+            g.addEdge(src->getInfo(), desti, e->getWeight());
+
+        }
+    }
+    string orig, dest;
+    cout << "The pipelines connecting the following places can be removed: "<<endl;
+    for(auto x: res){
+        if(x.first[0]=='C')
+            orig = cities_codes[x.first].getCity();
+
+        else if(x.first[0]=='P'){
+            orig = x.first;
+        }
+
+        else{
+            orig= reservoirs_codes[x.first].getReservoir();
+        }
+
+        if(x.second[0]=='C')
+            dest = cities_codes[x.second].getCity();
+
+        else if(x.second[0]=='P'){
+            dest = x.second;
+        }
+
+        else{
+            dest= reservoirs_codes[x.second].getReservoir();
+        }
+        cout<< orig << " to " << dest <<endl;
+    }
 }
