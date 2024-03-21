@@ -119,7 +119,7 @@ vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Res
         }
         if(v->getInfo()[0]=='C'){
             auto city = cities_codes[v->getInfo()];
-            g.addEdge(v->getInfo(), "sink", INF);
+            g.addEdge(v->getInfo(), "sink", city.getDemand());
         }
         if(v->getInfo() == "source"){
             src=v;
@@ -189,12 +189,15 @@ vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Res
         }*/
 
     for(auto v: g.getVertexSet()){
+        int sumFlow=0;
         if(v->getInfo()[0]=='C'){
-            for(auto edge: v->getAdj()){
-                if(edge->getDest()->getInfo()=="sink"){
-                    res.push_back(make_pair(v->getInfo(), edge->getFlow()));
-                }
+            for(auto edge: v->getIncoming()){
+                sumFlow+=edge->getFlow();
+                //if(edge->getDest()->getInfo()=="sink"){
+                    //res.push_back(make_pair(v->getInfo(), edge->getFlow()));
+                //}
             }
+            res.push_back(make_pair(v->getInfo(), sumFlow));
         }
     }
 
@@ -208,10 +211,13 @@ vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Res
 
 void chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string city){
     vector<pair<string, double>> flows = maxFlow(g, reservoirs_codes, cities_codes);
+    int sum=0;
     if(city=="none"){
         for(auto c: flows){
             cout << c.first << ": "<< c.second<<endl;
+            sum+=c.second;
         }
+        cout<<"max flow: "<<sum<<endl;
     }
     else {
         string code="";
