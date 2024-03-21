@@ -330,3 +330,64 @@ void removePumpingStations(Graph<string> &g, unordered_map<string, City> &cities
     }
 
 }
+
+
+void pipeFailure(string city, Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
+    vector<pair<string, string>> res; //src dest of the edges that can be removed
+
+    vector<pair<string, double>> flows = maxFlow(g, reservoirs_codes, cities_codes);
+
+    double initialValue;
+    for(auto x: flows){
+        if(x.first == city)
+            initialValue = x.second;
+    }
+
+    for(auto src: g.getVertexSet()){
+        for(auto e: src->getAdj()){
+            string desti = e->getDest()->getInfo();
+
+            g.removeEdge(src->getInfo(), e->getDest()->getInfo());
+            vector<pair<string, double>> newFlows = maxFlow(g, reservoirs_codes, cities_codes);
+
+            double newValue;
+            for(auto x: flows){
+                if(x.first == city)
+                    newValue = x.second;
+            }
+
+            if(initialValue == newValue){
+                res.push_back(make_pair(src->getInfo(), desti));
+            }
+
+            g.addEdge(src->getInfo(), desti, e->getWeight());
+
+        }
+    }
+    string orig, dest;
+    cout << "The pipelines connecting the following places can be removed: "<<endl;
+    for(auto x: res){
+        if(x.first[0]=='C')
+            orig = cities_codes[x.first].getCity();
+
+        else if(x.first[0]=='P'){
+            orig = x.first;
+        }
+
+        else{
+            orig= reservoirs_codes[x.first].getReservoir();
+        }
+
+        if(x.second[0]=='C')
+            dest = cities_codes[x.second].getCity();
+
+        else if(x.second[0]=='P'){
+            dest = x.second;
+        }
+
+        else{
+            dest= reservoirs_codes[x.second].getReservoir();
+        }
+        cout<< orig << " to " << dest <<endl;
+    }
+}

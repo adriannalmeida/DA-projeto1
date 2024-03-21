@@ -63,6 +63,7 @@ int main() {
 
     //maxFlow(g, reservoirs_code, cities_code);
 
-    removePumpingStations(g, cities_code, stations_code, reservoirs_code);
+    //removePumpingStations(g, cities_code, stations_code, reservoirs_code);
+    pipeFailure("C_6", g, reservoirs_code, cities_code);
 }
 
