@@ -1,20 +1,40 @@
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <string>
 #include "menu.h"
-#include "Utils.h"
+
+#ifdef __linux__
+#include <termios.h>
+#include <unistd.h>
+#elif _WIN32
+#include <conio.h>
+#include <windows.h>
+#endif
+
+using namespace std;
 
 void nonBlockingEntrance() {
+#ifdef __linux__
     struct termios t;
     tcgetattr(STDIN_FILENO, &t);
     t.c_lflag &= ~ICANON;
     t.c_lflag &= ~ECHO;
     tcsetattr(STDIN_FILENO, TCSANOW, &t);
+#elif _WIN32
+    // Windows specific code
+#endif
 }
-
 void restoreEntrace() {
+#ifdef __linux__
     struct termios t;
     tcgetattr(STDIN_FILENO, &t);
     t.c_lflag |= ICANON;
     t.c_lflag |= ECHO;
     tcsetattr(STDIN_FILENO, TCSANOW, &t);
+#elif _WIN32
+    // Windows specific code
+#endif
 }
 
 void printMenu(vector<string> options, int size, int select, string menuName) {
@@ -45,6 +65,7 @@ void auxprintMenu(vector<string> options, int & size, int &select, string menuNa
     char keyStroke;
     do{
         printMenu(options, size, select, menuName);
+#ifdef __linux__
         keyStroke = getchar();
         switch (keyStroke){
             case '\033':  // Tecla de esc
@@ -59,8 +80,24 @@ void auxprintMenu(vector<string> options, int & size, int &select, string menuNa
                 }
                 break;
         }
-    }while (keyStroke != '\n');  // Enter pressionado
+#elif _WIN32
+        keyStroke = _getch();
+        switch (keyStroke) {
+            case 224:  // Extended key
+                switch (_getch()) {
+                    case 72:  // Up arrow key
+                        select = (select - 1 + size) % size;
+                        break;
+                    case 80:  // Down arrow key
+                        select = (select + 1) % size;
+                        break;
+                }
+                break;
+        }
+#endif
+    } while (keyStroke != '\n');  // Enter pressionado
 }
+
 
 void mainMenu(Graph<string> g, unordered_map<string ,City> cities, unordered_map<string, Reservoir> reservoirs){
     vector<string> opt = {"Max Flow", "Pipes can remove", "C"};
@@ -74,7 +111,7 @@ void mainMenu(Graph<string> g, unordered_map<string ,City> cities, unordered_map
             //wait();
             break;
         case 1:
-            pipeFailure("C_3", g, reservoirs, cities);
+            //pipeFailure("C_3", g, reservoirs, cities);
             //wait();
             break;
         case 2:
