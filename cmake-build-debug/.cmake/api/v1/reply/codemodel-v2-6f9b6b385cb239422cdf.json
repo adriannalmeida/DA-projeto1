@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.26"
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Projeto1::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Projeto1-Debug-4d5dc5dfc16727b569e0.json",
+					"jsonFile" : "target-Projeto1-Debug-7985600ec08c6a87ddbe.json",
 					"name" : "Projeto1",
 					"projectIndex" : 0
 				}
@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/marta/OneDrive/Documentos/FEUP-Marta/ProjectDA/Project4/DA-projeto1/cmake-build-debug",
-		"source" : "C:/Users/marta/OneDrive/Documentos/FEUP-Marta/ProjectDA/Project4/DA-projeto1"
+		"build" : "/home/saracortez/FEUP/DA/sample/cmake-build-debug",
+		"source" : "/home/saracortez/FEUP/DA/sample"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 5
+		"minor" : 6
 	}
 }

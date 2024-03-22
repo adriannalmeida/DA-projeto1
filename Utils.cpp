@@ -3,8 +3,11 @@
 #include <iostream>
 using namespace std;
 
-int calculateReceivedSupply(Graph<string> g,unordered_map<string, City> &city_codes){
+int calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> &city_codes){
     int notSupplied = 0;
+    for(auto p:city_codes){
+        p.second.setReceived(0);
+    }
     for(auto p : city_codes){
         p.second.setReceived(0);
     }
@@ -24,20 +27,26 @@ int calculateReceivedSupply(Graph<string> g,unordered_map<string, City> &city_co
 }
 
 
-void printNotFullySuppliedCities(unordered_map<string, City> &city_codes, set<string> &c_set){
+void printNotFullySuppliedCities(Graph<string> &g, unordered_map<string, City> &city_codes){
     bool printColumnNames = 0;
-    //imprime os pares ordered
-    for (auto code : c_set) {
-        auto c = city_codes[code];
-        if (c.getReceived() < c.getDemand()) {
-            if (!printColumnNames) {
-                cout << "City Code" << '\t' << "Deficit";
-                printColumnNames = 1;
+    for (auto v : g.getVertexSet()) {
+        string code = v->getInfo();
+        if(code[0] == 'C'){
+            auto c = city_codes[code];
+            if (c.getReceived() < c.getDemand()) {
+                if (!printColumnNames) {
+                    cout << "City Code" << '\t' << "Deficit" << endl;
+                    printColumnNames = 1;
+                }
+                cout << c.getCode() << "\t      " << (c.getDemand() - c.getReceived()) << "\tDemand is: \t      " << c.getDemand() << "\tReceived is: \t      " << c.getReceived() <<endl;
             }
-            cout << c.getCode() << '\t' << (c.getDemand() - c.getReceived());
+        }
+        else{
+            if(code[0] == 'P') break;
         }
     }
-    if (!printColumnNames) cout << "All cities receive full demand!";
+    if (!printColumnNames) cout << "All cities receive full demand!"<<endl;
+    cout << endl;
 }
 
 
@@ -265,37 +274,32 @@ void chooseCityByCode(Graph<string> &g, unordered_map<string, Reservoir> &reserv
 
 }
 
-void chooseFailingReservoir(Graph<string> g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes, set<string> &c_set){
+void chooseFailingReservoir(Graph<string> g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes){
+
+
+    int before, after;
+    maxFlow(g, reservoirs_codes, city_codes);
+    before = calculateReceivedSupply(g, city_codes);
+
     try {
         Reservoir R = reservoirs_codes.at(code);
     } catch (const std::out_of_range& e) {
         cout << "Reservoir does not exist!: " << endl;
         return;
-        //OU cout << "Do you want to try again?\nYes\nNo";´
-        //ver como funciona o menu aqui. ver se ter os set faz sentido
-        //pus g passado por valor por referencia nas funcoes que ela chama.
-        //medir a complexidade para ver se é melhor só readicionar o vértice no fim.
     }
-
-    /*
-    Vertex<string>* saved = new Vertex<string>(code);
-    Vertex<string>* v = g.findVertex(code);
-    saved->getAdj() = v->getAdj();
-    */
-
-    //ou fazer um hide vertex?
-    //acho que só funciona com o max-flow sempre, uma vez que ao flow de todas as edges está suscetível a mudanças
-    //
+    cout << "When every Reservoir was functioning, " << before << " city(ies) were not receiving the needed supply." <<endl;
+    printNotFullySuppliedCities(g, city_codes);
     g.removeVertex(code);
 
     maxFlow(g, reservoirs_codes, city_codes);
-    /*do we have to? I think that city_codes are dispensable*/
-    calculateReceivedSupply(g, city_codes);
-    cout << "Cities for which demand is not met:" <<endl;
-    printNotFullySuppliedCities(city_codes, c_set);
+
+    after = calculateReceivedSupply(g, city_codes);
+    cout << "Now, " << after - before << " more cities are not sufficiently supplied. \nAll of them are listed below." << endl <<endl;
+    printNotFullySuppliedCities(g, city_codes);
 }
+
 //3.2
-void chooseFailingPumpingStation(Graph<string> g, string code, unordered_map<string, Reservoir> &ps_codes, unordered_map<string, City> &city_codes, set<string> &c_set){
+void chooseFailingPumpingStation(Graph<string> g, string code, unordered_map<string, Station> &ps_codes, unordered_map<string, City> &city_codes){
     try {
         Station S = ps_codes.at(code);
     } catch (const std::out_of_range& e) {

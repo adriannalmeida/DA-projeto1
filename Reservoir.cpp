@@ -2,7 +2,7 @@
 
 Reservoir::Reservoir(){};
 Reservoir::Reservoir(string reservoir_, string municipality_, string code, int id_, int maxDelivery_):
-    reservoir(reservoir_), municipality(municipality_), code(code),id(id_), maxDelivery(maxDelivery_){}
+        reservoir(reservoir_), municipality(municipality_), code(code),id(id_), maxDelivery(maxDelivery_){}
 
 string Reservoir::getReservoir() const {return reservoir;}
 string Reservoir::getMunicipality() const {return municipality;}
