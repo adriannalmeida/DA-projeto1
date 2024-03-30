@@ -22,4 +22,5 @@ void chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> &reserv
 void removePumpingStations(Graph<string> &g, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code, unordered_map<string, Reservoir> &reservoirs_code);
 
 void pipeFailure(string city, Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes);
+void waterDeficit(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes);
 #endif //DA_PROJETO1_UTILS_H

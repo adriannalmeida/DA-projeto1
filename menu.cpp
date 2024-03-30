@@ -1,8 +1,10 @@
+/*
 #include <iostream>
 #include <iomanip>
 #include <vector>
 #include <string>
 #include "menu.h"
+#include "Utils.h"
 
 #ifdef __linux__
 #include <termios.h>
@@ -99,7 +101,7 @@ void auxprintMenu(vector<string> options, int & size, int &select, string menuNa
 }
 
 
-void mainMenu(Graph<string> g, unordered_map<string ,City> cities, unordered_map<string, Reservoir> reservoirs){
+void mainMenu(Graph<string> g, unordered_map<string ,City> &cities, unordered_map<string, Reservoir> &reservoirs){
     vector<string> opt = {"Max Flow", "Pipes can remove", "C"};
     int select = 0, size = 3;
     nonBlockingEntrance();
@@ -109,10 +111,14 @@ void mainMenu(Graph<string> g, unordered_map<string ,City> cities, unordered_map
         case 0:
             cout << "aaaa";
             //wait();
+            waterDeficit(g, reservoirs, cities);
+
             break;
         case 1:
             //pipeFailure("C_3", g, reservoirs, cities);
             //wait();
+            //waterDeficit(g, reservoirs, cities);
+            ola();
             break;
         case 2:
             cout << "ahahah" << endl;
@@ -122,3 +128,5 @@ void mainMenu(Graph<string> g, unordered_map<string ,City> cities, unordered_map
     }
 
 }
+
+ */

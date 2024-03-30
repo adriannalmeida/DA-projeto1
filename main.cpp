@@ -10,26 +10,25 @@ int main() {
     unordered_map<string, Station> stations_code;
     set<string> r_set, s_set, c_set;
     Graph<string> g;
-    cout << "aazxsdkidsvjº" << endl;
 
-    /*string path_reser = "../Project1LargeDataSet/Project1LargeDataSet/Reservoir.csv";
+
+    string path_reser = "../Project1LargeDataSet/Project1LargeDataSet/Reservoir.csv";
     string path_station = "../Project1LargeDataSet/Project1LargeDataSet/Stations.csv";
     string path_cities = "../Project1LargeDataSet/Project1LargeDataSet/Cities.csv";
-    string path_pipes = "../Project1LargeDataSet/Project1LargeDataSet/Pipes.csv";*/
+    string path_pipes = "../Project1LargeDataSet/Project1LargeDataSet/Pipes.csv";
 
-    string path_reser = "/home/adriana/2leic/2S/DA/projeto1/Project1DataSetSmall/Project1DataSetSmall/Reservoirs_Madeira.csv";
+   /* string path_reser = "/home/adriana/2leic/2S/DA/projeto1/Project1DataSetSmall/Project1DataSetSmall/Reservoirs_Madeira.csv";
     string path_station = "/home/adriana/2leic/2S/DA/projeto1/Project1DataSetSmall/Project1DataSetSmall/Stations_Madeira.csv";
     string path_cities = "/home/adriana/2leic/2S/DA/projeto1/Project1DataSetSmall/Project1DataSetSmall/Cities_Madeira.csv";
-    string path_pipes = "/home/adriana/2leic/2S/DA/projeto1/Project1DataSetSmall/Project1DataSetSmall/Pipes_Madeira.csv";
+    string path_pipes = "/home/adriana/2leic/2S/DA/projeto1/Project1DataSetSmall/Project1DataSetSmall/Pipes_Madeira.csv";*/
 
     ReservoirParser(path_reser, g, reservoirs_code, r_set);
-    cout << "jahdisudadb" << endl;
     CityParser(path_cities, g, cities_code, c_set);
 
     StationParser(path_station, g, stations_code, s_set);
     PipesParser(path_pipes, g);
 
-    mainMenu(g, cities_code, reservoirs_code);
+    //mainMenu(g, cities_code, reservoirs_code);
     /*for(auto x : g.getVertexSet()){
         auto info = x->getInfo();
         switch (info[0]) {
@@ -71,5 +70,13 @@ int main() {
 
     //removePumpingStations(g, cities_code, stations_code, reservoirs_code);
     //pipeFailure("C_6", g, reservoirs_code, cities_code);
+/*
+    auto flows= maxFlow(g, reservoirs_code, cities_code);
+
+    for(auto p: flows){
+        cout<< "city: "<<cities_code[p.first].getCity()<<" demand ----->"<<cities_code[p.first].getDemand()<<"flow ------>"<< p.second<<endl;
+    }*/
+
+    waterDeficit(g, reservoirs_code, cities_code);
 }
 

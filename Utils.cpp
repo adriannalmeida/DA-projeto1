@@ -316,10 +316,17 @@ void removePumpingStations(Graph<string> &g, unordered_map<string, City> &cities
 
         cout << "Affected cities by " << info<<": "<<endl;
         for(int i=0; i<n; i++){
-
-            if(maxiFlow[i].second != currentFlow[i].second){
+            City c = cities_codes[maxiFlow[i].first];
+            if((maxiFlow[i].second != currentFlow[i].second) && (c.getDemand() > currentFlow[i].second)){
                 affected=true;
-                int dif=maxiFlow[i].second - currentFlow[i].second;
+                int dif;
+                if(maxiFlow[i].second > c.getDemand()){
+                dif=c.getDemand() - currentFlow[i].second;}
+                else{
+                    dif=maxiFlow[i].second - currentFlow[i].second;
+                }
+
+
                 cout << maxiFlow[i].first << "---->" << dif <<endl;
             }
 
@@ -338,9 +345,11 @@ void pipeFailure(string city, Graph<string> g, unordered_map<string, Reservoir> 
     vector<pair<string, double>> flows = maxFlow(g, reservoirs_codes, cities_codes);
 
     double initialValue;
+    City c;
     for(auto x: flows){
-        if(x.first == city)
-            initialValue = x.second;
+        if(x.first == city){
+            c = cities_codes[x.first];
+            initialValue = x.second;}
     }
 
     for(auto src: g.getVertexSet()){
@@ -351,12 +360,13 @@ void pipeFailure(string city, Graph<string> g, unordered_map<string, Reservoir> 
             vector<pair<string, double>> newFlows = maxFlow(g, reservoirs_codes, cities_codes);
 
             double newValue;
-            for(auto x: flows){
+            for(auto x: newFlows){
                 if(x.first == city)
                     newValue = x.second;
             }
 
-            if(initialValue == newValue){
+            if((initialValue == newValue)||(newValue>=c.getDemand())){
+
                 res.push_back(make_pair(src->getInfo(), desti));
             }
 
@@ -366,6 +376,7 @@ void pipeFailure(string city, Graph<string> g, unordered_map<string, Reservoir> 
     }
     string orig, dest;
     cout << "The pipelines connecting the following places can be removed: "<<endl;
+
     for(auto x: res){
         if(x.first[0]=='C')
             orig = cities_codes[x.first].getCity();
@@ -391,3 +402,39 @@ void pipeFailure(string city, Graph<string> g, unordered_map<string, Reservoir> 
         cout<< orig << " to " << dest <<endl;
     }
 }
+
+void waterDeficit(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
+    vector<pair<string, double>> initialFlows = maxFlow(g, reservoirs_codes, cities_codes);
+    for(auto v: g.getVertexSet()){
+        for(auto edge: v->getAdj()) {
+            string orig = v->getInfo();
+            string dest = edge->getDest()->getInfo();
+            int weight = edge->getWeight();
+
+            edge->setWeight(0);
+
+            vector<pair<string, double>> newFlows = maxFlow(g, reservoirs_codes, cities_codes);
+            edge->setWeight(weight);
+
+            cout << "The pipeline connecting " << orig << " to " << dest << " affect the following cities: " << endl;
+            bool flag=false;
+            for (int i = 0; i < newFlows.size(); i++) {
+                City c = cities_codes[initialFlows[i].first];
+                if ((initialFlows[i].second != newFlows[i].second) && (newFlows[i].second < c.getDemand())) {
+                    flag=true;
+                    if (initialFlows[i].second < c.getDemand()) {
+                        cout << initialFlows[i].first << " by deficit of "
+                             << initialFlows[i].second - newFlows[i].second << endl;
+                    } else {
+                        cout << initialFlows[i].first << " by deficit of " << c.getDemand() - newFlows[i].second
+                             << endl;
+                    }
+                }
+            }
+            if(!flag){
+                cout<<"No cities affected"<<endl;
+            }
+        }
+            }
+        }
+

@@ -1,4 +1,4 @@
-#ifndef PROJETO1_MENU_H
+/*#ifndef PROJETO1_MENU_H
 #define PROJETO1_MENU_H
 #include <iostream>
 #include "DataParser.h"
@@ -18,5 +18,7 @@ void nonBlockingEntrance();
 void restoreEntrace();
 void printMenu(vector<string> options, int size, int select, string menuName);
 void auxprintMenu(vector<string> options, int & size, int &select, string menuName);
-void mainMenu(Graph<string> g, unordered_map<string ,City> cities, unordered_map<string, Reservoir> reservoirs);
+void mainMenu(Graph<string> g, unordered_map<string ,City> &cities, unordered_map<string, Reservoir> &reservoirs);
 #endif //PROJETO1_MENU_H
+
+ */
