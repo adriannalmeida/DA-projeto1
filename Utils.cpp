@@ -438,3 +438,120 @@ void waterDeficit(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_
             }
         }
 
+
+
+vector<pair<pair<string, string>, int>> computeDiffs(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
+    vector<pair<pair<string, string>, int>> diffs;
+    for(auto v: g.getVertexSet()){
+        for(auto pipe: v->getAdj()){
+            diffs.push_back(make_pair(make_pair(pipe->getOrig()->getInfo(), pipe->getDest()->getInfo()), pipe->getWeight()-pipe->getFlow()));
+        }
+    }
+    return diffs;
+}
+
+vector<int> computeMetrics(Graph<string> g, vector<pair<pair<string, string>, int>> pipeDiffs){
+    vector<int> res;
+    int sum_diff=0;
+    int sum_var=0;
+    int maxDiff=0;
+    for(auto d: pipeDiffs){
+        sum_diff += d.second;
+        if(d.second>maxDiff){
+            maxDiff=d.second;
+        }
+    }
+    int average = sum_diff / pipeDiffs.size();
+    for(auto d: pipeDiffs){
+        sum_var += ((d.second - average)^2);
+    }
+    int variance = sum_var/pipeDiffs.size();
+    res.push_back(average);
+    res.push_back(variance);
+    res.push_back(maxDiff);
+    return res;
+}
+
+bool sortBySecond(pair<pair<string, string>, int> &a, pair<pair<string, string>, int> &b) {
+    return a.second > b.second;
+}
+
+vector<pair<pair<string, string>, int>> excessFlow(Graph<string> g){
+    vector<pair<pair<string, string>, int>> excessFlowPipes;
+    for (auto v: g.getVertexSet()){
+        for (auto pipe: v->getAdj()){
+            if(pipe->getFlow() > 0.9*pipe->getWeight()){
+                excessFlowPipes.push_back(make_pair(make_pair(pipe->getOrig()->getInfo(), pipe->getDest()->getInfo()), pipe->getFlow()/pipe->getWeight()));
+            }
+        }
+    }
+
+    sort(excessFlowPipes.begin(), excessFlowPipes.end(), sortBySecond);
+    return excessFlowPipes;
+}
+
+void Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code){
+    vector<pair<string, double>> flows = maxFlow(g, reservoirs_codes, cities_codes);
+    vector<pair<pair<string, string>, int>> initialPipeDiffs = computeDiffs(g, reservoirs_codes, cities_codes);
+
+    vector<int> initialMetrics = computeMetrics(g, initialPipeDiffs);
+
+    vector<pair<pair<string, string>, int>> excessFlowPipes = excessFlow(g);
+
+    cout<<excessFlowPipes.size()<<endl;
+    int i=4;
+    while(i>0) {
+        for (auto p: excessFlowPipes) {
+            string orig = p.first.first;
+            string dest = p.first.second;
+            Vertex<string> *vertexOrig;
+            Vertex<string> *vertexDest;
+            for (auto v: g.getVertexSet()) {
+                if (v->getInfo() == orig) {
+                    vertexOrig = v;
+                } else if (v->getInfo() == dest) {
+                    vertexDest = v;
+                }
+            }
+            int minFlowExcess = p.second;
+            pair<string, string> pipeMinFlowExcess;
+            int pipeCap;
+            int pipeFlow;
+            for (auto pipe: vertexOrig->getAdj()) {
+                if (pipe->getFlow() / pipe->getWeight() < minFlowExcess) {
+                    minFlowExcess = pipe->getFlow() / pipe->getWeight();
+                    pipeMinFlowExcess.first = pipe->getOrig()->getInfo();
+                    pipeMinFlowExcess.second = pipe->getDest()->getInfo();
+                    pipeCap = pipe->getWeight();
+                    pipeFlow = pipe->getFlow();
+                }
+            }
+
+            //identifiquei pipe com excesso de flow e identifiquei qual a pipe do vertice de origem com menos excessflow a seguir vou fazer a transferencia;
+            int flow;
+            for (auto edge: vertexOrig->getAdj()) {
+                if (edge->getDest() == vertexDest) {
+                    flow = edge->getFlow();
+                }
+            }
+            int pCap = 0.9 * pipeCap;
+            int amount_transfer = min(flow, pCap - pipeFlow);
+            for (auto edge: vertexOrig->getAdj()) {
+                if (edge->getDest() == vertexDest) {
+                    edge->setFlow(edge->getFlow() - amount_transfer);
+                } else if (edge->getDest()->getInfo() == pipeMinFlowExcess.second) {
+                    edge->setFlow(edge->getFlow() + amount_transfer);
+                }
+            }
+        }
+        excessFlowPipes = excessFlow(g);
+        cout<<excessFlowPipes.size()<<endl;
+        i--;
+    }
+
+
+    vector<pair<pair<string, string>, int>> finalPipeDiffs = computeDiffs(g, reservoirs_codes, cities_codes);
+    vector<int> finalMetrics= computeMetrics(g, finalPipeDiffs);
+    cout<< "Initial: [Average]-->"<<initialMetrics[0]<<" [Variance]-->"<<initialMetrics[1]<<" [MaxDiff]-->"<<initialMetrics[2]<<endl;
+    cout<< "Balanced: [Average]-->"<<finalMetrics[0]<<" [Variance]-->"<<finalMetrics[1]<<" [MaxDiff]-->"<<finalMetrics[2]<<endl;
+}
