@@ -10,12 +10,12 @@ int main() {
     unordered_map<string, Station> stations_code;
     set<string> r_set, s_set, c_set;
     Graph<string> g;
-/*
-    string path_reser = "../Project1LargeDataSet/Project1LargeDataSet/Reservoir.csv";
+
+    /*string path_reser = "../Project1LargeDataSet/Project1LargeDataSet/Reservoir.csv";
     string path_station = "../Project1LargeDataSet/Project1LargeDataSet/Stations.csv";
     string path_cities = "../Project1LargeDataSet/Project1LargeDataSet/Cities.csv";
     string path_pipes = "../Project1LargeDataSet/Project1LargeDataSet/Pipes.csv";
-    */
+*/
     string path_reser = "../Project1DataSetSmall/Project1DataSetSmall/Reservoirs_Madeira.csv";
     string path_station = "../Project1DataSetSmall/Project1DataSetSmall/Stations_Madeira.csv";
     string path_cities = "../Project1DataSetSmall/Project1DataSetSmall/Cities_Madeira.csv";
@@ -27,7 +27,7 @@ int main() {
     StationParser(path_station, g, stations_code);
     PipesParser(path_pipes, g);
     
-    //mainMenu(g, cities_code, reservoirs_code);
+    mainMenu(g, cities_code, reservoirs_code);
     /*for(auto x : g.getVertexSet()){
         auto info = x->getInfo();
         switch (info[0]) {
@@ -50,8 +50,8 @@ int main() {
             }
         }
 
-    }*/
-
+    }
+*/
     /*for (auto v: g.getVertexSet()) {
         for (auto e: v->getAdj()) {
             cout << e->getOrig()->getInfo() << "----->" << e->getDest()->getInfo() << endl;
@@ -71,7 +71,7 @@ int main() {
 /*
     cout << "Not supplied cities: "<< calculateReceivedSupply(g,cities_code) << endl;
     printNotFullySuppliedCities(g, cities_code);*/
-    chooseFailingReservoir(g, "R_1", reservoirs_code, cities_code);
+    //chooseFailingReservoir(g, "R_1", reservoirs_code, cities_code);
     //maxFlow
     //maxFlow(g, reservoirs_code);
 
@@ -91,6 +91,8 @@ int main() {
         cout<< "city: "<<cities_code[p.first].getCity()<<" demand ----->"<<cities_code[p.first].getDemand()<<"flow ------>"<< p.second<<endl;
     }*/
 
-    Balance(g, reservoirs_code, cities_code, stations_code);
+    //Balance(g, reservoirs_code, cities_code, stations_code);
+    //pipeFailure("C_1",g,reservoirs_code,cities_code);
+    //waterDeficit(g, reservoirs_code, cities_code);
 }
 

@@ -1,4 +1,3 @@
-/*
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -15,6 +14,13 @@
 #endif
 
 using namespace std;
+
+void wait(Graph<string> g, unordered_map<string ,City> &cities, unordered_map<string, Reservoir> &reservoirs) {
+    cout << "Press ENTER to continue...";
+    cin.get();
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    mainMenu(g, cities, reservoirs);
+}
 
 void nonBlockingEntrance() {
 #ifdef __linux__
@@ -109,16 +115,17 @@ void mainMenu(Graph<string> g, unordered_map<string ,City> &cities, unordered_ma
     restoreEntrace();
     switch (select){
         case 0:
-            cout << "aaaa";
-            //wait();
-            waterDeficit(g, reservoirs, cities);
+            chooseCityByName(g, reservoirs, cities, "none");
+
+            wait(g, cities, reservoirs);
+            //waterDeficit(g, reservoirs, cities);
 
             break;
         case 1:
             //pipeFailure("C_3", g, reservoirs, cities);
-            //wait();
+            wait(g, cities, reservoirs);
             //waterDeficit(g, reservoirs, cities);
-            ola();
+            //ola();
             break;
         case 2:
             cout << "ahahah" << endl;
@@ -129,4 +136,3 @@ void mainMenu(Graph<string> g, unordered_map<string ,City> &cities, unordered_ma
 
 }
 
- */
