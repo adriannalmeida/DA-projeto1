@@ -374,8 +374,9 @@ void pipeFailure(string city, Graph<string> g, unordered_map<string, Reservoir> 
     for(auto src: g.getVertexSet()){
         for(auto e: src->getAdj()){
             string desti = e->getDest()->getInfo();
-
-            g.removeEdge(src->getInfo(), e->getDest()->getInfo());
+            auto initialWeight = e->getWeight();
+            e->setWeight(0);
+            //g.removeEdge(src->getInfo(), e->getDest()->getInfo());
             vector<pair<string, double>> newFlows = maxFlow(g, reservoirs_codes, cities_codes);
 
             double newValue;
@@ -389,10 +390,12 @@ void pipeFailure(string city, Graph<string> g, unordered_map<string, Reservoir> 
                 res.push_back(make_pair(src->getInfo(), desti));
             }
 
-            g.addEdge(src->getInfo(), desti, e->getWeight());
+            //g.addEdge(src->getInfo(), desti, e->getWeight());
+            e->setWeight(initialWeight);
 
         }
     }
+    cout << res.size() << endl;
     string orig, dest;
     cout << "The pipelines connecting the following places can be removed: "<<endl;
 
