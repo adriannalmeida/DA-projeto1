@@ -3,7 +3,14 @@
 #include <iostream>
 using namespace std;
 
-void calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> &city_codes){
+int calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> &city_codes){
+    int notSupplied = 0;
+    for(auto p:city_codes){
+        p.second.setReceived(0);
+    }
+    for(auto p : city_codes){
+        p.second.setReceived(0);
+    }
     for (auto v : g.getVertexSet()) {
         if(v->getInfo()[0] == 'C'){
             double res = 0;
@@ -11,25 +18,35 @@ void calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> &city_
                 res += e->getFlow();
             }
             city_codes[v->getInfo()].setReceived(res);
+            if(res < city_codes[v->getInfo()].getDemand()){
+                notSupplied++;
+            }
         }
     }
+    return notSupplied;
 }
 
-void printNotFullySuppliedCities(unordered_map<string, City> &city_codes, set<string> &c_set){
 
-        bool printColumnNames = 0;
-        //imprime os pares ordered
-        for (auto code : c_set) {
+void printNotFullySuppliedCities(Graph<string> &g, unordered_map<string, City> &city_codes){
+    bool printColumnNames = 0;
+    for (auto v : g.getVertexSet()) {
+        string code = v->getInfo();
+        if(code[0] == 'C'){
             auto c = city_codes[code];
             if (c.getReceived() < c.getDemand()) {
                 if (!printColumnNames) {
-                    cout << "City Code" << '\t' << "Deficit";
+                    cout << "City Code" << '\t' << "Deficit" << endl;
                     printColumnNames = 1;
                 }
-                cout << c.getCode() << '\t' << (c.getDemand() - c.getReceived());
+                cout << c.getCode() << "\t      " << (c.getDemand() - c.getReceived()) << "\tDemand is: \t      " << c.getDemand() << "\tReceived is: \t      " << c.getReceived() <<endl;
             }
         }
-        if (!printColumnNames) cout << "All cities receive full demand!";
+        else{
+            if(code[0] == 'P') break;
+        }
+    }
+    if (!printColumnNames) cout << "All cities receive full demand!"<<endl;
+    cout << endl;
 }
 
 
@@ -107,7 +124,7 @@ void setFlowPath (Vertex<string>* s, Vertex<string>* d, double flow){
     }
 }
 
-vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
+vector<pair<string, double>> maxFlow(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
     g.addVertex("source");
     g.addVertex("sink");
     Vertex<string>* src;
@@ -160,33 +177,33 @@ vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Res
 
     vector<pair<string, double>> res;
     //for(auto dest: destinations){
-        //cout << src->getInfo() << "---->" << v->getInfo()<<endl;
-        for(auto v: g.getVertexSet()){
-            for(auto edge: v->getAdj()){
-                edge->setFlow(0);
-            }
+    //cout << src->getInfo() << "---->" << v->getInfo()<<endl;
+    for(auto v: g.getVertexSet()){
+        for(auto edge: v->getAdj()){
+            edge->setFlow(0);
         }
+    }
 
-        //double maxFlow=0;
-        while(findPath(g, src, snk)){
-            double f= minResidual(src, snk);
-            setFlowPath(src, snk, f);
-            //maxFlow+=f;
-        }
-        /*Vertex<string>* currentV=dest;
-        double maxFlow=0;
-        while (currentV->getInfo() != src->getInfo()){
-            maxFlow+=currentV->getPath()->getFlow();
-            currentV=currentV->getPath()->getOrig();
-        }*/
-        /*double maxFlow=0;
-        for(auto v: g.getVertexSet()){
-            for(auto edge: v->getAdj()){
-                if(edge->getDest()==dest){
-                    maxFlow+=edge->getFlow();
-                }
+    //double maxFlow=0;
+    while(findPath(g, src, snk)){
+        double f= minResidual(src, snk);
+        setFlowPath(src, snk, f);
+        //maxFlow+=f;
+    }
+    /*Vertex<string>* currentV=dest;
+    double maxFlow=0;
+    while (currentV->getInfo() != src->getInfo()){
+        maxFlow+=currentV->getPath()->getFlow();
+        currentV=currentV->getPath()->getOrig();
+    }*/
+    /*double maxFlow=0;
+    for(auto v: g.getVertexSet()){
+        for(auto edge: v->getAdj()){
+            if(edge->getDest()==dest){
+                maxFlow+=edge->getFlow();
             }
-        }*/
+        }
+    }*/
 
     for(auto v: g.getVertexSet()){
         int sumFlow=0;
@@ -201,11 +218,12 @@ vector<pair<string, double>> maxFlow(Graph<string> &g, unordered_map<string, Res
         }
     }
 
-        //res.push_back(make_pair(dest->getInfo(), maxFlow));
-
-        //cout << dest->getInfo() <<": " << maxFlow<<endl;
     g.removeVertex("source");
     g.removeVertex("sink");
+    
+    
+    
+    
     return res;
 }
 
@@ -229,7 +247,7 @@ void chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> &reserv
         if(code==""){
             cout<< "City doesn´t exist"<<endl;
         }
-        //cout << code;
+            //cout << code;
         else {
             for (auto ci: flows) {
                 if (ci.first == code) {
@@ -263,6 +281,7 @@ void chooseCityByCode(Graph<string> &g, unordered_map<string, Reservoir> &reserv
     }
 
 }
+
 
 void removePumpingStations(Graph<string> &g, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code, unordered_map<string, Reservoir> &reservoirs_code){
 
@@ -555,3 +574,44 @@ void Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes
     cout<< "Initial: [Average]-->"<<initialMetrics[0]<<" [Variance]-->"<<initialMetrics[1]<<" [MaxDiff]-->"<<initialMetrics[2]<<endl;
     cout<< "Balanced: [Average]-->"<<finalMetrics[0]<<" [Variance]-->"<<finalMetrics[1]<<" [MaxDiff]-->"<<finalMetrics[2]<<endl;
 }
+
+
+void chooseFailingReservoir(Graph<string> g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes){
+
+
+    int before, after;
+    maxFlow(g, reservoirs_codes, city_codes);
+    before = calculateReceivedSupply(g, city_codes);
+
+    try {
+        Reservoir R = reservoirs_codes.at(code);
+    } catch (const std::out_of_range& e) {
+        cout << "Reservoir does not exist!: " << endl;
+        return;
+    }
+    cout << "When every Reservoir was functioning, " << before << " city(ies) were not receiving the needed supply." <<endl;
+    printNotFullySuppliedCities(g, city_codes);
+    g.removeVertex(code);
+
+    maxFlow(g, reservoirs_codes, city_codes);
+
+    after = calculateReceivedSupply(g, city_codes);
+    cout << "Now, " << after - before << " more cities are not sufficiently supplied. \nAll of them are listed below." << endl <<endl;
+    printNotFullySuppliedCities(g, city_codes);
+}
+
+//3.2
+void chooseFailingPumpingStation(Graph<string> g, string code, unordered_map<string, Station> &ps_codes, unordered_map<string, City> &city_codes){
+    try {
+        Station S = ps_codes.at(code);
+    } catch (const std::out_of_range& e) {
+        cout << "Station does not exist!: " << endl;
+        return;
+        //OU cout << "Do you want to try again?\nYes\nNo";´
+        //ver como funciona o menu aqui. ver se ter os set faz sentido
+        //pus g passado por valor por referencia nas funcoes que ela chama.
+        //medir a complexidade para ver se é melhor só readicionar o vértice no fim.
+    }
+
+}
+
