@@ -104,7 +104,7 @@ void PipesParser(string path, Graph<string> &g){
         getline(ss, w, ',');
         getline(ss, d, ',');
 
-        if(d=="1"){
+        if(d=="0"){
             g.addBidirectionalEdge(orig, dest, stod(w));
         }
         else{
