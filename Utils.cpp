@@ -578,7 +578,6 @@ void Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes
 
 void chooseFailingReservoir(Graph<string> g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes){
 
-
     int before, after;
     maxFlow(g, reservoirs_codes, city_codes);
     before = calculateReceivedSupply(g, city_codes);
@@ -589,8 +588,22 @@ void chooseFailingReservoir(Graph<string> g, string code, unordered_map<string, 
         cout << "Reservoir does not exist!: " << endl;
         return;
     }
+
     cout << "When every Reservoir was functioning, " << before << " city(ies) were not receiving the needed supply." <<endl;
     printNotFullySuppliedCities(g, city_codes);
+
+    auto v = g.findVertex(code);
+
+    vector<pair<Vertex<string>*, double>> out;
+    vector<pair<Vertex<string>*, double>> inc;
+
+    for(auto edge: v->getAdj()){
+        out.push_back(make_pair(edge->getDest(), edge->getWeight()));
+    }
+    for(auto edge: v->getIncoming()){
+        inc.push_back(make_pair(edge->getOrig(), edge->getWeight()));
+    }
+
     g.removeVertex(code);
 
     maxFlow(g, reservoirs_codes, city_codes);
@@ -598,6 +611,17 @@ void chooseFailingReservoir(Graph<string> g, string code, unordered_map<string, 
     after = calculateReceivedSupply(g, city_codes);
     cout << "Now, " << after - before << " more cities are not sufficiently supplied. \nAll of them are listed below." << endl <<endl;
     printNotFullySuppliedCities(g, city_codes);
+
+    g.addVertex(code);
+
+    for(auto edge: out){
+        g.addEdge(code, edge.first->getInfo(), edge.second);
+    }
+
+    for(auto edge: inc){
+        g.addEdge(edge.first->getInfo(), code, edge.second);
+    }
+
 }
 
 //3.2
