@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# Install script for directory: C:/Users/marta/OneDrive/Documentos/FEUP-Marta/ProjectDA/Project5/DA-projeto1
-=======
-# Install script for directory: /home/saracortez/FEUP/DA/sample
->>>>>>> 3.1
+# Install script for directory: /home/saracortez/FEUP/DA/DA-projeto1
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -54,9 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-<<<<<<< HEAD
-file(WRITE "C:/Users/marta/OneDrive/Documentos/FEUP-Marta/ProjectDA/Project5/DA-projeto1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
-=======
-file(WRITE "/home/saracortez/FEUP/DA/sample/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
->>>>>>> 3.1
+file(WRITE "/home/saracortez/FEUP/DA/DA-projeto1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

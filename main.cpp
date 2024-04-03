@@ -1,11 +1,7 @@
 #include "DataParser.h"
 #include "data_structures/graph.h"
 #include "Utils.h"
-<<<<<<< HEAD
-#include <set>
 #include "menu.h"
-=======
->>>>>>> 3.1
 
 using namespace std;
 int main() {
@@ -24,14 +20,7 @@ int main() {
     string path_station = "../Project1DataSetSmall/Project1DataSetSmall/Stations_Madeira.csv";
     string path_cities = "../Project1DataSetSmall/Project1DataSetSmall/Cities_Madeira.csv";
     string path_pipes = "../Project1DataSetSmall/Project1DataSetSmall/Pipes_Madeira.csv";
-<<<<<<< HEAD
-=======
 
-    ReservoirParser(path_reser, g, reservoirs_code);
-    CityParser(path_cities, g, cities_code);
-    StationParser(path_station, g, stations_code);
-    PipesParser(path_pipes, g);
->>>>>>> 3.1
 
     ReservoirParser(path_reser, g, reservoirs_code);
     CityParser(path_cities, g, cities_code);
@@ -85,11 +74,11 @@ int main() {
     chooseFailingReservoir(g, "R_1", reservoirs_code, cities_code);
     //maxFlow
     //maxFlow(g, reservoirs_code);
-<<<<<<< HEAD
+
     //chooseCityByName(g, reservoirs_code, cities_code, "none");
-=======
+
     //chooseCityByName(g, reservoirs_code, cities_code, "Coimbra");
->>>>>>> 3.1
+
 
     //maxFlow(g, reservoirs_code, cities_code);
 

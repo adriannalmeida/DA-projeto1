@@ -55,11 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/cache-v2-629c3da33ab5f0d2edc8.json
-			"value" : "c:/Users/marta/OneDrive/Documentos/FEUP-Marta/ProjectDA/Project5/DA-projeto1/cmake-build-debug"
-========
-			"value" : "/home/saracortez/FEUP/DA/sample/cmake-build-debug"
->>>>>>>> 3.1:cmake-build-debug/.cmake/api/v1/reply/cache-v2-849c97bcc15124ab779c.json
+			"value" : "/home/saracortez/FEUP/DA/DA-projeto1/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -547,11 +543,7 @@
 				}
 			],
 			"type" : "STATIC",
-<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/cache-v2-629c3da33ab5f0d2edc8.json
-			"value" : "C:/Users/marta/OneDrive/Documentos/FEUP-Marta/ProjectDA/Project5/DA-projeto1/cmake-build-debug/CMakeFiles/pkgRedirects"
-========
-			"value" : "/home/saracortez/FEUP/DA/sample/cmake-build-debug/CMakeFiles/pkgRedirects"
->>>>>>>> 3.1:cmake-build-debug/.cmake/api/v1/reply/cache-v2-849c97bcc15124ab779c.json
+			"value" : "/home/saracortez/FEUP/DA/DA-projeto1/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -611,11 +603,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/cache-v2-629c3da33ab5f0d2edc8.json
-			"value" : "C:/Users/marta/OneDrive/Documentos/FEUP-Marta/ProjectDA/Project5/DA-projeto1"
-========
-			"value" : "/home/saracortez/FEUP/DA/sample"
->>>>>>>> 3.1:cmake-build-debug/.cmake/api/v1/reply/cache-v2-849c97bcc15124ab779c.json
+			"value" : "/home/saracortez/FEUP/DA/DA-projeto1"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1163,11 +1151,7 @@
 				}
 			],
 			"type" : "STATIC",
-<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/cache-v2-629c3da33ab5f0d2edc8.json
-			"value" : "C:/Users/marta/OneDrive/Documentos/FEUP-Marta/ProjectDA/Project5/DA-projeto1/cmake-build-debug"
-========
-			"value" : "/home/saracortez/FEUP/DA/sample/cmake-build-debug"
->>>>>>>> 3.1:cmake-build-debug/.cmake/api/v1/reply/cache-v2-849c97bcc15124ab779c.json
+			"value" : "/home/saracortez/FEUP/DA/DA-projeto1/cmake-build-debug"
 		},
 		{
 			"name" : "Projeto1_IS_TOP_LEVEL",
@@ -1191,11 +1175,7 @@
 				}
 			],
 			"type" : "STATIC",
-<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/cache-v2-629c3da33ab5f0d2edc8.json
-			"value" : "C:/Users/marta/OneDrive/Documentos/FEUP-Marta/ProjectDA/Project5/DA-projeto1"
-========
-			"value" : "/home/saracortez/FEUP/DA/sample"
->>>>>>>> 3.1:cmake-build-debug/.cmake/api/v1/reply/cache-v2-849c97bcc15124ab779c.json
+			"value" : "/home/saracortez/FEUP/DA/DA-projeto1"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",

@@ -743,8 +743,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/home/saracortez/FEUP/DA/sample/cmake-build-debug",
-		"source" : "/home/saracortez/FEUP/DA/sample"
+		"build" : "/home/saracortez/FEUP/DA/DA-projeto1/cmake-build-debug",
+		"source" : "/home/saracortez/FEUP/DA/DA-projeto1"
 	},
 	"version" : 
 	{

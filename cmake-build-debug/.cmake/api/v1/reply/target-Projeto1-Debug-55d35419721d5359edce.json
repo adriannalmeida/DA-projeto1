@@ -49,11 +49,7 @@
 			[
 				{
 					"backtrace" : 2,
-<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/target-Projeto1-Debug-092fc91bb5c753875f6f.json
-					"path" : "C:/Users/marta/OneDrive/Documentos/FEUP-Marta/ProjectDA/Project5/DA-projeto1/."
-========
-					"path" : "/home/saracortez/FEUP/DA/sample/."
->>>>>>>> 3.1:cmake-build-debug/.cmake/api/v1/reply/target-Projeto1-Debug-7985600ec08c6a87ddbe.json
+					"path" : "/home/saracortez/FEUP/DA/DA-projeto1/."
 				}
 			],
 			"language" : "CXX",
