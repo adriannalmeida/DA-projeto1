@@ -1,4 +1,4 @@
-# Install script for directory: /home/saracortez/FEUP/DA/DA-projeto1
+# Install script for directory: /home/adriana/2leic/2S/DA/clone4Project1
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/saracortez/FEUP/DA/DA-projeto1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/adriana/2leic/2S/DA/clone4Project1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -115,17 +115,13 @@ void mainMenu(Graph<string> g, unordered_map<string ,City> &cities, unordered_ma
     restoreEntrace();
     switch (select){
         case 0:
-            chooseCityByName(g, reservoirs, cities, "none");
-
+            //chooseCityByName(g, reservoirs, cities, "none");
+            pipeFailure("C_1",g,reservoirs,cities);
             wait(g, cities, reservoirs);
-            //waterDeficit(g, reservoirs, cities);
 
             break;
         case 1:
-            //pipeFailure("C_3", g, reservoirs, cities);
             wait(g, cities, reservoirs);
-            //waterDeficit(g, reservoirs, cities);
-            //ola();
             break;
         case 2:
             cout << "ahahah" << endl;

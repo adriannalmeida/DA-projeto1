@@ -20,4 +20,5 @@ add_executable(Projeto1
         Utils.cpp
         menu.h
         menu.cpp
+        menu2.cpp
 )

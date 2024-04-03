@@ -2,6 +2,7 @@
 #include "data_structures/graph.h"
 #include "Utils.h"
 #include "menu.h"
+#include "menu2.h"
 
 using namespace std;
 int main() {
@@ -16,10 +17,10 @@ int main() {
     string path_cities = "../Project1LargeDataSet/Project1LargeDataSet/Cities.csv";
     string path_pipes = "../Project1LargeDataSet/Project1LargeDataSet/Pipes.csv";
 */
-    string path_reser = "../Project1DataSetSmall/Project1DataSetSmall/Reservoirs_Madeira.csv";
-    string path_station = "../Project1DataSetSmall/Project1DataSetSmall/Stations_Madeira.csv";
-    string path_cities = "../Project1DataSetSmall/Project1DataSetSmall/Cities_Madeira.csv";
-    string path_pipes = "../Project1DataSetSmall/Project1DataSetSmall/Pipes_Madeira.csv";
+    string path_reser = "/home/adriana/2leic/2S/DA/clone4Project1/Project1DataSetSmall/Project1DataSetSmall/Reservoirs_Madeira.csv";
+    string path_station = "/home/adriana/2leic/2S/DA/clone4Project1/Project1DataSetSmall/Project1DataSetSmall/Stations_Madeira.csv";
+    string path_cities = "/home/adriana/2leic/2S/DA/clone4Project1/Project1DataSetSmall/Project1DataSetSmall/Cities_Madeira.csv";
+    string path_pipes = "/home/adriana/2leic/2S/DA/clone4Project1/Project1DataSetSmall/Project1DataSetSmall/Pipes_Madeira.csv";
 
 
     ReservoirParser(path_reser, g, reservoirs_code);
