@@ -77,6 +77,6 @@ int main() {
         cout<< "city: "<<cities_code[p.first].getCity()<<" demand ----->"<<cities_code[p.first].getDemand()<<"flow ------>"<< p.second<<endl;
     }*/
 
-    waterDeficit(g, reservoirs_code, cities_code);
+    Balance(g, reservoirs_code, cities_code, stations_code);
 }
 

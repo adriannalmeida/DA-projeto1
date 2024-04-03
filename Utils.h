@@ -23,4 +23,11 @@ void removePumpingStations(Graph<string> &g, unordered_map<string, City> &cities
 
 void pipeFailure(string city, Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes);
 void waterDeficit(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes);
+
+vector<pair<pair<string, string>, int>> computeDiffs(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes);
+void Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code);
+vector<int> computeMetrics(Graph<string> g, vector<pair<pair<string, string>, int>> pipeDiffs);
+bool sortBySecond(pair<pair<string, string>, int> &a, pair<pair<string, string>, int> &b);
+vector<pair<pair<string, string>, int>> excessFlow(Graph<string> g);
+
 #endif //DA_PROJETO1_UTILS_H
