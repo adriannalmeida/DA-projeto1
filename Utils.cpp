@@ -24,7 +24,7 @@ int calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> &city_c
     return notSupplied;
 }*/
 
-int calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> &city_codes, unordered_map<string, double> flows){
+int Utils::calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> &city_codes, unordered_map<string, double> flows){
     int notSupplied = 0;
 
     for (auto v : g.getVertexSet()) {
@@ -39,7 +39,7 @@ int calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> &city_c
 
 
 
-void printNotFullySuppliedCities(Graph<string> &g, unordered_map<string, City> &city_codes, unordered_map<string, double> flows){
+void Utils::printNotFullySuppliedCities(Graph<string> &g, unordered_map<string, City> &city_codes, unordered_map<string, double> flows){
     bool printColumnNames = 0;
     for (auto v : g.getVertexSet()) {
         string code = v->getInfo();
@@ -65,7 +65,7 @@ void printNotFullySuppliedCities(Graph<string> &g, unordered_map<string, City> &
 // Max Flow
 
 
-void testAndVisit(queue<Vertex<string>*> &q, Edge<string>* e, Vertex<string>* v, double r ){
+void Utils::testAndVisit(queue<Vertex<string>*> &q, Edge<string>* e, Vertex<string>* v, double r ){
     if(!v->isVisited() && r > 0 ){
         v->setVisited(true);
         v->setPath(e);
@@ -73,7 +73,7 @@ void testAndVisit(queue<Vertex<string>*> &q, Edge<string>* e, Vertex<string>* v,
     }
 }
 
-bool findPath(Graph<string>& g, Vertex<string>*s, Vertex<string>*d){
+bool Utils::findPath(Graph<string>& g, Vertex<string>*s, Vertex<string>*d){
     for(auto v: g.getVertexSet()){
         v->setVisited(false);
     }
@@ -98,7 +98,7 @@ bool findPath(Graph<string>& g, Vertex<string>*s, Vertex<string>*d){
     return d->isVisited();
 }
 
-double minResidual(Vertex<string>* s, Vertex<string>* d){
+double Utils::minResidual(Vertex<string>* s, Vertex<string>* d){
     double minFlow=INF;
     auto current=d;
 
@@ -119,7 +119,7 @@ double minResidual(Vertex<string>* s, Vertex<string>* d){
     return minFlow;
 }
 
-void setFlowPath (Vertex<string>* s, Vertex<string>* d, double flow){
+void Utils::setFlowPath (Vertex<string>* s, Vertex<string>* d, double flow){
     auto current = d;
 
     while(current!=s){
@@ -136,7 +136,7 @@ void setFlowPath (Vertex<string>* s, Vertex<string>* d, double flow){
     }
 }
 
-unordered_map<string, double> maxFlow(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
+unordered_map<string, double> Utils::maxFlow(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
     g.addVertex("source");
     g.addVertex("sink");
     Vertex<string>* src;
@@ -239,7 +239,7 @@ unordered_map<string, double> maxFlow(Graph<string> g, unordered_map<string, Res
     return res;
 }
 
-void chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string city){
+void Utils::chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string city){
     unordered_map<string, double> flows = maxFlow(g, reservoirs_codes, cities_codes);
     int sum=0;
     if(city=="none"){
@@ -271,7 +271,7 @@ void chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> &reserv
 
 }
 
-void chooseCityByCode(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string code){
+void Utils::chooseCityByCode(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string code){
     unordered_map<string, double> flows = maxFlow(g, reservoirs_codes, cities_codes);
     if(code=="none"){
         for(auto c: flows){
@@ -295,7 +295,7 @@ void chooseCityByCode(Graph<string> &g, unordered_map<string, Reservoir> &reserv
 }
 
 
-void removePumpingStations(Graph<string> &g, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code, unordered_map<string, Reservoir> &reservoirs_code){
+void Utils::removePumpingStations(Graph<string> &g, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code, unordered_map<string, Reservoir> &reservoirs_code){
 
     std::vector<Vertex<string>*> stations;
     for(auto v: g.getVertexSet()){
@@ -369,7 +369,7 @@ void removePumpingStations(Graph<string> &g, unordered_map<string, City> &cities
 }
 
 
-void pipeFailure(string city, Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
+void Utils::pipeFailure(string city, Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
     vector<pair<string, string>> res; //src dest of the edges that can be removed
 
     unordered_map<string, double> flows = maxFlow(g, reservoirs_codes, cities_codes);
@@ -436,7 +436,7 @@ void pipeFailure(string city, Graph<string> g, unordered_map<string, Reservoir> 
     }
 }
 
-void waterDeficit(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
+void Utils::waterDeficit(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
     unordered_map<string, double> initialFlows = maxFlow(g, reservoirs_codes, cities_codes);
     for(auto v: g.getVertexSet()){
         for(auto edge: v->getAdj()) {
@@ -473,7 +473,7 @@ void waterDeficit(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_
 
 
 
-vector<pair<pair<string, string>, int>> computeDiffs(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
+vector<pair<pair<string, string>, int>> Utils::computeDiffs(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes){
     vector<pair<pair<string, string>, int>> diffs;
     for(auto v: g.getVertexSet()){
         for(auto pipe: v->getAdj()){
@@ -483,7 +483,7 @@ vector<pair<pair<string, string>, int>> computeDiffs(Graph<string> g, unordered_
     return diffs;
 }
 
-vector<int> computeMetrics(Graph<string> g, vector<pair<pair<string, string>, int>> pipeDiffs){
+vector<int> Utils::computeMetrics(Graph<string> g, vector<pair<pair<string, string>, int>> pipeDiffs){
     vector<int> res;
     int sum_diff=0;
     int sum_var=0;
@@ -505,11 +505,11 @@ vector<int> computeMetrics(Graph<string> g, vector<pair<pair<string, string>, in
     return res;
 }
 
-bool sortBySecond(pair<pair<string, string>, int> &a, pair<pair<string, string>, int> &b) {
+bool Utils::sortBySecond(pair<pair<string, string>, int> &a, pair<pair<string, string>, int> &b) {
     return a.second > b.second;
 }
 
-vector<pair<pair<string, string>, int>> excessFlow(Graph<string> g){
+vector<pair<pair<string, string>, int>> Utils::excessFlow(Graph<string> g){
     vector<pair<pair<string, string>, int>> excessFlowPipes;
     for (auto v: g.getVertexSet()){
         for (auto pipe: v->getAdj()){
@@ -523,7 +523,7 @@ vector<pair<pair<string, string>, int>> excessFlow(Graph<string> g){
     return excessFlowPipes;
 }
 
-void Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code){
+void Utils::Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code){
     unordered_map<string, double> flows = maxFlow(g, reservoirs_codes, cities_codes);
     vector<pair<pair<string, string>, int>> initialPipeDiffs = computeDiffs(g, reservoirs_codes, cities_codes);
 
@@ -531,7 +531,6 @@ void Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes
 
     vector<pair<pair<string, string>, int>> excessFlowPipes = excessFlow(g);
 
-    cout<<excessFlowPipes.size()<<endl;
     int i=4;
     while(i>0) {
         for (auto p: excessFlowPipes) {
@@ -578,7 +577,6 @@ void Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes
             }
         }
         excessFlowPipes = excessFlow(g);
-        cout<<excessFlowPipes.size()<<endl;
         i--;
     }
 
@@ -590,7 +588,7 @@ void Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes
 }
 
 
-void chooseFailingReservoir(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes){
+void Utils::chooseFailingReservoir(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes){
 
     int before, after;
     unordered_map<string, double> flows = maxFlow(g, reservoirs_codes, city_codes);
@@ -640,7 +638,7 @@ void chooseFailingReservoir(Graph<string> &g, string code, unordered_map<string,
 }
 
 //3.2
-void chooseFailingPumpingStation(Graph<string> g, string code, unordered_map<string, Station> &ps_codes, unordered_map<string, City> &city_codes){
+void Utils::chooseFailingPumpingStation(Graph<string> g, string code, unordered_map<string, Station> &ps_codes, unordered_map<string, City> &city_codes){
     try {
         Station S = ps_codes.at(code);
     } catch (const std::out_of_range& e) {

@@ -26,7 +26,8 @@ int main() {
     CityParser(path_cities, g, cities_code);
     StationParser(path_station, g, stations_code);
     PipesParser(path_pipes, g);
-    
+
+    Menu::openMenu(g, cities_code, reservoirs_code, stations_code);
     //mainMenu(g, cities_code, reservoirs_code);
     /*for(auto x : g.getVertexSet()){
         auto info = x->getInfo();
@@ -71,7 +72,7 @@ int main() {
 /*
     cout << "Not supplied cities: "<< calculateReceivedSupply(g,cities_code) << endl;
     printNotFullySuppliedCities(g, cities_code);*/
-    chooseFailingReservoir(g, "R_1", reservoirs_code, cities_code);
+    //chooseFailingReservoir(g, "R_1", reservoirs_code, cities_code);
     //maxFlow
     //maxFlow(g, reservoirs_code);
 
@@ -93,6 +94,6 @@ int main() {
     }*/
 
     //Balance(g, reservoirs_code, cities_code, stations_code);
-    chooseCityByName(g, reservoirs_code, cities_code, "Coimbra");
+    //chooseCityByName(g, reservoirs_code, cities_code, "Coimbra");
 }
 
