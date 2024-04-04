@@ -232,10 +232,10 @@ unordered_map<string, double> Utils::maxFlow(Graph<string> g, unordered_map<stri
 
     g.removeVertex("source");
     g.removeVertex("sink");
-    
-    
-    
-    
+
+
+
+
     return res;
 }
 
@@ -337,7 +337,7 @@ void Utils::removePumpingStations(Graph<string> &g, unordered_map<string, City> 
         for(auto edge: outcomingEdges){
             g.addEdge(info, edge.first->getInfo(), edge.second);
         }
-        
+
         for(auto edge: incomingEdges){
             g.addEdge(edge.first->getInfo(), info, edge.second);
         }
@@ -531,6 +531,7 @@ void Utils::Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoir
 
     vector<pair<pair<string, string>, int>> excessFlowPipes = excessFlow(g);
 
+
     int i=4;
     while(i>0) {
         for (auto p: excessFlowPipes) {
@@ -566,7 +567,7 @@ void Utils::Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoir
                     flow = edge->getFlow();
                 }
             }
-            int pCap = 0.9 * pipeCap;
+            int pCap = 0.8 * pipeCap;
             int amount_transfer = min(flow, pCap - pipeFlow);
             for (auto edge: vertexOrig->getAdj()) {
                 if (edge->getDest() == vertexDest) {
@@ -577,6 +578,7 @@ void Utils::Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoir
             }
         }
         excessFlowPipes = excessFlow(g);
+        cout<<excessFlowPipes.size()<<endl;
         i--;
     }
 
