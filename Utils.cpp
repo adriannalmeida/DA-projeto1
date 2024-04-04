@@ -456,8 +456,12 @@ void Utils::waterDeficit(Graph<string> g, unordered_map<string, Reservoir> &rese
                 if ((p.second != newFlows[p.first]) && (newFlows[p.first] < c.getDemand())) {
                     flag=true;
                     if (p.second < c.getDemand()) {
+                        if(p.second - newFlows[p.first]>0){
                         cout << p.first << " by deficit of "
-                             << p.second - newFlows[p.first] << endl;
+                             << p.second - newFlows[p.first] << endl;}
+                        else{
+                            cout<<p.first<<" by surplus of "<<newFlows[p.first] -p.second <<endl;
+                        }
                     } else {
                         cout << p.first << " by deficit of " << c.getDemand() - newFlows[p.first]
                              << endl;
