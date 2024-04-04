@@ -408,7 +408,7 @@ void Utils::pipeFailure(string city, Graph<string> g, unordered_map<string, Rese
     }
     cout << res.size() << endl;
     string orig, dest;
-    cout << "The pipelines connecting the following places can be removed: "<<endl;
+    cout << "The pipelines connecting the following places can be removed one at a time: "<<endl;
 
     for(auto x: res){
         if(x.first[0]=='C')
@@ -470,6 +470,56 @@ void Utils::waterDeficit(Graph<string> g, unordered_map<string, Reservoir> &rese
         }
             }
         }
+
+void Utils::waterDeficitChoosePipe(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, vector<pair<string, string>> pipes) {
+    unordered_map<string, double> initialFlows = maxFlow(g, reservoirs_codes, cities_codes);
+    vector<pair<Edge<string> *, int>> weights;
+    for (const auto& pipe: pipes) {
+
+        for (auto v: g.getVertexSet()) {
+            for (auto edge: v->getAdj()) {
+                string orig = v->getInfo();
+                string dest = edge->getDest()->getInfo();
+
+                if (((orig == pipe.first) && (dest == pipe.second)) || ((orig == pipe.second) && (dest == pipe.first))) {
+
+                    int weight = edge->getWeight();
+                    edge->setWeight(0);
+
+                    weights.push_back(make_pair(edge, weight));
+
+                }
+
+            }
+        }
+    }
+    unordered_map<string, double> newFlows = maxFlow(g, reservoirs_codes, cities_codes);
+
+    for(auto p: weights){
+
+        p.first->setWeight(p.second);
+
+    }
+
+    cout <<endl << "The pipelines chosen affects the following cities: " << endl;
+    bool flag=false;
+    for (auto p : initialFlows) {
+        City c = cities_codes[p.first];
+        if ((p.second != newFlows[p.first]) && (newFlows[p.first] < c.getDemand())) {
+            flag=true;
+            if (p.second < c.getDemand()) {
+                cout << p.first << " by deficit of "
+                     << p.second - newFlows[p.first] << endl;
+            } else {
+                cout << p.first << " by deficit of " << c.getDemand() - newFlows[p.first]
+                     << endl;
+            }
+        }
+    }
+    if(!flag){
+        cout<<"No cities affected!"<<endl;
+    }
+}
 
 
 
@@ -578,7 +628,7 @@ void Utils::Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoir
             }
         }
         excessFlowPipes = excessFlow(g);
-        cout<<excessFlowPipes.size()<<endl;
+
         i--;
     }
 

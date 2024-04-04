@@ -11,17 +11,17 @@ int main() {
     set<string> r_set, s_set, c_set;
     Graph<string> g;
 
-    string path_reser = "../Project1LargeDataSet/Project1LargeDataSet/Reservoir.csv";
+    /*string path_reser = "../Project1LargeDataSet/Project1LargeDataSet/Reservoir.csv";
     string path_station = "../Project1LargeDataSet/Project1LargeDataSet/Stations.csv";
     string path_cities = "../Project1LargeDataSet/Project1LargeDataSet/Cities.csv";
     string path_pipes = "../Project1LargeDataSet/Project1LargeDataSet/Pipes.csv";
-/*
+*/
     string path_reser = "../Project1DataSetSmall/Project1DataSetSmall/Reservoirs_Madeira.csv";
     string path_station = "../Project1DataSetSmall/Project1DataSetSmall/Stations_Madeira.csv";
     string path_cities = "../Project1DataSetSmall/Project1DataSetSmall/Cities_Madeira.csv";
     string path_pipes = "../Project1DataSetSmall/Project1DataSetSmall/Pipes_Madeira.csv";
 
-*/
+
     ReservoirParser(path_reser, g, reservoirs_code);
     CityParser(path_cities, g, cities_code);
     StationParser(path_station, g, stations_code);

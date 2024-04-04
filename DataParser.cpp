@@ -71,9 +71,10 @@ void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht) 
         getline(ss, id, ',');
         getline(ss, code, ',');
         getline(ss, demand, ',');
-        //getline(ss, lixo, '"');  //para small dataset
-        //getline(ss, population, '"'); //para small dataset
-        getline(ss, population, ' '); //para large dataset
+        getline(ss, lixo, '"');  //para small dataset
+        getline(ss, population, '"'); //para small dataset
+
+        //getline(ss, population, ' '); //para large dataset
         
 
         City C = City(city, stoi(id), code, stod(demand), stoi(population));
