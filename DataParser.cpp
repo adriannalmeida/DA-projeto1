@@ -40,15 +40,14 @@ void StationParser(string path, Graph<string> &g, unordered_map<string, Station>
 
     while (getline(csv, line, '\n')) {
 
-        string id, code;
+        string id, code, lixo;
         stringstream ss(line);
 
         getline(ss, id, ',');
         getline(ss, code, ',');
-
         Station S = Station(stoi(id), code);
 
-        cout << code<<endl; //o teste
+        cout << code << endl; //o teste
 
         g.addVertex(code);
         ht.emplace(code, S);
@@ -72,9 +71,9 @@ void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht) 
         getline(ss, id, ',');
         getline(ss, code, ',');
         getline(ss, demand, ',');
-        getline(ss, lixo, '"');  //para small dataset
-        getline(ss, population, '"'); //para small dataset
-        //getline(ss, population, ' '); //para large dataset
+        //getline(ss, lixo, '"');  //para small dataset
+        //getline(ss, population, '"'); //para small dataset
+        getline(ss, population, ' '); //para large dataset
         
 
         City C = City(city, stoi(id), code, stod(demand), stoi(population));
@@ -110,14 +109,7 @@ void PipesParser(string path, Graph<string> &g){
         else{
             g.addEdge(orig, dest, stod(w));
         }
-        /*Vertex<string>* origin = g.findVertex(orig);
 
-
-        Vertex<string>* destination = g.findVertex(dest);
-
-
-        Edge<string> E = Edge(orig, dest, stoi(w), d - '0');
-        g.addEdge(E);*/
 
     }
 }

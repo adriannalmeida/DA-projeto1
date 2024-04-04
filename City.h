@@ -9,7 +9,6 @@ class City {
     string code;
     double demand;
     long int population;
-    double received;
 
 public:
     City();
@@ -19,8 +18,6 @@ public:
     string getCode() const;
     double getDemand() const;
     long getPopulation() const;
-    double getReceived() const;
-    void setReceived(double amount);
 };
 
 

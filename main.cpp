@@ -5,7 +5,7 @@
 
 using namespace std;
 int main() {
-     unordered_map<string, Reservoir> reservoirs_code;
+    unordered_map<string, Reservoir> reservoirs_code;
     unordered_map<string, City> cities_code;
     unordered_map<string, Station> stations_code;
     set<string> r_set, s_set, c_set;
@@ -15,13 +15,13 @@ int main() {
     string path_station = "../Project1LargeDataSet/Project1LargeDataSet/Stations.csv";
     string path_cities = "../Project1LargeDataSet/Project1LargeDataSet/Cities.csv";
     string path_pipes = "../Project1LargeDataSet/Project1LargeDataSet/Pipes.csv";
-
-    /*string path_reser = "../Project1DataSetSmall/Project1DataSetSmall/Reservoirs_Madeira.csv";
+/*
+    string path_reser = "../Project1DataSetSmall/Project1DataSetSmall/Reservoirs_Madeira.csv";
     string path_station = "../Project1DataSetSmall/Project1DataSetSmall/Stations_Madeira.csv";
     string path_cities = "../Project1DataSetSmall/Project1DataSetSmall/Cities_Madeira.csv";
     string path_pipes = "../Project1DataSetSmall/Project1DataSetSmall/Pipes_Madeira.csv";
-*/
 
+*/
     ReservoirParser(path_reser, g, reservoirs_code);
     CityParser(path_cities, g, cities_code);
     StationParser(path_station, g, stations_code);
@@ -71,7 +71,7 @@ int main() {
 /*
     cout << "Not supplied cities: "<< calculateReceivedSupply(g,cities_code) << endl;
     printNotFullySuppliedCities(g, cities_code);*/
-    //chooseFailingReservoir(g, "R_1", reservoirs_code, cities_code);
+    chooseFailingReservoir(g, "R_1", reservoirs_code, cities_code);
     //maxFlow
     //maxFlow(g, reservoirs_code);
 
@@ -84,6 +84,7 @@ int main() {
 
     //removePumpingStations(g, cities_code, stations_code, reservoirs_code);
     //pipeFailure("C_6", g, reservoirs_code, cities_code);
+
 /*
     auto flows= maxFlow(g, reservoirs_code, cities_code);
 
@@ -92,6 +93,6 @@ int main() {
     }*/
 
     //Balance(g, reservoirs_code, cities_code, stations_code);
-    chooseCityByName(g, reservoirs_code, cities_code, "none");
+    chooseCityByName(g, reservoirs_code, cities_code, "Coimbra");
 }
 

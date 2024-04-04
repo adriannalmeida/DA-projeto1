@@ -7,7 +7,6 @@ City::City(string city, int id, string code, double demand, long population){
     this->code = code;
     this->demand = demand;
     this->population= population;
-    this->received = 0;
 };
 
 string City::getCity() const{
@@ -24,10 +23,4 @@ double City::getDemand() const{
 }
 long City::getPopulation() const{
     return this->population;
-}
-double City::getReceived() const{
-    return this->received;
-}
-void City::setReceived(double amount){
-    this->received = amount;
 }
