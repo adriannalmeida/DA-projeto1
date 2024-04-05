@@ -24,20 +24,6 @@ int calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> &city_c
     return notSupplied;
 }*/
 
-int Utils::calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> &city_codes, unordered_map<string, double> flows){
-    int notSupplied = 0;
-
-    for (auto v : g.getVertexSet()) {
-        if(v->getInfo()[0] == 'C'){
-            if(flows[v->getInfo()] < city_codes[v->getInfo()].getDemand()){
-                notSupplied++;
-            }
-        }
-    }
-    return notSupplied;
-}
-
-
 
 void Utils::printNotFullySuppliedCities(Graph<string> &g, unordered_map<string, City> &city_codes, unordered_map<string, double> flows){
     bool printColumnNames = 0;
@@ -294,8 +280,72 @@ void Utils::chooseCityByCode(Graph<string> &g, unordered_map<string, Reservoir> 
 
 }
 
+void Utils::chooseRemovePumpingStations(Graph<string> &g, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code, unordered_map<string, Reservoir> &reservoirs_code, string station){
 
-void Utils::removePumpingStations(Graph<string> &g, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code, unordered_map<string, Reservoir> &reservoirs_code){
+    Vertex<string>* ps;
+    for(auto v: g.getVertexSet()){
+        if(v->getInfo()==station){
+            ps=v;
+        }
+    }
+
+    unordered_map<string, double> maxiFlow = maxFlow(g, reservoirs_code, cities_codes);
+
+
+
+
+        vector<pair<Vertex<string>*, double>> outcomingEdges;
+        vector<pair<Vertex<string>*, double>> incomingEdges;
+        for(auto edge: ps->getAdj()){
+            outcomingEdges.push_back(make_pair(edge->getDest(), edge->getWeight()));
+        }
+        for(auto edge: ps->getIncoming()){
+            incomingEdges.push_back(make_pair(edge->getOrig(), edge->getWeight()));
+        }
+
+        string info=ps->getInfo();
+        g.removeVertex(ps->getInfo());
+
+        unordered_map<string, double> currentFlow = maxFlow(g, reservoirs_code, cities_codes);
+
+        g.addVertex(info);
+
+        for(auto edge: outcomingEdges){
+            g.addEdge(info, edge.first->getInfo(), edge.second);
+        }
+
+        for(auto edge: incomingEdges){
+            g.addEdge(edge.first->getInfo(), info, edge.second);
+        }
+
+        int n=maxiFlow.size();
+        bool affected=false;
+
+        cout << "Affected cities by " << info<<": "<<endl;
+        for(auto p : maxiFlow){
+            City c = cities_codes[p.first];
+            if((p.second != currentFlow[p.first]) && (c.getDemand() > currentFlow[p.first])){
+                affected=true;
+                int dif;
+                if(p.second > c.getDemand()){
+                    dif=c.getDemand() - currentFlow[p.first];}
+                else{
+                    dif=p.second - currentFlow[p.first];
+                }
+
+                cout << p.first << "---->" << dif <<endl;
+            }
+
+        }
+        if(!affected){
+            cout << "No cities affected"<< endl;
+        }
+
+
+}
+
+
+ void Utils::removePumpingStations(Graph<string> &g, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code, unordered_map<string, Reservoir> &reservoirs_code){
 
     std::vector<Vertex<string>*> stations;
     for(auto v: g.getVertexSet()){
@@ -475,7 +525,7 @@ void Utils::waterDeficit(Graph<string> g, unordered_map<string, Reservoir> &rese
             }
         }
 
-void Utils::waterDeficitChoosePipe(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, vector<pair<string, string>> pipes) {
+/* em falta */ void Utils::waterDeficitChoosePipe(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, vector<pair<string, string>> pipes) {
     unordered_map<string, double> initialFlows = maxFlow(g, reservoirs_codes, cities_codes);
     vector<pair<Edge<string> *, int>> weights;
     for (const auto& pipe: pipes) {
@@ -643,6 +693,18 @@ void Utils::Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoir
     cout<< "Balanced: [Average]-->"<<finalMetrics[0]<<" [Variance]-->"<<finalMetrics[1]<<" [MaxDiff]-->"<<finalMetrics[2]<<endl;
 }
 
+int Utils::calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> &city_codes, unordered_map<string, double> flows){
+    int notSupplied = 0;
+
+    for (auto v : g.getVertexSet()) {
+        if(v->getInfo()[0] == 'C'){
+            if(flows[v->getInfo()] < city_codes[v->getInfo()].getDemand()){
+                notSupplied++;
+            }
+        }
+    }
+    return notSupplied;
+}
 
 void Utils::chooseFailingReservoir(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes){
 
@@ -666,9 +728,11 @@ void Utils::chooseFailingReservoir(Graph<string> &g, string code, unordered_map<
 
     for(auto edge: v->getAdj()){
         out.emplace(edge->getDest(), edge->getWeight());
+        g.removeEdge(code, edge->getDest()->getInfo());
     }
     for(auto edge: v->getIncoming()){
         inc.emplace(edge->getOrig(), edge->getWeight());
+        g.removeEdge(edge->getOrig()->getInfo(), code);
     }
 
     g.removeVertex(code);
@@ -694,7 +758,7 @@ void Utils::chooseFailingReservoir(Graph<string> &g, string code, unordered_map<
 }
 
 //3.2
-void Utils::chooseFailingPumpingStation(Graph<string> g, string code, unordered_map<string, Station> &ps_codes, unordered_map<string, City> &city_codes){
+/* em falta */ void Utils::chooseFailingPumpingStation(Graph<string> g, string code, unordered_map<string, Station> &ps_codes, unordered_map<string, City> &city_codes){
     try {
         Station S = ps_codes.at(code);
     } catch (const std::out_of_range& e) {

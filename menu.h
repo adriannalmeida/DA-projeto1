@@ -20,6 +20,14 @@ public:
     static void initialOptions(Graph<string> g, unordered_map<string ,City> &cities, unordered_map<string, Reservoir> &reservoirs, unordered_map<string, Station> &stations);
     static int closeMenu();
     static void metrics(Graph<string> g, unordered_map<string ,City> &cities, unordered_map<string, Reservoir> &reservoirs, unordered_map<string, Station> &stations);
-};
+    static void maxFlowMenu(Graph<string> g, unordered_map<string ,City> &cities, unordered_map<string, Reservoir> &reservoirs, unordered_map<string, Station> &stations);
+    static void chooseCity(Graph<string> g, unordered_map<string ,City> &cities, unordered_map<string, Reservoir> &reservoirs, unordered_map<string, Station> &stations);
+    static void failures(Graph<string> g, unordered_map<string ,City> &cities, unordered_map<string, Reservoir> &reservoirs, unordered_map<string, Station> &stations);
+    static void pumpingStations(Graph<string> g, unordered_map<string ,City> &cities, unordered_map<string, Reservoir> &reservoirs, unordered_map<string, Station> &stations);
+    static void pipelines(Graph<string> g, unordered_map<string ,City> &cities, unordered_map<string, Reservoir> &reservoirs, unordered_map<string, Station> &stations);
+
+
+
+    };
 #endif //PROJETO1_MENU_H
 

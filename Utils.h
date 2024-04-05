@@ -40,5 +40,7 @@ static int calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> 
     static void chooseCityByCode(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string code);
     static void calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> &city_codes);
     static void waterDeficitChoosePipe(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, vector<pair<string, string>> pipes);
-};
+    static void chooseRemovePumpingStations(Graph<string> &g, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code, unordered_map<string, Reservoir> &reservoirs_code, string station){
+
+    };
 #endif //DA_PROJETO1_UTILS_H
