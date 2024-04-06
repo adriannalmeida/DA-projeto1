@@ -723,7 +723,7 @@ int Utils::calculateReceivedSupply(Graph<string> &g,unordered_map<string, City> 
     return notSupplied;
 }
 //using caps
-/*
+
 void Utils::chooseFailingReservoir(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes){
 
     int before, after;
@@ -762,9 +762,9 @@ void Utils::chooseFailingReservoir(Graph<string> &g, string code, unordered_map<
     }
 
 
-}*/
+}
 //using vertex removal
-
+/*
 void Utils::chooseFailingReservoir(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes){
 
     int before, after;
@@ -803,7 +803,7 @@ void Utils::chooseFailingReservoir(Graph<string> &g, string code, unordered_map<
     }
 
 }
-
+*/
 void Utils::noUnnecessaryMaxFlow(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes){
 
     //início do inicio_________________________________________________________

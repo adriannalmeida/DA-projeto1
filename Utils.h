@@ -12,7 +12,6 @@ public:
 
     static int calculateReceivedSupply(Graph<string> &g, unordered_map<string, City> &city_codes,
                                        unordered_map<string, double> flows);
-
     static void printNotFullySuppliedCities(Graph<string> &g, unordered_map<string, City> &city_codes,
                                             unordered_map<string, double> flows);
 

@@ -29,7 +29,7 @@ int main() {
     StationParser(path_station, g, stations_code);
     PipesParser(path_pipes, g);
 
-    Menu::openMenu(g, cities_code, reservoirs_code, stations_code);
+    //Menu::openMenu(g, cities_code, reservoirs_code, stations_code);
     //mainMenu(g, cities_code, reservoirs_code);
     /*for(auto x : g.getVertexSet()){
         auto info = x->getInfo();
