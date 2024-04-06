@@ -671,7 +671,7 @@ void Utils::Balance(Graph<string> g, unordered_map<string, Reservoir> &reservoir
                     flow = edge->getFlow();
                 }
             }
-            int pCap = 0.8 * pipeCap;
+            int pCap = 0.80 * pipeCap;
             int amount_transfer = min(flow, pCap - pipeFlow);
             for (auto edge: vertexOrig->getAdj()) {
                 if (edge->getDest() == vertexDest) {

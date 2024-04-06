@@ -17,12 +17,12 @@ int Menu::closeMenu() {
 }
 void Menu::initialOptions(Graph<string> g, unordered_map<string ,City> &cities, unordered_map<string, Reservoir> &reservoirs, unordered_map<string, Station> &stations) {
     cout << "What do you want to consult?" << endl;
-    cout << "1. Basic Service Metrics\n" << "2. Reliability and Sensitivity to Failures\n" << "4. Quit\n";
+    cout << "1. Basic Service Metrics\n" << "2. Reliability and Sensitivity to Failures\n" << "3. Quit\n";
     cout << "Option: ";
     string option;
     cin >> option;
 
-    while (!(option == "1" || option == "2" || option == "3" || option == "4")) {
+    while (!(option == "1" || option == "2" || option == "3" )) {
         cout << "Invalid input. Option: ";
         cin >> option;
     }
@@ -30,7 +30,7 @@ void Menu::initialOptions(Graph<string> g, unordered_map<string ,City> &cities, 
     cout << " " << endl;
     if (option == "1") { metrics(g, cities, reservoirs, stations); }
     if (option == "2") {failures(g, cities, reservoirs, stations);}
-        if (option == "4") { closeMenu(); }
+        if (option == "3") { closeMenu(); }
     }
 
 void Menu::failures(Graph<string> g, unordered_map<string ,City> &cities, unordered_map<string, Reservoir> &reservoirs, unordered_map<string, Station> &stations){
@@ -50,7 +50,9 @@ void Menu::failures(Graph<string> g, unordered_map<string ,City> &cities, unorde
         cout << "Reservoir Code: ";
         string option;
         cin >> option;
-        Utils::chooseFailingReservoir(g, option, reservoirs, cities);        }
+        Utils::chooseFailingReservoir(g, option, reservoirs, cities);
+        cout<<endl;
+        continueM(g, cities, reservoirs, stations);}
     else if (option == "2") {
         pumpingStations(g, cities, reservoirs, stations);
     }
@@ -75,9 +77,13 @@ void Menu::pipelines(Graph<string> g, unordered_map<string ,City> &cities, unord
         cout << "City code: ";
         string option;
         cin >> option;
-        Utils::pipeFailure(option, g, reservoirs, cities);}
+        Utils::pipeFailure(option, g, reservoirs, cities);
+        cout<<endl;
+        continueM(g, cities, reservoirs, stations);}
     else if(option=="2"){
         Utils::waterDeficit(g, reservoirs, cities);
+        cout<<endl;
+        continueM(g, cities, reservoirs, stations);
     }
     else if(option == "3"){
         vector<pair<string, string>> pipes;
@@ -105,6 +111,8 @@ void Menu::pipelines(Graph<string> g, unordered_map<string ,City> &cities, unord
             }
         }
         Utils::waterDeficitChoosePipe(g, reservoirs, cities, pipes);
+        cout<<endl;
+        continueM(g, cities, reservoirs, stations);
     }
     else{failures(g, cities, reservoirs, stations);}
 }
@@ -122,10 +130,12 @@ void Menu::pumpingStations(Graph<string> g, unordered_map<string ,City> &cities,
     cout << " " << endl;
     if(option=="1"){Utils::removePumpingStations(g, cities, stations, reservoirs);}
     else if(option=="2"){
-        cout << "Pumping Station code ";
+        cout << "Pumping Station code: ";
         string option;
         cin >> option;
         Utils::chooseRemovePumpingStations(g, cities, stations, reservoirs, option);
+        cout<<endl;
+        continueM(g, cities, reservoirs, stations);
     }
     else{failures(g, cities, reservoirs, stations);}
 }
@@ -133,7 +143,7 @@ void Menu::pumpingStations(Graph<string> g, unordered_map<string ,City> &cities,
 
 void Menu::metrics(Graph<string> g, unordered_map<string ,City> &cities, unordered_map<string, Reservoir> &reservoirs, unordered_map<string, Station> &stations) {
     cout << "What do you want to consult?" << endl;
-    cout << "1.Max Flow\n" << "2.Water Needs\n" << "3. Balance Flow" << "4.Go back\n";
+    cout << "1.Max Flow\n" << "2.Water Needs\n" << "3. Balance Flow\n" << "4.Go back\n";
     cout << "Option: ";
     string option;
     cin >> option;
@@ -147,8 +157,12 @@ void Menu::metrics(Graph<string> g, unordered_map<string ,City> &cities, unorder
 
     unordered_map<string, double> flows = Utils::maxFlow(g, reservoirs, cities);
     if (option == "1") {maxFlowMenu(g, cities, reservoirs, stations);}
-    else if (option == "2") {Utils::printNotFullySuppliedCities(g, cities, flows);}
-    else if (option == "3") { Utils::Balance(g, reservoirs, cities, stations); }
+    else if (option == "2") {Utils::printNotFullySuppliedCities(g, cities, flows);
+        cout<<endl;
+        continueM(g, cities, reservoirs, stations);}
+    else if (option == "3") { Utils::Balance(g, reservoirs, cities, stations);
+        cout<<endl;
+        continueM(g, cities, reservoirs, stations);}
     else if (option == "4") {initialOptions(g, cities, reservoirs, stations);}
 }
 
@@ -167,7 +181,9 @@ void Menu::maxFlowMenu(Graph<string> g, unordered_map<string ,City> &cities, uno
     cout << " " << endl;
     vector<pair<string, string>> pipes;
 
-    if (option == "1") {Utils::chooseCityByName(g, reservoirs, cities, "none");}
+    if (option == "1") {Utils::chooseCityByName(g, reservoirs, cities, "none");
+        cout<<endl;
+        continueM(g, cities, reservoirs, stations);}
     else if (option == "2") {chooseCity(g, cities, reservoirs, stations);}
     else if (option == "3") { metrics(g, cities, reservoirs, stations); }
 
@@ -194,6 +210,8 @@ void Menu::chooseCity(Graph<string> g, unordered_map<string ,City> &cities, unor
         cin >> option;
 
         Utils::chooseCityByCode(g, reservoirs, cities, option);
+        cout<<endl;
+        continueM(g, cities, reservoirs, stations);
     }
     else if (option == "2") {
         cout << "City name: ";
@@ -201,7 +219,24 @@ void Menu::chooseCity(Graph<string> g, unordered_map<string ,City> &cities, unor
         cin >> option;
 
         Utils::chooseCityByName(g, reservoirs, cities, option);
+        cout<<endl;
+        continueM(g, cities, reservoirs, stations);
     }
     else if (option == "3") {maxFlowMenu(g, cities, reservoirs, stations);}
 
+}
+
+void Menu::continueM(Graph<string> g, unordered_map<string ,City> &cities, unordered_map<string, Reservoir> &reservoirs, unordered_map<string, Station> &stations){
+    cout << "Want do you want to do now?" << endl;
+    cout << "1. Go back to Menu\n" << "2.Quit\n" << endl;
+    cout << "Option: "<<endl;
+    string option;
+    cin >> option;
+
+    while (!(option == "1" || option == "2") ){
+    cout << "Invalid input. Option: ";
+    cin >> option;
+    }
+    if( option == "1"){initialOptions(g, cities, reservoirs, stations);}
+    else{closeMenu();}
 }
