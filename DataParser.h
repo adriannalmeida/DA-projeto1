@@ -56,8 +56,9 @@ void StationParser(string path, Graph<string> &g, unordered_map<string, Station>
  * @param path The file path of the CSV file containing the City data.
  * @param g The graph representing the network.
  * @param ht The hash table mapping city codes to City objects.
+ * @param s The region identifier, specifies the data to parse.
  */
-void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht);
+void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht, string s);
 
 /**
  * @brief Parses the Pipes data from a CSV file and populates a graph.

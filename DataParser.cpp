@@ -53,7 +53,7 @@ void StationParser(string path, Graph<string> &g, unordered_map<string, Station>
     }
 }
 
-void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht) {
+void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht, string s) {
     ifstream csv(path);
     if (!csv.is_open()) {
         cerr << "Error opening Cities.csv" << endl;
@@ -70,9 +70,13 @@ void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht) 
         getline(ss, id, ',');
         getline(ss, code, ',');
         getline(ss, demand, ',');
-        getline(ss, lixo, '"');  //para small dataset
-        getline(ss, population, '"'); //para small dataset
-        //getline(ss, population, ' '); //para large dataset
+        if(s == "Madeira"){
+            getline(ss, lixo, '"');  //para small dataset
+            getline(ss, population, '"'); //para small dataset
+        }
+        if(s == "Portugal"){
+            getline(ss, population, ' '); //para large dataset
+        }
         
 
         City C = City(city, stoi(id), code, stod(demand), stoi(population));
