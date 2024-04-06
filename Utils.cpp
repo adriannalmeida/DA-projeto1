@@ -12,10 +12,10 @@ void Utils::printNotFullySuppliedCities(Graph<string> &g, unordered_map<string, 
             auto c = city_codes[code];
             if (flows[code] < c.getDemand()) {
                 if (!printColumnNames) {
-                    cout << "City Code" << '\t' << "Deficit" << endl;
+                    cout << "CityCode" << "     " << "Deficit" << endl;
                     printColumnNames = 1;
                 }
-                cout << c.getCode() << "\t      " << (c.getDemand() - flows[code]) << "\tDemand is: \t      " << c.getDemand() << "\tFlow is: \t      " << flows[code]<<endl;
+                cout << c.getCode() << string((13- c.getCode().size()), ' ') << (c.getDemand() - flows[code]) << string((22 - to_string(c.getDemand()).size()), ' ') << "Demand is:    " << c.getDemand() << "\tFlow is: \t" << flows[code]<<endl;
             }
         } else{
             if(code[0] == 'P') break;

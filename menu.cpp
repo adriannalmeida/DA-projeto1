@@ -76,7 +76,7 @@ void Menu::chooseRegion(){
 
 void Menu::initialOptions() {
     cout << "What do you want to consult?" << endl;
-    cout << "1. Basic Service Metrics\n" << "2. Reliability and Sensitivity to Failures\n" << "3. Go back\n";
+    cout << "1. Basic Service Metrics\n" << "2. Reliability and Sensitivity to Failures\n" << "3. Quit\n";
     cout << "Option: ";
     string option;
     cin >> option;
@@ -89,7 +89,7 @@ void Menu::initialOptions() {
     cout << " " << endl;
     if (option == "1") { metrics(); }
     if (option == "2") {failures();}
-        if (option == "3") { chooseRegion(); }
+    if (option == "3") { closeMenu(); }
 }
 
 void Menu::failures(){
@@ -204,7 +204,7 @@ void Menu::pumpingStations(){
 
 void Menu::metrics() {
     cout << "What do you want to consult?" << endl;
-    cout << "1.Max Flow\n" << "2.Water Needs\n" << "3. Balance Flow\n" << "4.Go back\n";
+    cout << "1.Max Flow\n" << "2.Water Needs\n" << "3.Balance Flow\n" << "4.Go back\n";
     cout << "Option: ";
     string option;
     cin >> option;
@@ -297,6 +297,6 @@ void Menu::continueM(){
     cout << "Invalid input. Option: ";
     cin >> option;
     }
-    if( option == "1"){chooseRegion();}
+    if( option == "1"){initialOptions();}
     else{closeMenu();}
 }
