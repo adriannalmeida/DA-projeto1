@@ -2,10 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "Projeto1.exe"
-		},
-		{
-			"path" : "Projeto1.pdb"
+			"path" : "Projeto1"
 		}
 	],
 	"backtrace" : 1,
@@ -52,7 +49,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "C:/Users/marta/OneDrive/Documentos/FEUP-Marta/ProjectDA/projectDA14/DA-projeto1/."
+					"path" : "/home/saracortez/FEUP/DA/DA-projeto1/."
 				}
 			],
 			"language" : "CXX",
@@ -89,16 +86,12 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
-			},
-			{
-				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
-				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "Projeto1",
-	"nameOnDisk" : "Projeto1.exe",
+	"nameOnDisk" : "Projeto1",
 	"paths" : 
 	{
 		"build" : ".",

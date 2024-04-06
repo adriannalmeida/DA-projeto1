@@ -47,7 +47,6 @@ void StationParser(string path, Graph<string> &g, unordered_map<string, Station>
         getline(ss, code, ',');
         Station S = Station(stoi(id), code);
 
-        //cout << code << endl; //o teste
 
         g.addVertex(code);
         ht.emplace(code, S);
@@ -73,7 +72,6 @@ void CityParser(string path, Graph<string> &g, unordered_map<string, City> &ht) 
         getline(ss, demand, ',');
         getline(ss, lixo, '"');  //para small dataset
         getline(ss, population, '"'); //para small dataset
-
         //getline(ss, population, ' '); //para large dataset
         
 

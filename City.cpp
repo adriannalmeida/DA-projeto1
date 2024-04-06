@@ -1,6 +1,7 @@
 #include "City.h"
 
 City::City(){}
+
 City::City(string city, int id, string code, double demand, long population){
     this->city = city;
     this->id = id;

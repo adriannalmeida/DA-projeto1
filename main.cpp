@@ -5,16 +5,18 @@
 
 using namespace std;
 int main() {
+    Utils utils;
     unordered_map<string, Reservoir> reservoirs_code;
     unordered_map<string, City> cities_code;
     unordered_map<string, Station> stations_code;
     set<string> r_set, s_set, c_set;
     Graph<string> g;
-
-    /*string path_reser = "../Project1LargeDataSet/Project1LargeDataSet/Reservoir.csv";
+/*
+    string path_reser = "../Project1LargeDataSet/Project1LargeDataSet/Reservoir.csv";
     string path_station = "../Project1LargeDataSet/Project1LargeDataSet/Stations.csv";
     string path_cities = "../Project1LargeDataSet/Project1LargeDataSet/Cities.csv";
     string path_pipes = "../Project1LargeDataSet/Project1LargeDataSet/Pipes.csv";
+
 */
     string path_reser = "../Project1DataSetSmall/Project1DataSetSmall/Reservoirs_Madeira.csv";
     string path_station = "../Project1DataSetSmall/Project1DataSetSmall/Stations_Madeira.csv";
@@ -27,7 +29,7 @@ int main() {
     StationParser(path_station, g, stations_code);
     PipesParser(path_pipes, g);
 
-    Menu::openMenu(g, cities_code, reservoirs_code, stations_code);
+    //Menu::openMenu(g, cities_code, reservoirs_code, stations_code);
     //mainMenu(g, cities_code, reservoirs_code);
     /*for(auto x : g.getVertexSet()){
         auto info = x->getInfo();
@@ -69,14 +71,14 @@ int main() {
             cout << "Edge flow: " << e->getFlow() <<endl;
         }
     }*/
-/*
-    cout << "Not supplied cities: "<< calculateReceivedSupply(g,cities_code) << endl;
-    printNotFullySuppliedCities(g, cities_code);*/
-    //chooseFailingReservoir(g, "R_1", reservoirs_code, cities_code);
+
+
+    utils.chooseFailingReservoir(g, "R_4", reservoirs_code, cities_code);
+    //noUnnecessaryMaxFlow(g, "R_1", reservoirs_code, cities_code);
+
     //maxFlow
     //maxFlow(g, reservoirs_code);
 
-    //chooseCityByName(g, reservoirs_code, cities_code, "none");
 
     //chooseCityByName(g, reservoirs_code, cities_code, "Coimbra");
 
@@ -96,4 +98,3 @@ int main() {
     //Balance(g, reservoirs_code, cities_code, stations_code);
     //chooseCityByName(g, reservoirs_code, cities_code, "Coimbra");
 }
-
