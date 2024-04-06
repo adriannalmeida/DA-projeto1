@@ -176,6 +176,7 @@ public:
     static vector<pair<pair<string, string>, int>> computeDiffs(Graph<string> g, unordered_map<string, Reservoir> &reservoirs_codes,
                  unordered_map<string, City> &cities_codes);
 
+    //static void dfsReachableCities(Graph<string>& g, Vertex<string> *v, std::vector<string> & res);
         /**
      * @brief Balances the network flow by transferring excess flow from pipes to other pipes.
      *
@@ -234,8 +235,8 @@ public:
     static vector<pair<pair<string, string>, int>> excessFlow(Graph<string> g);
 
 
-    static void noUnnecessaryMaxFlow(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes);
-
+    static void noUnnecessaryMaxFlow(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes,
+                                     unordered_map<string, City> &city_codes);
     /**
      * @brief Simulates the scenario where a reservoir fails and evaluates the impact on the water supply to cities.
      *

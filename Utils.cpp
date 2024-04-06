@@ -125,43 +125,23 @@ unordered_map<string, double> Utils::maxFlow(Graph<string> g, unordered_map<stri
     if(src==snk){cout<< "Invalid";}
 
     unordered_map<string, double> res;
-    //for(auto dest: destinations){
-    //cout << src->getInfo() << "---->" << v->getInfo()<<endl;
+
     for(auto v: g.getVertexSet()){
         for(auto edge: v->getAdj()){
             edge->setFlow(0);
         }
     }
 
-    //double maxFlow=0;
     while(findPath(g, src, snk)){
         double f= minResidual(src, snk);
         setFlowPath(src, snk, f);
-        //maxFlow+=f;
     }
-    /*Vertex<string>* currentV=dest;
-    double maxFlow=0;
-    while (currentV->getInfo() != src->getInfo()){
-        maxFlow+=currentV->getPath()->getFlow();
-        currentV=currentV->getPath()->getOrig();
-    }*/
-    /*double maxFlow=0;
-    for(auto v: g.getVertexSet()){
-        for(auto edge: v->getAdj()){
-            if(edge->getDest()==dest){
-                maxFlow+=edge->getFlow();
-            }
-        }
-    }*/
 
     for(auto v: g.getVertexSet()){
         int sumFlow=0;
         if(v->getInfo()[0]=='C'){
             for(auto edge: v->getIncoming()){
                 sumFlow+=edge->getFlow();
-                //if(edge->getDest()->getInfo()=="sink"){
-                    //res.push_back(make_pair(v->getInfo(), edge->getFlow()));
-                //}
             }
             res[v->getInfo()] = sumFlow;
         }
@@ -735,52 +715,147 @@ void Utils::chooseFailingReservoir(Graph<string> &g, string code, unordered_map<
 
 
 }
-
-void Utils::noUnnecessaryMaxFlow(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes){
-
-    //início do inicio_________________________________________________________
-    int before, after, outgF = 0;
-    unordered_map<string, double> flows = maxFlow(g, reservoirs_codes, city_codes);
-    before = calculateReceivedSupply(g, city_codes, flows);
-
-    try {
-        Reservoir R = reservoirs_codes.at(code);
-    } catch (const std::out_of_range& e) {
-        cout << "Reservoir does not exist!: " << endl;
-        return;
+void dfsReachableCities(Graph<string> &g, Vertex<string> *v, std::vector<string> & res){
+    v->setVisited(true);
+    if(v->getInfo()[0] == 'C')res.push_back(v->getInfo());
+    for (auto & e : v->getAdj()) {
+        auto w = e->getDest();
+        if (!w->isVisited()) {
+            dfsReachableCities(g, w, res);
+        }
     }
-
-    cout << "When every Reservoir was functioning, " << before << " city(ies) were not receiving the needed supply." <<endl;
-    printNotFullySuppliedCities(g, city_codes, flows);
-
-    auto v = g.findVertex(code);
-    queue<pair<Vertex<string>*, double>> out;
-
-    for(auto edge: v->getAdj()){
-        out.emplace(edge->getDest(), edge->getWeight());
-        outgF += edge->getFlow();
-    }
-
-    vector<string> vAffectByReservoir;
-    g.dfsVisit(v, vAffectByReservoir);
-    for(auto el : vAffectByReservoir)
-        cout << el <<endl;
-
-    g.removeVertex(code);
-    // fim do início_________________________________________________________________
-
-    //inicio do fim ____________________________________________________________________________
-    after = calculateReceivedSupply(g, city_codes,  flows);
-    cout << "When reservoir "<< code << " stopped functioning " << after - before << " more cities are not sufficiently supplied.\nAll of them are listed below." << endl <<  endl;
-    printNotFullySuppliedCities(g, city_codes, flows);
-
-    g.addVertex(code);
-
-    while(!out.empty()){
-        g.addEdge(code, out.front().first->getInfo(), out.front().second);
-        out.pop();
-    }
-    //fim do fim________________________________________________________________________
 }
+
+void explorePathsFromSource(Graph<string>& g, Vertex<string>* v, const string& sourceCode, vector<vector<string>>& affectedPaths) {
+    // Mark the current vertex as visited and processing
+    v->setVisited(true);
+    v->setProcesssing(true);
+
+    // Explore outgoing edges from the current vertex
+    for (Edge<string>* edge : v->getAdj()) {
+        // Check if the destination vertex of the edge is already being processed
+        if (edge->getDest()->isProcessing()) {
+            // Detected a cycle, handle accordingly (e.g., skip or mark the affected paths)
+            continue; // For simplicity, we skip exploration of cyclic paths
+        }
+
+        // Continue exploring downstream paths if the destination vertex has not been visited
+        if (!edge->getDest()->isVisited() && edge->getDest()->getInfo() != sourceCode) {
+            // Set the path attribute of the destination vertex
+            edge->getDest()->setPath(edge);
+            // Continue exploring downstream paths
+            explorePathsFromSource(g, edge->getDest(), sourceCode, affectedPaths);
+        }
+    }
+
+    // If the current vertex is not the source and has a valid path,
+    // reconstruct the affected path and add it to affectedPaths
+    if (v->isProcessing() && v->getInfo() != sourceCode && v->getPath() != nullptr) {
+        vector<string> currentPath;
+        Edge<string>* currentEdge = v->getPath();
+        while (currentEdge->getOrig()->getInfo() != sourceCode) {
+            currentPath.push_back(currentEdge->getOrig()->getInfo());
+            currentEdge = currentEdge->getOrig()->getPath();
+        }
+        currentPath.push_back(currentEdge->getOrig()->getInfo());
+        reverse(currentPath.begin(), currentPath.end());
+        affectedPaths.push_back(currentPath);
+    }
+
+    // Reset the processing attribute for backtracking purposes
+    v->setProcesssing(false);
+}
+
+vector<vector<string>> identifyAffectedPaths(Graph<string> &g, const string& sourceCode)  {
+    vector<vector<string>> affectedPaths; // Store all affected paths
+    for(auto v: g.getVertexSet()){
+        v->setVisited(false);
+        v->setProcesssing(false);
+    }
+    // Find the source vertex in the graph
+    Vertex<string>* sourceVertex = g.findVertex(sourceCode);
+    if (sourceVertex == nullptr) {
+        return affectedPaths; // Source not found, return empty paths
+    }
+    // Perform Depth-First Search from the source vertex
+    explorePathsFromSource(g, sourceVertex, sourceCode, affectedPaths);
+
+    return affectedPaths;
+}
+
+void updateFlowAfterSourceRemoval(Graph<string>& g, const string& sourceCode) {
+    // Identify affected paths
+    vector<vector<string>> affectedPaths = identifyAffectedPaths(g, sourceCode);
+
+    // Update flow values and residual capacities along affected paths
+    for (const auto& path : affectedPaths) {
+        for (size_t i = 0; i < path.size() - 1; ++i) {
+            Vertex<string>* u = g.findVertex(path[i]);
+            Vertex<string>* v = g.findVertex(path[i + 1]);
+
+            // Find the edge connecting u to v
+            Edge<string>* edge = g.findEdge(path[i], path[i + 1]);
+            if (edge) {
+                // Calculate adjusted capacity: original capacity - flow
+                int adjustedCapacity = edge->getOriginalWeight() - edge->getFlow();
+                // Update capacity to adjusted value
+                edge->setWeight(adjustedCapacity);
+                // Reset flow to zero
+                edge->setFlow(0);
+            }
+        }
+    }
+}
+
+    void Utils::noUnnecessaryMaxFlow(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes,
+                                     unordered_map<string, City> &city_codes) {
+
+        //início do inicio_________________________________________________________
+        int before, after, outgF = 0;
+        unordered_map<string, double> flows = maxFlow(g, reservoirs_codes, city_codes);
+        before = calculateReceivedSupply(g, city_codes, flows);
+
+        try {
+            Reservoir R = reservoirs_codes.at(code);
+        } catch (const std::out_of_range &e) {
+            cout << "Reservoir does not exist!: " << endl;
+            return;
+        }
+
+        cout << "When every Reservoir was functioning, " << before << " city(ies) were not receiving the needed supply."
+             << endl;
+        printNotFullySuppliedCities(g, city_codes, flows);
+
+        auto v = g.findVertex(code);
+
+        queue<int> caps;
+
+        for (auto edge: v->getAdj()) {
+            caps.push(edge->getWeight());
+            edge->setWeight(0);
+        }
+
+        // fim do início_________________________________________________________________
+        vector<string> reached;
+        updateFlowAfterSourceRemoval(g, code);
+/*
+        } else {
+            flows = maxFlow(g, reservoirs_codes, city_codes);
+        }*/
+
+
+        //inicio do fim ____________________________________________________________________________
+
+
+        after = calculateReceivedSupply(g, city_codes, flows);
+        cout << "When reservoir " << code << " stopped functioning " << after - before
+             << " more cities are not sufficiently supplied.\nAll of them are listed below." << endl << endl;
+        printNotFullySuppliedCities(g, city_codes, flows);
+        for (auto edge: v->getAdj()) {
+            edge->setWeight(caps.front());
+            caps.pop();
+        }
+        //fim do fim________________________________________________________________________
+    }
 
 

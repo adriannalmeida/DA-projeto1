@@ -61,6 +61,7 @@ protected:
     int queueIndex = 0; 		// required by MutablePriorityQueue and UFDS
 
     void deleteEdge(Edge<T> *edge);
+
 };
 
 /********************** Edge  ****************************/
@@ -80,7 +81,7 @@ public:
     void setReverse(Edge<T> *reverse);
     void setFlow(double flow);
     void setWeight(double weight);
-
+    double getOriginalWeight();
 protected:
 
     Vertex<T> * dest; // destination bool direction;
@@ -94,6 +95,7 @@ protected:
     Edge<T> *reverse = nullptr;
 
     double flow; // for flow-related problems
+    double originalWeight;
 };
 
 /********************** Graph  ****************************/
@@ -297,8 +299,12 @@ void Vertex<T>::deleteEdge(Edge<T> *edge) {
 /********************** Edge  ****************************/
 
 template <class T>
-Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double w): orig(orig), dest(dest), weight(w) {}
+Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double w): orig(orig), dest(dest), weight(w) {originalWeight = weight;}
 
+template <class T>
+double Edge<T>::getOriginalWeight() {
+    return this->originalWeight;
+}
 template <class T>
 Vertex<T> * Edge<T>::getDest() const {
     return this->dest;

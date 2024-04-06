@@ -2,7 +2,7 @@
 #define DA_PROJETO1_CITY_H
 
 #include <string>
-
+using namespace std;
 /**
  * @brief Represents a City entity.
  *

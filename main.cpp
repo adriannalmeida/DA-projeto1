@@ -5,7 +5,6 @@
 
 using namespace std;
 int main() {
-    Utils utils;
     unordered_map<string, Reservoir> reservoirs_code;
     unordered_map<string, City> cities_code;
     unordered_map<string, Station> stations_code;
@@ -73,8 +72,8 @@ int main() {
     }*/
 
 
-    utils.chooseFailingReservoir(g, "R_4", reservoirs_code, cities_code);
-    //noUnnecessaryMaxFlow(g, "R_1", reservoirs_code, cities_code);
+    //Utils::chooseFailingReservoir(g, "R_4", reservoirs_code, cities_code);
+    Utils::noUnnecessaryMaxFlow(g, "R_2", reservoirs_code, cities_code);
 
     //maxFlow
     //maxFlow(g, reservoirs_code);
