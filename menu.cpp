@@ -76,7 +76,7 @@ void Menu::chooseRegion(){
 
 void Menu::initialOptions() {
     cout << "What do you want to consult?" << endl;
-    cout << "1. Basic Service Metrics\n" << "2. Reliability and Sensitivity to Failures\n" << "3. Quit\n";
+    cout << "1. Basic Service Metrics\n" << "2. Reliability and Sensitivity to Failures\n" << "3. Go back\n";
     cout << "Option: ";
     string option;
     cin >> option;
@@ -89,7 +89,7 @@ void Menu::initialOptions() {
     cout << " " << endl;
     if (option == "1") { metrics(); }
     if (option == "2") {failures();}
-        if (option == "3") { closeMenu(); }
+        if (option == "3") { chooseRegion(); }
 }
 
 void Menu::failures(){
@@ -118,7 +118,7 @@ void Menu::failures(){
     else if(option == "3"){
         pipelines();
     }
-    else if (option == "4") { closeMenu(); }
+    else if (option == "4") { initialOptions(); }
 }
 
 void Menu::pipelines(){
@@ -187,7 +187,9 @@ void Menu::pumpingStations(){
     }
 
     cout << " " << endl;
-    if(option=="1"){Utils::removePumpingStations(g, cities, stations, reservoirs);}
+    if(option=="1"){Utils::removePumpingStations(g, cities, stations, reservoirs);
+        cout<<endl;
+        wait();}
     else if(option=="2"){
         cout << "Pumping Station code: ";
         string option;
@@ -295,6 +297,6 @@ void Menu::continueM(){
     cout << "Invalid input. Option: ";
     cin >> option;
     }
-    if( option == "1"){initialOptions();}
+    if( option == "1"){chooseRegion();}
     else{closeMenu();}
 }
