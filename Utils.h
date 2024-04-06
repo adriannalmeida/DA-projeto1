@@ -34,5 +34,5 @@ vector<pair<pair<string, string>, int>> excessFlow(Graph<string> g);
 
 
 void chooseFailingReservoir(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes);
-
+void noUnnecessaryMaxFlow(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes);
 #endif //DA_PROJETO1_UTILS_H

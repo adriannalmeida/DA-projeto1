@@ -129,7 +129,7 @@ public:
     std:: vector<T> dfs() const;
     std:: vector<T> dfs(const T & source) const;
     void dfsVisit(Vertex<T> *v,  std::vector<T> & res) const;
-    std::vector<T> bfs(const T & source) const;
+    vector<T> bfs(const T & source);
 
     bool isDAG() const;
     bool dfsIsDAG(Vertex<T> *v) const;
@@ -529,8 +529,8 @@ void Graph<T>::dfsVisit(Vertex<T> *v, std::vector<T> & res) const {
  * Returns a vector with the contents of the vertices by bfs order.
  */
 template <class T>
-std::vector<T> Graph<T>::bfs(const T & source) const {
-    std::vector<int> res;
+std::vector<T> Graph<T>::bfs(const T & source)  {
+    vector <basic_string<char>> res;
     // Get the source vertex
     auto s = findVertex(source);
     if (s == nullptr) {
