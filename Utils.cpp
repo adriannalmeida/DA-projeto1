@@ -15,10 +15,9 @@ void Utils::printNotFullySuppliedCities(Graph<string> &g, unordered_map<string, 
                     cout << "City Code" << '\t' << "Deficit" << endl;
                     printColumnNames = 1;
                 }
-                cout << c.getCode() << "\t      " << (c.getDemand() - flows[code]) << "\tDemand is: \t      " << c.getDemand() << "\tReceived is: \t      " << flows[code]<<endl;
+                cout << c.getCode() << "\t      " << (c.getDemand() - flows[code]) << "\tDemand is: \t      " << c.getDemand() << "\tFlow is: \t      " << flows[code]<<endl;
             }
-        }
-        else{
+        } else{
             if(code[0] == 'P') break;
         }
     }
@@ -122,33 +121,6 @@ unordered_map<string, double> Utils::maxFlow(Graph<string> g, unordered_map<stri
             snk=v;
         }
     }
-    //testar
-    /*for(auto v:g.getVertexSet()){
-        if(v->getInfo()=="source"){
-            for(auto edge: v->getAdj()){
-                auto reservoir=reservoirs_codes[edge->getDest()->getInfo()];
-                cout << v->getInfo() << "---->" << edge->getDest()->getInfo()<< "->" << edge->getWeight()<< "->" <<reservoir.getMaxDelivery()<<endl;
-            }
-        }
-    }*/
-
-    /*for(auto v:g.getVertexSet()){
-        if(v->getInfo()[0]=='C'){
-            for(auto edge: v->getAdj()){
-                auto city=cities_codes[v->getInfo()];
-                cout << v->getInfo() << "---->" << edge->getDest()->getInfo();
-            }
-        }
-    }*/
-    // acabou testar
-
-
-    /*vector<Vertex<string>*> destinations;
-    for(auto v: g.getVertexSet()){
-        if(v->getInfo()[0] == 'C'){
-            destinations.push_back(v);
-        }
-    }*/
 
     if(src==snk){cout<< "Invalid";}
 
@@ -763,47 +735,7 @@ void Utils::chooseFailingReservoir(Graph<string> &g, string code, unordered_map<
 
 
 }
-//using vertex removal
-/*
-void Utils::chooseFailingReservoir(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes){
 
-    int before, after;
-    unordered_map<string, double> flows = maxFlow(g, reservoirs_codes, city_codes);
-    before = calculateReceivedSupply(g, city_codes, flows);
-
-    try {
-        Reservoir R = reservoirs_codes.at(code);
-    } catch (const std::out_of_range& e) {
-        cout << "Reservoir does not exist!: " << endl;
-        return;
-    }
-
-    cout << "When every Reservoir was functioning, " << before << " city(ies) were not receiving the needed supply." <<endl;
-    printNotFullySuppliedCities(g, city_codes, flows);
-
-    auto v = g.findVertex(code);
-
-    queue<Edge<string>*> out;
-
-    for(auto edge: v->getAdj()){
-        out.push(edge);
-    }
-    g.removeVertex(code);
-    flows = maxFlow(g, reservoirs_codes, city_codes);
-
-    after = calculateReceivedSupply(g, city_codes,  flows);
-    cout << "When reservoir "<< code << " stopped functioning " << after - before  << " more cities are not sufficiently supplied.\nAll of them are listed below." << endl <<endl;
-    printNotFullySuppliedCities(g, city_codes, flows);
-
-    g.addVertex(code);
-
-    while(!out.empty()){
-        g.addEdge(code, out.front()->getDest()->getInfo(), out.front()->getWeight());
-        out.pop();
-    }
-
-}
-*/
 void Utils::noUnnecessaryMaxFlow(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes){
 
     //início do inicio_________________________________________________________
@@ -850,19 +782,5 @@ void Utils::noUnnecessaryMaxFlow(Graph<string> &g, string code, unordered_map<st
     }
     //fim do fim________________________________________________________________________
 }
-//3.2
-/* em falta */
-void Utils::chooseFailingPumpingStation(Graph<string> g, string code, unordered_map<string, Station> &ps_codes, unordered_map<string, City> &city_codes){
-    try {
-        Station S = ps_codes.at(code);
-    } catch (const std::out_of_range& e) {
-        cout << "Station does not exist!: " << endl;
-        return;
-        //OU cout << "Do you want to try again?\nYes\nNo";´
-        //ver como funciona o menu aqui. ver se ter os set faz sentido
-        //pus g passado por valor por referencia nas funcoes que ela chama.
-        //medir a complexidade para ver se é melhor só readicionar o vértice no fim.
-    }
 
-}
 
