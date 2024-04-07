@@ -1,0 +1,505 @@
+\hypertarget{classUtils}{}\doxysection{Utils Class Reference}
+\label{classUtils}\index{Utils@{Utils}}
+
+
+Utility functions for working with graphs and flow algorithms.  
+
+
+
+
+{\ttfamily \#include $<$Utils.\+h$>$}
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{classUtils_a05e79e114dcdeb83952b92f5fb896046}{calculate\+Received\+Supply}} (Graph$<$ string $>$ \&g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&city\+\_\+codes, unordered\+\_\+map$<$ string, double $>$ flows)
+\begin{DoxyCompactList}\small\item\em Calculates the number of cities that did not receive enough supply. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classUtils_a000a5898df413415d584252df93067c7}{print\+Not\+Fully\+Supplied\+Cities}} (Graph$<$ string $>$ \&g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&city\+\_\+codes, unordered\+\_\+map$<$ string, double $>$ flows)
+\begin{DoxyCompactList}\small\item\em Prints cities that are not fully supplied. \end{DoxyCompactList}\item 
+static unordered\+\_\+map$<$ string, double $>$ \mbox{\hyperlink{classUtils_a1760b6a5f016c8411446f5d501486384}{max\+Flow}} (Graph$<$ string $>$ g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&reservoirs\+\_\+codes, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&cities\+\_\+codes)
+\begin{DoxyCompactList}\small\item\em Computes the maximum flow in the graph using the Edmonds-\/\+Karp algorithm. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classUtils_a72c9ea92beaed34477226b2b0444b28d}{test\+And\+Visit}} (queue$<$ Vertex$<$ string $>$ $\ast$ $>$ \&q, Edge$<$ string $>$ $\ast$e, Vertex$<$ string $>$ $\ast$v, double r)
+\begin{DoxyCompactList}\small\item\em Tests if a vertex has not been visited and the residual capacity of the edge is positive, then marks the vertex as visited, sets the path, and pushes it into the queue. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classUtils_a7debaac7c072fa1cdb5c7300753cd900}{find\+Path}} (Graph$<$ string $>$ \&g, Vertex$<$ string $>$ $\ast$s, Vertex$<$ string $>$ $\ast$d)
+\begin{DoxyCompactList}\small\item\em Finds a path from source to destination in the graph using BFS. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{classUtils_aeb5c14ee01a4c2942d5356da3e4b35e5}{min\+Residual}} (Vertex$<$ string $>$ $\ast$s, Vertex$<$ string $>$ $\ast$d)
+\begin{DoxyCompactList}\small\item\em Finds the minimum residual capacity along the path from source to destination. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classUtils_ae7e3fcdf920ef71d3bbbe834c06fbb1e}{set\+Flow\+Path}} (Vertex$<$ string $>$ $\ast$s, Vertex$<$ string $>$ $\ast$d, double flow)
+\begin{DoxyCompactList}\small\item\em Updates the flow along the path from source to destination. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classUtils_acd6520aeaa6c71c4ddbfca7c7cbfd3db}{choose\+City\+By\+Name}} (Graph$<$ string $>$ \&g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&reservoirs\+\_\+codes, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&cities\+\_\+codes, string city)
+\begin{DoxyCompactList}\small\item\em Chooses a city by name and displays its flow value or the flows of all cities if no city name is specified. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classUtils_ab2c3f3d63d769f05a209c139afffd492}{remove\+Pumping\+Stations}} (Graph$<$ string $>$ \&g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&cities\+\_\+codes, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classStation}{Station}} $>$ \&stations\+\_\+code, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&reservoirs\+\_\+code)
+\begin{DoxyCompactList}\small\item\em Removes pumping stations from the network and checks for affected cities. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classUtils_a327cb11ae7e929df14135d0e38aff2c5}{pipe\+Failure}} (string city, Graph$<$ string $>$ g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&reservoirs\+\_\+codes, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&cities\+\_\+codes)
+\begin{DoxyCompactList}\small\item\em Simulates a pipe failure in a specific city and identifies potentially disconnected edges. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classUtils_ac855765f266ee91bc74f15f146315ebf}{water\+Deficit}} (Graph$<$ string $>$ g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&reservoirs\+\_\+codes, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&cities\+\_\+codes)
+\begin{DoxyCompactList}\small\item\em Identifies cities affected by water deficit due to the removal of a pipeline and prints the deficits. \end{DoxyCompactList}\item 
+static vector$<$ pair$<$ pair$<$ string, string $>$, int $>$ $>$ \mbox{\hyperlink{classUtils_a068c82a57c8d03d27dcb4b1a6aa4fd4d}{compute\+Diffs}} (Graph$<$ string $>$ g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&reservoirs\+\_\+codes, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&cities\+\_\+codes)
+\begin{DoxyCompactList}\small\item\em Computes the differences between pipe weights and flow values for each pipe in the graph. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classUtils_a268bd7b4483295a308362c342f0abc3d}{Balance}} (Graph$<$ string $>$ g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&reservoirs\+\_\+codes, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&cities\+\_\+codes, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classStation}{Station}} $>$ \&stations\+\_\+code)
+\begin{DoxyCompactList}\small\item\em Balances the network flow by transferring excess flow from pipes to other pipes. \end{DoxyCompactList}\item 
+static vector$<$ int $>$ \mbox{\hyperlink{classUtils_aa4956e29082441f13ced9c447b903306}{compute\+Metrics}} (Graph$<$ string $>$ g, vector$<$ pair$<$ pair$<$ string, string $>$, int $>$ $>$ pipe\+Diffs)
+\begin{DoxyCompactList}\small\item\em Computes metrics such as average, variance, and maximum difference from a vector of pipe differences. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classUtils_aa73f31c9f983d020052e3174aa368349}{sort\+By\+Second}} (pair$<$ pair$<$ string, string $>$, int $>$ \&a, pair$<$ pair$<$ string, string $>$, int $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Comparator function to sort pairs based on the second element in descending order. \end{DoxyCompactList}\item 
+static vector$<$ pair$<$ pair$<$ string, string $>$, int $>$ $>$ \mbox{\hyperlink{classUtils_a6ff54e2081c76a29cc4d766d0519b067}{excess\+Flow}} (Graph$<$ string $>$ g)
+\begin{DoxyCompactList}\small\item\em Identifies pipes with excess flow and sorts them based on the excess flow ratio. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classUtils_ad6fd789dcf31ded4cbad525e250ea9ed}{choose\+Failing\+Reservoir}} (Graph$<$ string $>$ \&g, string code, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&reservoirs\+\_\+codes, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&city\+\_\+codes)
+\begin{DoxyCompactList}\small\item\em Simulates the scenario where a reservoir fails and evaluates the impact on the water supply to cities. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classUtils_a4b443926d39b174f82460f5ad2d97a47}{choose\+City\+By\+Code}} (Graph$<$ string $>$ \&g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&reservoirs\+\_\+codes, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&cities\+\_\+codes, string code)
+\begin{DoxyCompactList}\small\item\em Selects a city by its code and displays its flow or lists all cities and their flows if code is \char`\"{}none\char`\"{}. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classUtils_afc3d5c142cafde748169476127b23680}{water\+Deficit\+Choose\+Pipe}} (Graph$<$ string $>$ g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&reservoirs\+\_\+codes, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&cities\+\_\+codes, vector$<$ pair$<$ string, string $>$ $>$ pipes)
+\begin{DoxyCompactList}\small\item\em Identifies the impact of chosen pipes on cities\textquotesingle{} water deficit. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classUtils_a8821d0f06a4a32e764a1deaa3489e06c}{choose\+Remove\+Pumping\+Stations}} (Graph$<$ string $>$ \&g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&cities\+\_\+codes, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classStation}{Station}} $>$ \&stations\+\_\+code, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&reservoirs\+\_\+code, string station)
+\begin{DoxyCompactList}\small\item\em Chooses and removes a pumping station from the network and displays affected cities and their supply changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility functions for working with graphs and flow algorithms. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classUtils_a268bd7b4483295a308362c342f0abc3d}\label{classUtils_a268bd7b4483295a308362c342f0abc3d}} 
+\index{Utils@{Utils}!Balance@{Balance}}
+\index{Balance@{Balance}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{Balance()}{Balance()}}
+{\footnotesize\ttfamily void Utils\+::\+Balance (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&}]{reservoirs\+\_\+codes,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&}]{cities\+\_\+codes,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{stations\+\_\+code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Balances the network flow by transferring excess flow from pipes to other pipes. 
+
+This function balances the network flow by transferring excess flow from pipes with excess flow to other pipes. It iteratively performs flow transfers to minimize flow imbalances in the network.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the network flow. \\
+\hline
+{\em reservoirs\+\_\+codes} & A map containing reservoir codes mapped to corresponding \mbox{\hyperlink{classReservoir}{Reservoir}} objects. \\
+\hline
+{\em cities\+\_\+codes} & A map containing city codes mapped to corresponding \mbox{\hyperlink{classCity}{City}} objects. \\
+\hline
+{\em stations\+\_\+code} & A map containing station codes mapped to corresponding \mbox{\hyperlink{classStation}{Station}} objects.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function primarily depends on the number of iterations performed to balance the flow. Let n be the number of vertices and e be the number of edges. In each iteration, excess flow pipes are identified (O(e log e)), and flow transfers are performed, resulting in a total time complexity of O(k $\ast$ e log e), where k is the number of iterations. \mbox{\Hypertarget{classUtils_a05e79e114dcdeb83952b92f5fb896046}\label{classUtils_a05e79e114dcdeb83952b92f5fb896046}} 
+\index{Utils@{Utils}!calculateReceivedSupply@{calculateReceivedSupply}}
+\index{calculateReceivedSupply@{calculateReceivedSupply}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{calculateReceivedSupply()}{calculateReceivedSupply()}}
+{\footnotesize\ttfamily int Utils\+::calculate\+Received\+Supply (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$ \&}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&}]{city\+\_\+codes,  }\item[{unordered\+\_\+map$<$ string, double $>$}]{flows }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the number of cities that did not receive enough supply. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the network flow. \\
+\hline
+{\em city\+\_\+codes} & A map containing city codes mapped to corresponding \mbox{\hyperlink{classCity}{City}} objects. \\
+\hline
+{\em flows} & A map containing flow values for each vertex in the graph. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of cities that did not receive enough supply. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classUtils_a4b443926d39b174f82460f5ad2d97a47}\label{classUtils_a4b443926d39b174f82460f5ad2d97a47}} 
+\index{Utils@{Utils}!chooseCityByCode@{chooseCityByCode}}
+\index{chooseCityByCode@{chooseCityByCode}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{chooseCityByCode()}{chooseCityByCode()}}
+{\footnotesize\ttfamily void Utils\+::choose\+City\+By\+Code (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$ \&}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&}]{reservoirs\+\_\+codes,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&}]{cities\+\_\+codes,  }\item[{string}]{code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Selects a city by its code and displays its flow or lists all cities and their flows if code is \char`\"{}none\char`\"{}. 
+
+This function selects a city by its code and displays its flow. If the code is \char`\"{}none\char`\"{}, it lists all cities and their corresponding flows. If the provided code does not match any city code, it prints a message stating that the city does not exist.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the network flow. \\
+\hline
+{\em reservoirs\+\_\+codes} & A map containing reservoir codes mapped to corresponding \mbox{\hyperlink{classReservoir}{Reservoir}} objects. \\
+\hline
+{\em cities\+\_\+codes} & A map containing city codes mapped to corresponding \mbox{\hyperlink{classCity}{City}} objects. \\
+\hline
+{\em code} & The code of the city to select. If \char`\"{}none\char`\"{}, all cities and their flows are listed.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function depends on the size of the graph and the max\+Flow function. Let e be the number of edges and v be the number of vertices in the graph, the time complexity is O(e$^\wedge$2 $\ast$ v) for the max\+Flow function. \mbox{\Hypertarget{classUtils_acd6520aeaa6c71c4ddbfca7c7cbfd3db}\label{classUtils_acd6520aeaa6c71c4ddbfca7c7cbfd3db}} 
+\index{Utils@{Utils}!chooseCityByName@{chooseCityByName}}
+\index{chooseCityByName@{chooseCityByName}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{chooseCityByName()}{chooseCityByName()}}
+{\footnotesize\ttfamily int Utils\+::choose\+City\+By\+Name (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$ \&}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&}]{reservoirs\+\_\+codes,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&}]{cities\+\_\+codes,  }\item[{string}]{city }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Chooses a city by name and displays its flow value or the flows of all cities if no city name is specified. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the network flow. \\
+\hline
+{\em reservoirs\+\_\+codes} & A map containing reservoir codes mapped to corresponding \mbox{\hyperlink{classReservoir}{Reservoir}} objects. \\
+\hline
+{\em cities\+\_\+codes} & A map containing city codes mapped to corresponding \mbox{\hyperlink{classCity}{City}} objects. \\
+\hline
+{\em city} & The name of the city to display the flow value for. If \char`\"{}none\char`\"{} is provided, flows for all cities are displayed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the name corresponds to a city in the network, -\/1 otherwise.
+\end{DoxyReturn}
+This function runs in constant time O(1). \mbox{\Hypertarget{classUtils_ad6fd789dcf31ded4cbad525e250ea9ed}\label{classUtils_ad6fd789dcf31ded4cbad525e250ea9ed}} 
+\index{Utils@{Utils}!chooseFailingReservoir@{chooseFailingReservoir}}
+\index{chooseFailingReservoir@{chooseFailingReservoir}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{chooseFailingReservoir()}{chooseFailingReservoir()}}
+{\footnotesize\ttfamily void Utils\+::choose\+Failing\+Reservoir (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$ \&}]{g,  }\item[{string}]{code,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&}]{reservoirs\+\_\+codes,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&}]{city\+\_\+codes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Simulates the scenario where a reservoir fails and evaluates the impact on the water supply to cities. 
+
+This function simulates the scenario where a reservoir with the specified code fails and evaluates the impact on the water supply to cities. It calculates the number of cities not receiving sufficient supply before and after the reservoir failure and prints the affected cities.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the network flow. \\
+\hline
+{\em code} & The code of the reservoir to simulate the failure. \\
+\hline
+{\em reservoirs\+\_\+codes} & A map containing reservoir codes mapped to corresponding \mbox{\hyperlink{classReservoir}{Reservoir}} objects. \\
+\hline
+{\em city\+\_\+codes} & A map containing city codes mapped to corresponding \mbox{\hyperlink{classCity}{City}} objects.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function is O(e$^\wedge$2 $\ast$ v), where e is the number of edges and v is the number of vertices in the graph. \mbox{\Hypertarget{classUtils_a8821d0f06a4a32e764a1deaa3489e06c}\label{classUtils_a8821d0f06a4a32e764a1deaa3489e06c}} 
+\index{Utils@{Utils}!chooseRemovePumpingStations@{chooseRemovePumpingStations}}
+\index{chooseRemovePumpingStations@{chooseRemovePumpingStations}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{chooseRemovePumpingStations()}{chooseRemovePumpingStations()}}
+{\footnotesize\ttfamily void Utils\+::choose\+Remove\+Pumping\+Stations (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$ \&}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&}]{cities\+\_\+codes,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{stations\+\_\+code,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&}]{reservoirs\+\_\+code,  }\item[{string}]{station }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Chooses and removes a pumping station from the network and displays affected cities and their supply changes. 
+
+This function selects a pumping station from the network specified by its station code, removes it from the graph, recalculates the flow, and displays the affected cities along with the changes in their supply.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the network. \\
+\hline
+{\em cities\+\_\+codes} & A map containing city codes mapped to corresponding \mbox{\hyperlink{classCity}{City}} objects. \\
+\hline
+{\em stations\+\_\+code} & A map containing station codes mapped to corresponding \mbox{\hyperlink{classStation}{Station}} objects. \\
+\hline
+{\em reservoirs\+\_\+code} & A map containing reservoir codes mapped to corresponding \mbox{\hyperlink{classReservoir}{Reservoir}} objects. \\
+\hline
+{\em station} & The code of the pumping station to be removed.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function depends on the size of the graph and the max\+Flow(\+O(e$^\wedge$2 $\ast$ v)). \mbox{\Hypertarget{classUtils_a068c82a57c8d03d27dcb4b1a6aa4fd4d}\label{classUtils_a068c82a57c8d03d27dcb4b1a6aa4fd4d}} 
+\index{Utils@{Utils}!computeDiffs@{computeDiffs}}
+\index{computeDiffs@{computeDiffs}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{computeDiffs()}{computeDiffs()}}
+{\footnotesize\ttfamily vector$<$ pair$<$ pair$<$ string, string $>$, int $>$ $>$ Utils\+::compute\+Diffs (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&}]{reservoirs\+\_\+codes,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&}]{cities\+\_\+codes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the differences between pipe weights and flow values for each pipe in the graph. 
+
+This function computes the differences between pipe weights and flow values for each pipe in the given graph and returns a vector of pairs, where each pair contains the source-\/destination vertex pair and the corresponding difference.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the network flow. \\
+\hline
+{\em reservoirs\+\_\+codes} & A map containing reservoir codes mapped to corresponding \mbox{\hyperlink{classReservoir}{Reservoir}} objects. \\
+\hline
+{\em cities\+\_\+codes} & A map containing city codes mapped to corresponding \mbox{\hyperlink{classCity}{City}} objects. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of pairs, where each pair contains the source-\/destination vertex pair and the corresponding difference between pipe weight and flow.
+\end{DoxyReturn}
+The time complexity of this function is O(e), where e is the number of edges in the graph. \mbox{\Hypertarget{classUtils_aa4956e29082441f13ced9c447b903306}\label{classUtils_aa4956e29082441f13ced9c447b903306}} 
+\index{Utils@{Utils}!computeMetrics@{computeMetrics}}
+\index{computeMetrics@{computeMetrics}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{computeMetrics()}{computeMetrics()}}
+{\footnotesize\ttfamily vector$<$ int $>$ Utils\+::compute\+Metrics (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g,  }\item[{vector$<$ pair$<$ pair$<$ string, string $>$, int $>$ $>$}]{pipe\+Diffs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes metrics such as average, variance, and maximum difference from a vector of pipe differences. 
+
+This function computes metrics such as average, variance, and maximum difference from the vector of pipe differences and returns them in a vector.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the network flow. \\
+\hline
+{\em pipe\+Diffs} & A vector of pairs containing pipe differences. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector containing the computed metrics (average, variance, maximum difference).
+\end{DoxyReturn}
+The time complexity of this function is O(n), where n is the size of the pipe differences vector. \mbox{\Hypertarget{classUtils_a6ff54e2081c76a29cc4d766d0519b067}\label{classUtils_a6ff54e2081c76a29cc4d766d0519b067}} 
+\index{Utils@{Utils}!excessFlow@{excessFlow}}
+\index{excessFlow@{excessFlow}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{excessFlow()}{excessFlow()}}
+{\footnotesize\ttfamily vector$<$ pair$<$ pair$<$ string, string $>$, int $>$ $>$ Utils\+::excess\+Flow (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Identifies pipes with excess flow and sorts them based on the excess flow ratio. 
+
+This function identifies pipes with excess flow (flow \texorpdfstring{$>$}{>} 90\% of weight) and sorts them based on the excess flow ratio (flow/weight). It returns a vector of pairs containing the source-\/destination vertex pair and the excess flow ratio.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the network flow. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of pairs containing the source-\/destination vertex pair and the excess flow ratio.
+\end{DoxyReturn}
+The time complexity of this function is O(e log e), where e is the number of edges in the graph. \mbox{\Hypertarget{classUtils_a7debaac7c072fa1cdb5c7300753cd900}\label{classUtils_a7debaac7c072fa1cdb5c7300753cd900}} 
+\index{Utils@{Utils}!findPath@{findPath}}
+\index{findPath@{findPath}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{findPath()}{findPath()}}
+{\footnotesize\ttfamily bool Utils\+::find\+Path (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$ \&}]{g,  }\item[{Vertex$<$ string $>$ $\ast$}]{s,  }\item[{Vertex$<$ string $>$ $\ast$}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Finds a path from source to destination in the graph using BFS. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph. \\
+\hline
+{\em s} & The source vertex. \\
+\hline
+{\em d} & The destination vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if a path is found, false otherwise.
+\end{DoxyReturn}
+This function has a time complexity of O(V + E), where V is the number of vertices and E is the number of edges in the graph. \mbox{\Hypertarget{classUtils_a1760b6a5f016c8411446f5d501486384}\label{classUtils_a1760b6a5f016c8411446f5d501486384}} 
+\index{Utils@{Utils}!maxFlow@{maxFlow}}
+\index{maxFlow@{maxFlow}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{maxFlow()}{maxFlow()}}
+{\footnotesize\ttfamily unordered\+\_\+map$<$ string, double $>$ Utils\+::max\+Flow (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&}]{reservoirs\+\_\+codes,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&}]{cities\+\_\+codes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the maximum flow in the graph using the Edmonds-\/\+Karp algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph. \\
+\hline
+{\em reservoirs\+\_\+codes} & A map of reservoirs\textquotesingle{} codes to their corresponding \mbox{\hyperlink{classReservoir}{Reservoir}} objects. \\
+\hline
+{\em cities\+\_\+codes} & A map of cities\textquotesingle{} codes to their corresponding \mbox{\hyperlink{classCity}{City}} objects. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A map containing the flow values for each city vertex.
+\end{DoxyReturn}
+This function has a time complexity of O(\+E$^\wedge$2 $\ast$ V), where E is the number of edges and V is the number of vertices in the graph. \mbox{\Hypertarget{classUtils_aeb5c14ee01a4c2942d5356da3e4b35e5}\label{classUtils_aeb5c14ee01a4c2942d5356da3e4b35e5}} 
+\index{Utils@{Utils}!minResidual@{minResidual}}
+\index{minResidual@{minResidual}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{minResidual()}{minResidual()}}
+{\footnotesize\ttfamily double Utils\+::min\+Residual (\begin{DoxyParamCaption}\item[{Vertex$<$ string $>$ $\ast$}]{s,  }\item[{Vertex$<$ string $>$ $\ast$}]{d }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Finds the minimum residual capacity along the path from source to destination. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The source vertex. \\
+\hline
+{\em d} & The destination vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The minimum residual capacity.
+\end{DoxyReturn}
+This function has a time complexity of O(\+V), where V is the number of vertices along the path from source to destination. \mbox{\Hypertarget{classUtils_a327cb11ae7e929df14135d0e38aff2c5}\label{classUtils_a327cb11ae7e929df14135d0e38aff2c5}} 
+\index{Utils@{Utils}!pipeFailure@{pipeFailure}}
+\index{pipeFailure@{pipeFailure}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{pipeFailure()}{pipeFailure()}}
+{\footnotesize\ttfamily void Utils\+::pipe\+Failure (\begin{DoxyParamCaption}\item[{string}]{city,  }\item[{Graph$<$ string $>$}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&}]{reservoirs\+\_\+codes,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&}]{cities\+\_\+codes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Simulates a pipe failure in a specific city and identifies potentially disconnected edges. 
+
+This function simulates a pipe failure in the specified city of the network graph and identifies the edges that can be removed without disconnecting the network. It then prints the connections that can be removed one at a time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em city} & The city where the pipe failure occurs. \\
+\hline
+{\em g} & The graph representing the network flow. \\
+\hline
+{\em reservoirs\+\_\+codes} & A map containing reservoir codes mapped to corresponding \mbox{\hyperlink{classReservoir}{Reservoir}} objects. \\
+\hline
+{\em cities\+\_\+codes} & A map containing city codes mapped to corresponding \mbox{\hyperlink{classCity}{City}} objects.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function primarily depends on the number of edges in the graph. Let n be the number of vertices and e be the number of edges. The function computes the maximum flow twice for each edge, resulting in a time complexity of O(e$^\wedge$2 $\ast$ n). \mbox{\Hypertarget{classUtils_a000a5898df413415d584252df93067c7}\label{classUtils_a000a5898df413415d584252df93067c7}} 
+\index{Utils@{Utils}!printNotFullySuppliedCities@{printNotFullySuppliedCities}}
+\index{printNotFullySuppliedCities@{printNotFullySuppliedCities}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{printNotFullySuppliedCities()}{printNotFullySuppliedCities()}}
+{\footnotesize\ttfamily void Utils\+::print\+Not\+Fully\+Supplied\+Cities (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$ \&}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&}]{city\+\_\+codes,  }\item[{unordered\+\_\+map$<$ string, double $>$}]{flows }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Prints cities that are not fully supplied. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the network. \\
+\hline
+{\em city\+\_\+codes} & A map of city codes to \mbox{\hyperlink{classCity}{City}} objects. \\
+\hline
+{\em flows} & A map of flows for each city.\\
+\hline
+\end{DoxyParams}
+This function runs in time O(\+V) where V is the number of vertexes in the graph. \mbox{\Hypertarget{classUtils_ab2c3f3d63d769f05a209c139afffd492}\label{classUtils_ab2c3f3d63d769f05a209c139afffd492}} 
+\index{Utils@{Utils}!removePumpingStations@{removePumpingStations}}
+\index{removePumpingStations@{removePumpingStations}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{removePumpingStations()}{removePumpingStations()}}
+{\footnotesize\ttfamily void Utils\+::remove\+Pumping\+Stations (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$ \&}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&}]{cities\+\_\+codes,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{stations\+\_\+code,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&}]{reservoirs\+\_\+code }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Removes pumping stations from the network and checks for affected cities. 
+
+This function removes pumping stations from the network graph and checks for affected cities in terms of changes in flow after the removal. It then prints the affected cities along with the difference in flow. If no cities are affected, it prints a message indicating so.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the network flow. \\
+\hline
+{\em cities\+\_\+codes} & A map containing city codes mapped to corresponding \mbox{\hyperlink{classCity}{City}} objects. \\
+\hline
+{\em stations\+\_\+code} & A map containing station codes mapped to corresponding \mbox{\hyperlink{classStation}{Station}} objects. \\
+\hline
+{\em reservoirs\+\_\+code} & A map containing reservoir codes mapped to corresponding \mbox{\hyperlink{classReservoir}{Reservoir}} objects.\\
+\hline
+\end{DoxyParams}
+The complexity of this function primarily depends on the number of pumping stations (P) in the network. Let n be the number of vertices and e be the number of edges in the graph. Finding affected cities involves computing the maximum flow twice\+: once before and once after the removal of each pumping station. Therefore, the time complexity of this function can be expressed as O(\+P $\ast$ (e$^\wedge$2 $\ast$ n)), where e$^\wedge$2 represents the maximum flow computation complexity using the Edmonds-\/\+Karp algorithm. \mbox{\Hypertarget{classUtils_ae7e3fcdf920ef71d3bbbe834c06fbb1e}\label{classUtils_ae7e3fcdf920ef71d3bbbe834c06fbb1e}} 
+\index{Utils@{Utils}!setFlowPath@{setFlowPath}}
+\index{setFlowPath@{setFlowPath}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{setFlowPath()}{setFlowPath()}}
+{\footnotesize\ttfamily void Utils\+::set\+Flow\+Path (\begin{DoxyParamCaption}\item[{Vertex$<$ string $>$ $\ast$}]{s,  }\item[{Vertex$<$ string $>$ $\ast$}]{d,  }\item[{double}]{flow }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Updates the flow along the path from source to destination. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The source vertex. \\
+\hline
+{\em d} & The destination vertex. \\
+\hline
+{\em flow} & The flow to be added or subtracted.\\
+\hline
+\end{DoxyParams}
+This function has a time complexity of O(\+V), where V is the number of vertices along the path from source to destination. \mbox{\Hypertarget{classUtils_aa73f31c9f983d020052e3174aa368349}\label{classUtils_aa73f31c9f983d020052e3174aa368349}} 
+\index{Utils@{Utils}!sortBySecond@{sortBySecond}}
+\index{sortBySecond@{sortBySecond}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{sortBySecond()}{sortBySecond()}}
+{\footnotesize\ttfamily bool Utils\+::sort\+By\+Second (\begin{DoxyParamCaption}\item[{pair$<$ pair$<$ string, string $>$, int $>$ \&}]{a,  }\item[{pair$<$ pair$<$ string, string $>$, int $>$ \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Comparator function to sort pairs based on the second element in descending order. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First pair to compare. \\
+\hline
+{\em b} & Second pair to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the second element of pair \textquotesingle{}a\textquotesingle{} is greater than that of pair \textquotesingle{}b\textquotesingle{}, otherwise false.
+\end{DoxyReturn}
+The time complexity of this function is O(1). \mbox{\Hypertarget{classUtils_a72c9ea92beaed34477226b2b0444b28d}\label{classUtils_a72c9ea92beaed34477226b2b0444b28d}} 
+\index{Utils@{Utils}!testAndVisit@{testAndVisit}}
+\index{testAndVisit@{testAndVisit}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{testAndVisit()}{testAndVisit()}}
+{\footnotesize\ttfamily void Utils\+::test\+And\+Visit (\begin{DoxyParamCaption}\item[{queue$<$ Vertex$<$ string $>$ $\ast$ $>$ \&}]{q,  }\item[{Edge$<$ string $>$ $\ast$}]{e,  }\item[{Vertex$<$ string $>$ $\ast$}]{v,  }\item[{double}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Tests if a vertex has not been visited and the residual capacity of the edge is positive, then marks the vertex as visited, sets the path, and pushes it into the queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em q} & The queue of vertices to be visited. \\
+\hline
+{\em e} & The edge to be tested. \\
+\hline
+{\em v} & The vertex to be visited. \\
+\hline
+{\em r} & The residual capacity of the edge.\\
+\hline
+\end{DoxyParams}
+This function runs in constant time O(1). \mbox{\Hypertarget{classUtils_ac855765f266ee91bc74f15f146315ebf}\label{classUtils_ac855765f266ee91bc74f15f146315ebf}} 
+\index{Utils@{Utils}!waterDeficit@{waterDeficit}}
+\index{waterDeficit@{waterDeficit}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{waterDeficit()}{waterDeficit()}}
+{\footnotesize\ttfamily void Utils\+::water\+Deficit (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&}]{reservoirs\+\_\+codes,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&}]{cities\+\_\+codes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Identifies cities affected by water deficit due to the removal of a pipeline and prints the deficits. 
+
+This function identifies cities affected by water deficit due to the removal of a pipeline in the network graph. It then prints the affected cities along with the deficit in water flow.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the network flow. \\
+\hline
+{\em reservoirs\+\_\+codes} & A map containing reservoir codes mapped to corresponding \mbox{\hyperlink{classReservoir}{Reservoir}} objects. \\
+\hline
+{\em cities\+\_\+codes} & A map containing city codes mapped to corresponding \mbox{\hyperlink{classCity}{City}} objects.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function primarily depends on the number of edges in the graph. Let n be the number of vertices and e be the number of edges. The function computes the maximum flow twice for each edge, resulting in a time complexity of O(e$^\wedge$2 $\ast$ n). \mbox{\Hypertarget{classUtils_afc3d5c142cafde748169476127b23680}\label{classUtils_afc3d5c142cafde748169476127b23680}} 
+\index{Utils@{Utils}!waterDeficitChoosePipe@{waterDeficitChoosePipe}}
+\index{waterDeficitChoosePipe@{waterDeficitChoosePipe}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{waterDeficitChoosePipe()}{waterDeficitChoosePipe()}}
+{\footnotesize\ttfamily void Utils\+::water\+Deficit\+Choose\+Pipe (\begin{DoxyParamCaption}\item[{Graph$<$ string $>$}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&}]{reservoirs\+\_\+codes,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&}]{cities\+\_\+codes,  }\item[{vector$<$ pair$<$ string, string $>$ $>$}]{pipes }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Identifies the impact of chosen pipes on cities\textquotesingle{} water deficit. 
+
+This function calculates the impact of selected pipes on cities\textquotesingle{} water deficit. It takes a vector of pairs representing the pipes to be analyzed, and for each pipe, it temporarily sets its weight to 0, recalculates the flow, and determines the changes in the water deficit for each affected city. After analyzing all pipes, it restores their original weights and displays the cities affected by the chosen pipes and their respective water deficit changes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em g} & The graph representing the network. \\
+\hline
+{\em reservoirs\+\_\+codes} & A map containing reservoir codes mapped to corresponding \mbox{\hyperlink{classReservoir}{Reservoir}} objects. \\
+\hline
+{\em cities\+\_\+codes} & A map containing city codes mapped to corresponding \mbox{\hyperlink{classCity}{City}} objects. \\
+\hline
+{\em pipes} & A vector of pairs representing the pipes to be analyzed, where each pair contains the origin and destination codes of a pipe.\\
+\hline
+\end{DoxyParams}
+The time complexity of this function depends on the size of the graph, the number of pipes to be analyzed, and the max\+Flow function. Let e be the number of edges, v be the number of vertices, and p be the number of pipes, the time complexity is O(p $\ast$ (e$^\wedge$2 $\ast$ v)). 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Utils_8h}{Utils.\+h}}\item 
+Utils.\+cpp\end{DoxyCompactItemize}

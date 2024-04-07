@@ -1,0 +1,242 @@
+\hypertarget{classMenu}{}\doxysection{Menu Class Reference}
+\label{classMenu}\index{Menu@{Menu}}
+
+
+Represents a menu for interacting with the network system.  
+
+
+
+
+{\ttfamily \#include $<$menu.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMenu_ad466dd83355124a6ed958430450bfe94}\label{classMenu_ad466dd83355124a6ed958430450bfe94}} 
+{\bfseries Menu} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the \mbox{\hyperlink{classMenu}{Menu}} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenu_aec89029553906a8ffcdd26d00c96193d}{choose\+Region}} ()
+\begin{DoxyCompactList}\small\item\em Allows user to choose a region and performs corresponding actions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenu_a10af579f71c81a35986a2093d7653e0a}{build\+Graph}} (string s)
+\begin{DoxyCompactList}\small\item\em Builds the graph based on the specified region. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenu_a8964e02467730c1afc769c473aa9c3f2}{open\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Opens the menu and displays a welcome message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenu_ab934c2d5abb4ab56362bd998a4cbce4d}{wait}} ()
+\begin{DoxyCompactList}\small\item\em Waits for user input before continuing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenu_ab93f600719dfd1373340bbbdb9516015}{initial\+Options}} ()
+\begin{DoxyCompactList}\small\item\em Presents initial menu options and performs corresponding actions. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classMenu_ae864cbcdfd4916c1179f1e6d4fc5dff2}{close\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Closes the menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenu_ac7e6ce13afe2ffa574639da6cca87638}{metrics}} ()
+\begin{DoxyCompactList}\small\item\em Provides options for consulting different metrics related to the network. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenu_abe1841d3b9414532fd3626ab1b80ebd9}{max\+Flow\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Provides options for consulting maximum flow information. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenu_a166c7bfeef78bfb5f07e09ea11286262}{choose\+City}} ()
+\begin{DoxyCompactList}\small\item\em Provides options for specifying a city and consults maximum flow information. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenu_aa13bccf6fcad3784e6c7f023e249ac3b}{failures}} ()
+\begin{DoxyCompactList}\small\item\em Provides options for simulating failures in the network components. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenu_aaf4040cbb32949e7e065de7e50cfe5e6}{pumping\+Stations}} ()
+\begin{DoxyCompactList}\small\item\em Provides options for the removal of pumping Stations in the network. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenu_a4abdc964a0ce7a3943d95cf30163a0a7}{pipelines}} ()
+\begin{DoxyCompactList}\small\item\em Provides options for failures in pipelines and its relevance in the network flow. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenu_a28514dd2efbad28d5f610fc668ee8615}{continueM}} ()
+\begin{DoxyCompactList}\small\item\em Provides options to continue searching or quit the menu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \mbox{\hyperlink{classMenu_a40d1bbe8d75127bdf282efa94c30c06a}{reservoirs}}
+\begin{DoxyCompactList}\small\item\em Unordered map storing information about reservoirs. \end{DoxyCompactList}\item 
+unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \mbox{\hyperlink{classMenu_af89fb56d82fdcb5c2c78e9a96a190288}{cities}}
+\begin{DoxyCompactList}\small\item\em Unordered map storing information about cities. \end{DoxyCompactList}\item 
+unordered\+\_\+map$<$ string, \mbox{\hyperlink{classStation}{Station}} $>$ \mbox{\hyperlink{classMenu_ad51d544d7764ef9898d18e0806d2175a}{stations}}
+\begin{DoxyCompactList}\small\item\em Unordered map storing information about stations. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMenu_aed6f12d65d1f24ecc803f704f1cae301}\label{classMenu_aed6f12d65d1f24ecc803f704f1cae301}} 
+Graph$<$ string $>$ {\bfseries g}
+\begin{DoxyCompactList}\small\item\em Graph representing the network infrastructure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a menu for interacting with the network system. 
+
+This class provides various menu options for interacting with the network system, including options for displaying metrics, handling maximum flow, choosing cities, managing failures, handling pumping stations, managing pipelines, and continuing operations. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classMenu_a10af579f71c81a35986a2093d7653e0a}\label{classMenu_a10af579f71c81a35986a2093d7653e0a}} 
+\index{Menu@{Menu}!buildGraph@{buildGraph}}
+\index{buildGraph@{buildGraph}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{buildGraph()}{buildGraph()}}
+{\footnotesize\ttfamily void Menu\+::build\+Graph (\begin{DoxyParamCaption}\item[{string}]{s }\end{DoxyParamCaption})}
+
+
+
+Builds the graph based on the specified region. 
+
+This function Idetermines the file paths for reservoirs, stations, cities, and pipes data based on the input region. Then, it calls the corresponding parser functions to populate the graph with data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & A string representing the region for which the graph is to be built. Valid values are \textquotesingle{}Portugal\textquotesingle{} or \textquotesingle{}Madeira\textquotesingle{}. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMenu_a166c7bfeef78bfb5f07e09ea11286262}\label{classMenu_a166c7bfeef78bfb5f07e09ea11286262}} 
+\index{Menu@{Menu}!chooseCity@{chooseCity}}
+\index{chooseCity@{chooseCity}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{chooseCity()}{chooseCity()}}
+{\footnotesize\ttfamily void Menu\+::choose\+City (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Provides options for specifying a city and consults maximum flow information. 
+
+This function presents a menu with options to specify a city in order to consult maximum flow information for that city. Validates the input and performs actions based on the selected option. \mbox{\Hypertarget{classMenu_aec89029553906a8ffcdd26d00c96193d}\label{classMenu_aec89029553906a8ffcdd26d00c96193d}} 
+\index{Menu@{Menu}!chooseRegion@{chooseRegion}}
+\index{chooseRegion@{chooseRegion}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{chooseRegion()}{chooseRegion()}}
+{\footnotesize\ttfamily void Menu\+::choose\+Region (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Allows user to choose a region and performs corresponding actions. 
+
+This function displays a menu where the a network is chosen. Validates the input and performs actions based on the selected option. \mbox{\Hypertarget{classMenu_ae864cbcdfd4916c1179f1e6d4fc5dff2}\label{classMenu_ae864cbcdfd4916c1179f1e6d4fc5dff2}} 
+\index{Menu@{Menu}!closeMenu@{closeMenu}}
+\index{closeMenu@{closeMenu}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{closeMenu()}{closeMenu()}}
+{\footnotesize\ttfamily int Menu\+::close\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Closes the menu. 
+
+\begin{DoxyReturn}{Returns}
+An integer value indicating the success of closing the menu. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMenu_a28514dd2efbad28d5f610fc668ee8615}\label{classMenu_a28514dd2efbad28d5f610fc668ee8615}} 
+\index{Menu@{Menu}!continueM@{continueM}}
+\index{continueM@{continueM}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{continueM()}{continueM()}}
+{\footnotesize\ttfamily void Menu\+::continueM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Provides options to continue searching or quit the menu. 
+
+This function presents a menu with options to either go back to the main menu or quit the program. Validates the input and performs actions based on the selected option. \mbox{\Hypertarget{classMenu_aa13bccf6fcad3784e6c7f023e249ac3b}\label{classMenu_aa13bccf6fcad3784e6c7f023e249ac3b}} 
+\index{Menu@{Menu}!failures@{failures}}
+\index{failures@{failures}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{failures()}{failures()}}
+{\footnotesize\ttfamily void Menu\+::failures (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Provides options for simulating failures in the network components. 
+
+This function presents a menu with options to simulate failures in different network components. Validates the input and performs actions based on the selected option. \mbox{\Hypertarget{classMenu_ab93f600719dfd1373340bbbdb9516015}\label{classMenu_ab93f600719dfd1373340bbbdb9516015}} 
+\index{Menu@{Menu}!initialOptions@{initialOptions}}
+\index{initialOptions@{initialOptions}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{initialOptions()}{initialOptions()}}
+{\footnotesize\ttfamily void Menu\+::initial\+Options (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Presents initial menu options and performs corresponding actions. 
+
+This function displays a menu with initial options for consultation. Validates the input and performs actions based on the selected option. \mbox{\Hypertarget{classMenu_abe1841d3b9414532fd3626ab1b80ebd9}\label{classMenu_abe1841d3b9414532fd3626ab1b80ebd9}} 
+\index{Menu@{Menu}!maxFlowMenu@{maxFlowMenu}}
+\index{maxFlowMenu@{maxFlowMenu}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{maxFlowMenu()}{maxFlowMenu()}}
+{\footnotesize\ttfamily void Menu\+::max\+Flow\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Provides options for consulting maximum flow information. 
+
+This function presents a menu with options to consult different information about the maxflow. Validates the input and performs actions based on the selected option. \mbox{\Hypertarget{classMenu_ac7e6ce13afe2ffa574639da6cca87638}\label{classMenu_ac7e6ce13afe2ffa574639da6cca87638}} 
+\index{Menu@{Menu}!metrics@{metrics}}
+\index{metrics@{metrics}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{metrics()}{metrics()}}
+{\footnotesize\ttfamily void Menu\+::metrics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Provides options for consulting different metrics related to the network. 
+
+This function presents a menu with options to consult various metrics. Validates the input and performs actions based on the selected option. \mbox{\Hypertarget{classMenu_a8964e02467730c1afc769c473aa9c3f2}\label{classMenu_a8964e02467730c1afc769c473aa9c3f2}} 
+\index{Menu@{Menu}!openMenu@{openMenu}}
+\index{openMenu@{openMenu}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{openMenu()}{openMenu()}}
+{\footnotesize\ttfamily void Menu\+::open\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Opens the menu and displays a welcome message. 
+
+This function also calls the {\ttfamily \mbox{\hyperlink{classMenu_aec89029553906a8ffcdd26d00c96193d}{choose\+Region()}}} function \mbox{\Hypertarget{classMenu_a4abdc964a0ce7a3943d95cf30163a0a7}\label{classMenu_a4abdc964a0ce7a3943d95cf30163a0a7}} 
+\index{Menu@{Menu}!pipelines@{pipelines}}
+\index{pipelines@{pipelines}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{pipelines()}{pipelines()}}
+{\footnotesize\ttfamily void Menu\+::pipelines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Provides options for failures in pipelines and its relevance in the network flow. 
+
+This function presents a menu with options to determined failures in pipelines and presents the impact of those failures Validates the input and performs actions based on the selected option. \mbox{\Hypertarget{classMenu_aaf4040cbb32949e7e065de7e50cfe5e6}\label{classMenu_aaf4040cbb32949e7e065de7e50cfe5e6}} 
+\index{Menu@{Menu}!pumpingStations@{pumpingStations}}
+\index{pumpingStations@{pumpingStations}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{pumpingStations()}{pumpingStations()}}
+{\footnotesize\ttfamily void Menu\+::pumping\+Stations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Provides options for the removal of pumping Stations in the network. 
+
+This function presents a menu with options to remove different number of pumping stations. Validates the input and performs actions based on the selected option. \mbox{\Hypertarget{classMenu_ab934c2d5abb4ab56362bd998a4cbce4d}\label{classMenu_ab934c2d5abb4ab56362bd998a4cbce4d}} 
+\index{Menu@{Menu}!wait@{wait}}
+\index{wait@{wait}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{wait()}{wait()}}
+{\footnotesize\ttfamily void Menu\+::wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Waits for user input before continuing. 
+
+This function clears the input buffer to prevent any remaining input from affecting it. After receiving the ENTER key press, it calls the {\ttfamily \mbox{\hyperlink{classMenu_a28514dd2efbad28d5f610fc668ee8615}{continue\+M()}}} function. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classMenu_af89fb56d82fdcb5c2c78e9a96a190288}\label{classMenu_af89fb56d82fdcb5c2c78e9a96a190288}} 
+\index{Menu@{Menu}!cities@{cities}}
+\index{cities@{cities}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{cities}{cities}}
+{\footnotesize\ttfamily unordered\+\_\+map$<$string, \mbox{\hyperlink{classCity}{City}}$>$ Menu\+::cities}
+
+
+
+Unordered map storing information about cities. 
+
+This unordered map stores the object of class \mbox{\hyperlink{classCity}{City}}. Each city is associated with its unique code. \mbox{\Hypertarget{classMenu_a40d1bbe8d75127bdf282efa94c30c06a}\label{classMenu_a40d1bbe8d75127bdf282efa94c30c06a}} 
+\index{Menu@{Menu}!reservoirs@{reservoirs}}
+\index{reservoirs@{reservoirs}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{reservoirs}{reservoirs}}
+{\footnotesize\ttfamily unordered\+\_\+map$<$string, \mbox{\hyperlink{classReservoir}{Reservoir}}$>$ Menu\+::reservoirs}
+
+
+
+Unordered map storing information about reservoirs. 
+
+This unordered map stores the object of class \mbox{\hyperlink{classReservoir}{Reservoir}}. Each reservoir is associated with its unique code. \mbox{\Hypertarget{classMenu_ad51d544d7764ef9898d18e0806d2175a}\label{classMenu_ad51d544d7764ef9898d18e0806d2175a}} 
+\index{Menu@{Menu}!stations@{stations}}
+\index{stations@{stations}!Menu@{Menu}}
+\doxysubsubsection{\texorpdfstring{stations}{stations}}
+{\footnotesize\ttfamily unordered\+\_\+map$<$string, \mbox{\hyperlink{classStation}{Station}}$>$ Menu\+::stations}
+
+
+
+Unordered map storing information about stations. 
+
+This unordered map stores the object of class \mbox{\hyperlink{classStation}{Station}}. Each station is associated with its unique code. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+menu.\+h\item 
+menu.\+cpp\end{DoxyCompactItemize}

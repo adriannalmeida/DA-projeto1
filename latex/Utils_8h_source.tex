@@ -1,0 +1,65 @@
+\hypertarget{Utils_8h_source}{}\doxysection{Utils.\+h}
+\mbox{\hyperlink{Utils_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef DA\_PROJETO1\_UTILS\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define DA\_PROJETO1\_UTILS\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{DataParser_8h}{DataParser.h}}"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{14 \textcolor{keyword}{class }\mbox{\hyperlink{classUtils}{Utils}} \{}
+\DoxyCodeLine{15 \textcolor{keyword}{public}:}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{25     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{classUtils_a05e79e114dcdeb83952b92f5fb896046}{calculateReceivedSupply}}(Graph<string> \&g, unordered\_map<string, City> \&city\_codes,}
+\DoxyCodeLine{26                                        unordered\_map<string, double> flows);}
+\DoxyCodeLine{35     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUtils_a000a5898df413415d584252df93067c7}{printNotFullySuppliedCities}}(Graph<string> \&g, unordered\_map<string, City> \&city\_codes,}
+\DoxyCodeLine{36                                             unordered\_map<string, double> flows);}
+\DoxyCodeLine{47     \textcolor{keyword}{static} unordered\_map<string, double> \mbox{\hyperlink{classUtils_a1760b6a5f016c8411446f5d501486384}{maxFlow}}(Graph<string> g, unordered\_map<string, Reservoir> \&reservoirs\_codes,}
+\DoxyCodeLine{48                                                  unordered\_map<string, City> \&cities\_codes);}
+\DoxyCodeLine{58     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUtils_a72c9ea92beaed34477226b2b0444b28d}{testAndVisit}}(queue<Vertex<string> *> \&q, Edge<string> *e, Vertex<string> *v, \textcolor{keywordtype}{double} r);}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{69     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classUtils_a7debaac7c072fa1cdb5c7300753cd900}{findPath}}(Graph<string> \&g, Vertex<string> *s, Vertex<string> *d);}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{79     \textcolor{keyword}{static} \textcolor{keywordtype}{double} \mbox{\hyperlink{classUtils_aeb5c14ee01a4c2942d5356da3e4b35e5}{minResidual}}(Vertex<string> *s, Vertex<string> *d);}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{89     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUtils_ae7e3fcdf920ef71d3bbbe834c06fbb1e}{setFlowPath}}(Vertex<string> *s, Vertex<string> *d, \textcolor{keywordtype}{double} flow);}
+\DoxyCodeLine{100     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{classUtils_acd6520aeaa6c71c4ddbfca7c7cbfd3db}{chooseCityByName}}(Graph<string> \&g, unordered\_map<string, Reservoir> \&reservoirs\_codes,}
+\DoxyCodeLine{101                                  unordered\_map<string, City> \&cities\_codes, \textcolor{keywordtype}{string} city);}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{122     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUtils_ab2c3f3d63d769f05a209c139afffd492}{removePumpingStations}}(Graph<string> \&g, unordered\_map<string, City> \&cities\_codes,}
+\DoxyCodeLine{123                                       unordered\_map<string, Station> \&stations\_code,}
+\DoxyCodeLine{124                                       unordered\_map<string, Reservoir> \&reservoirs\_code);}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{142     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUtils_a327cb11ae7e929df14135d0e38aff2c5}{pipeFailure}}(\textcolor{keywordtype}{string} city, Graph<string> g, unordered\_map<string, Reservoir> \&reservoirs\_codes,}
+\DoxyCodeLine{143                             unordered\_map<string, City> \&cities\_codes);}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{159     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUtils_ac855765f266ee91bc74f15f146315ebf}{waterDeficit}}(Graph<string> g, unordered\_map<string, Reservoir> \&reservoirs\_codes,}
+\DoxyCodeLine{160                              unordered\_map<string, City> \&cities\_codes);}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{177     \textcolor{keyword}{static} vector<pair<pair<string, string>, \textcolor{keywordtype}{int}>> \mbox{\hyperlink{classUtils_a068c82a57c8d03d27dcb4b1a6aa4fd4d}{computeDiffs}}(Graph<string> g, unordered\_map<string, Reservoir> \&reservoirs\_codes,}
+\DoxyCodeLine{178                  unordered\_map<string, City> \&cities\_codes);}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{196     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUtils_a268bd7b4483295a308362c342f0abc3d}{Balance}}(Graph<string> g, unordered\_map<string, Reservoir> \&reservoirs\_codes,}
+\DoxyCodeLine{197                         unordered\_map<string, City> \&cities\_codes, unordered\_map<string, Station> \&stations\_code);}
+\DoxyCodeLine{210     \textcolor{keyword}{static} vector<int> \mbox{\hyperlink{classUtils_aa4956e29082441f13ced9c447b903306}{computeMetrics}}(Graph<string> g, vector<pair<pair<string, string>, \textcolor{keywordtype}{int}>> pipeDiffs);}
+\DoxyCodeLine{221     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classUtils_aa73f31c9f983d020052e3174aa368349}{sortBySecond}}(pair<pair<string, string>, \textcolor{keywordtype}{int}> \&a, pair<pair<string, string>, \textcolor{keywordtype}{int}> \&b);}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{235     \textcolor{keyword}{static} vector<pair<pair<string, string>, \textcolor{keywordtype}{int}>> \mbox{\hyperlink{classUtils_a6ff54e2081c76a29cc4d766d0519b067}{excessFlow}}(Graph<string> g);}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237 }
+\DoxyCodeLine{253     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUtils_ad6fd789dcf31ded4cbad525e250ea9ed}{chooseFailingReservoir}}(Graph<string> \&g, \textcolor{keywordtype}{string} code, unordered\_map<string, Reservoir> \&reservoirs\_codes,}
+\DoxyCodeLine{254                            unordered\_map<string, City> \&city\_codes);}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{272     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUtils_a4b443926d39b174f82460f5ad2d97a47}{chooseCityByCode}}(Graph<string> \&g, unordered\_map<string, Reservoir> \&reservoirs\_codes,}
+\DoxyCodeLine{273                                  unordered\_map<string, City> \&cities\_codes, \textcolor{keywordtype}{string} code);}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{294     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUtils_afc3d5c142cafde748169476127b23680}{waterDeficitChoosePipe}}(Graph<string> g, unordered\_map<string, Reservoir> \&reservoirs\_codes,}
+\DoxyCodeLine{295                                        unordered\_map<string, City> \&cities\_codes, vector<pair<string, string>> pipes);}
+\DoxyCodeLine{311     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{classUtils_a8821d0f06a4a32e764a1deaa3489e06c}{chooseRemovePumpingStations}}(Graph<string> \&g, unordered\_map<string, City> \&cities\_codes,}
+\DoxyCodeLine{312                                             unordered\_map<string, Station> \&stations\_code,}
+\DoxyCodeLine{313                                             unordered\_map<string, Reservoir> \&reservoirs\_code, \textcolor{keywordtype}{string} station);}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{315     \};}
+\DoxyCodeLine{316 }
+\DoxyCodeLine{317 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//DA\_PROJETO1\_UTILS\_H}}
+
+\end{DoxyCode}

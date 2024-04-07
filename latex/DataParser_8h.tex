@@ -1,0 +1,136 @@
+\hypertarget{DataParser_8h}{}\doxysection{Data\+Parser.\+h File Reference}
+\label{DataParser_8h}\index{DataParser.h@{DataParser.h}}
+
+
+Functions for parsing the given data from CSV Files.  
+
+
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include \char`\"{}Reservoir.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}data\+\_\+structures/graph.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include \char`\"{}Station.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}City.\+h\char`\"{}}\newline
+Include dependency graph for Data\+Parser.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{DataParser_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=169pt]{DataParser_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{DataParser_8h_a918c5c96af9db73a12bcda3a67916505}{Reservoir\+Parser}} (string path, Graph$<$ string $>$ \&g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&ht)
+\begin{DoxyCompactList}\small\item\em Parses the \mbox{\hyperlink{classReservoir}{Reservoir}} data from a CSV file and populates a graph and a hash table. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{DataParser_8h_aa262c89b4d4c1819ed6d5ecbc9e84de9}{Station\+Parser}} (string path, Graph$<$ string $>$ \&g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classStation}{Station}} $>$ \&ht)
+\begin{DoxyCompactList}\small\item\em Parses the \mbox{\hyperlink{classStation}{Station}} data from a CSV file and populates a graph and a hash table. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{DataParser_8h_afb12f154b423bdccbc179889e9726bbd}{City\+Parser}} (string path, Graph$<$ string $>$ \&g, unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&ht, string s)
+\begin{DoxyCompactList}\small\item\em Parses the \mbox{\hyperlink{classCity}{City}} data from a CSV file and populates a graph and a hash table. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{DataParser_8h_afc3d1e32b51a9b36e87a65828bb306cc}{Pipes\+Parser}} (string path, Graph$<$ string $>$ \&g)
+\begin{DoxyCompactList}\small\item\em Parses the Pipes data from a CSV file and populates a graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions for parsing the given data from CSV Files. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{DataParser_8h_afb12f154b423bdccbc179889e9726bbd}\label{DataParser_8h_afb12f154b423bdccbc179889e9726bbd}} 
+\index{DataParser.h@{DataParser.h}!CityParser@{CityParser}}
+\index{CityParser@{CityParser}!DataParser.h@{DataParser.h}}
+\doxysubsubsection{\texorpdfstring{CityParser()}{CityParser()}}
+{\footnotesize\ttfamily void City\+Parser (\begin{DoxyParamCaption}\item[{string}]{path,  }\item[{Graph$<$ string $>$ \&}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classCity}{City}} $>$ \&}]{ht,  }\item[{string}]{s }\end{DoxyParamCaption})}
+
+
+
+Parses the \mbox{\hyperlink{classCity}{City}} data from a CSV file and populates a graph and a hash table. 
+
+This function reads the \mbox{\hyperlink{classCity}{City}} data from the specified CSV file and populates a graph representing the network and a hash table mapping city codes to \mbox{\hyperlink{classCity}{City}} objects. It adds vertices to the graph for each city and stores corresponding \mbox{\hyperlink{classCity}{City}} objects in the hash table.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The file path of the CSV file containing the \mbox{\hyperlink{classCity}{City}} data. \\
+\hline
+{\em g} & The graph representing the network. \\
+\hline
+{\em ht} & The hash table mapping city codes to \mbox{\hyperlink{classCity}{City}} objects. \\
+\hline
+{\em s} & The region identifier, specifies the data to parse. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{DataParser_8h_afc3d1e32b51a9b36e87a65828bb306cc}\label{DataParser_8h_afc3d1e32b51a9b36e87a65828bb306cc}} 
+\index{DataParser.h@{DataParser.h}!PipesParser@{PipesParser}}
+\index{PipesParser@{PipesParser}!DataParser.h@{DataParser.h}}
+\doxysubsubsection{\texorpdfstring{PipesParser()}{PipesParser()}}
+{\footnotesize\ttfamily void Pipes\+Parser (\begin{DoxyParamCaption}\item[{string}]{path,  }\item[{Graph$<$ string $>$ \&}]{g }\end{DoxyParamCaption})}
+
+
+
+Parses the Pipes data from a CSV file and populates a graph. 
+
+This function reads the Pipes data from the specified CSV file and populates a graph representing the network. It adds edges to the graph for each pipe, considering whether the pipe is bidirectional or unidirectional.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The file path of the CSV file containing the Pipes data. \\
+\hline
+{\em g} & The graph representing the network. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{DataParser_8h_a918c5c96af9db73a12bcda3a67916505}\label{DataParser_8h_a918c5c96af9db73a12bcda3a67916505}} 
+\index{DataParser.h@{DataParser.h}!ReservoirParser@{ReservoirParser}}
+\index{ReservoirParser@{ReservoirParser}!DataParser.h@{DataParser.h}}
+\doxysubsubsection{\texorpdfstring{ReservoirParser()}{ReservoirParser()}}
+{\footnotesize\ttfamily void Reservoir\+Parser (\begin{DoxyParamCaption}\item[{string}]{path,  }\item[{Graph$<$ string $>$ \&}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classReservoir}{Reservoir}} $>$ \&}]{ht }\end{DoxyParamCaption})}
+
+
+
+Parses the \mbox{\hyperlink{classReservoir}{Reservoir}} data from a CSV file and populates a graph and a hash table. 
+
+This function reads the \mbox{\hyperlink{classReservoir}{Reservoir}} data from the specified CSV file and populates a graph representing the network and a hash table mapping reservoir codes to \mbox{\hyperlink{classReservoir}{Reservoir}} objects. It adds vertices to the graph for each reservoir and stores corresponding \mbox{\hyperlink{classReservoir}{Reservoir}} objects in the hash table.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The file path of the CSV file containing the \mbox{\hyperlink{classReservoir}{Reservoir}} data. \\
+\hline
+{\em g} & The graph representing the network. \\
+\hline
+{\em ht} & The hash table mapping reservoir codes to \mbox{\hyperlink{classReservoir}{Reservoir}} objects. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{DataParser_8h_aa262c89b4d4c1819ed6d5ecbc9e84de9}\label{DataParser_8h_aa262c89b4d4c1819ed6d5ecbc9e84de9}} 
+\index{DataParser.h@{DataParser.h}!StationParser@{StationParser}}
+\index{StationParser@{StationParser}!DataParser.h@{DataParser.h}}
+\doxysubsubsection{\texorpdfstring{StationParser()}{StationParser()}}
+{\footnotesize\ttfamily void Station\+Parser (\begin{DoxyParamCaption}\item[{string}]{path,  }\item[{Graph$<$ string $>$ \&}]{g,  }\item[{unordered\+\_\+map$<$ string, \mbox{\hyperlink{classStation}{Station}} $>$ \&}]{ht }\end{DoxyParamCaption})}
+
+
+
+Parses the \mbox{\hyperlink{classStation}{Station}} data from a CSV file and populates a graph and a hash table. 
+
+This function reads the \mbox{\hyperlink{classStation}{Station}} data from the specified CSV file and populates a graph representing the network and a hash table mapping station codes to \mbox{\hyperlink{classStation}{Station}} objects. It adds vertices to the graph for each station and stores corresponding \mbox{\hyperlink{classStation}{Station}} objects in the hash table.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The file path of the CSV file containing the \mbox{\hyperlink{classStation}{Station}} data. \\
+\hline
+{\em g} & The graph representing the network. \\
+\hline
+{\em ht} & The hash table mapping station codes to \mbox{\hyperlink{classStation}{Station}} objects. \\
+\hline
+\end{DoxyParams}

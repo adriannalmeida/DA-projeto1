@@ -207,11 +207,6 @@ void Utils::chooseCityByCode(Graph<string> &g, unordered_map<string, Reservoir> 
 void Utils::chooseRemovePumpingStations(Graph<string> &g, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code, unordered_map<string, Reservoir> &reservoirs_code, string station){
 
     Vertex<string>* ps = g.findVertex(station);
-    /*for(auto v: g.getVertexSet()){
-        if(v->getInfo()==station){
-            ps=v;
-        }
-    }*/
 
     unordered_map<string, double> maxiFlow = maxFlow(g, reservoirs_code, cities_codes);
 
@@ -340,7 +335,6 @@ void Utils::pipeFailure(string city, Graph<string> g, unordered_map<string, Rese
             string desti = e->getDest()->getInfo();
             auto initialWeight = e->getWeight();
             e->setWeight(0);
-            //g.removeEdge(src->getInfo(), e->getDest()->getInfo());
             unordered_map<string, double> newFlows = maxFlow(g, reservoirs_codes, cities_codes);
 
             double newValue;
@@ -609,13 +603,6 @@ void Utils::chooseFailingReservoir(Graph<string> &g, string code, unordered_map<
     int before, after;
     unordered_map<string, double> flows = maxFlow(g, reservoirs_codes, city_codes);
     before = calculateReceivedSupply(g, city_codes, flows);
-
-    try {
-        Reservoir R = reservoirs_codes.at(code);
-    } catch (const std::out_of_range& e) {
-        cout << "Reservoir does not exist!: " << endl;
-        return;
-    }
 
     cout << "When every Reservoir was functioning, " << before << " city(ies) were not receiving the needed supply." <<endl;
     printNotFullySuppliedCities(g, city_codes, flows);
