@@ -10,8 +10,6 @@ add_executable(Projeto1
         City.h
         DataParser.h
         DataParser.cpp
-        data_structures/ufds.cpp
-        data_structures/MutablePriorityQueue.h
         Reservoir.h
         Reservoir.cpp
         main.cpp

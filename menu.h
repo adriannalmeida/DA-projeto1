@@ -1,18 +1,8 @@
 #ifndef PROJETO1_MENU_H
 #define PROJETO1_MENU_H
 
-#include <iostream>
-#include "DataParser.h"
-#include <vector>
-#include <set>
-#include <unordered_map>
-#include <unistd.h>
-#include <algorithm>
-#include <unordered_set>
-#include <cmath>
-#include <cctype>
-#include <iomanip>
 #include "Utils.h"
+#include "DataParser.h"
 
 /**
  * @brief Represents a menu for interacting with the network system.
