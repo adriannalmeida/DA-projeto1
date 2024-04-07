@@ -150,7 +150,7 @@ unordered_map<string, double> Utils::maxFlow(Graph<string> g, unordered_map<stri
     return res;
 }
 
-void Utils::chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string city){
+int Utils::chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string city){
     unordered_map<string, double> flows = maxFlow(g, reservoirs_codes, cities_codes);
     int sum=0;
     if(city=="none"){
@@ -168,7 +168,7 @@ void Utils::chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> 
             }
         }
         if(code==""){
-            cout<< "City doesn´t exist"<<endl;
+            return -1;
         }
         else {
             for (auto ci: flows) {
@@ -178,7 +178,7 @@ void Utils::chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> 
             }
         }
     }
-
+    return 0;
 }
 
 void Utils::chooseCityByCode(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &cities_codes, string code){
@@ -358,9 +358,9 @@ void Utils::pipeFailure(string city, Graph<string> g, unordered_map<string, Rese
 
         }
     }
-    cout << res.size() << endl;
+    cout << "Number of pipelines that can be removed without affecting the chosen city: "<< res.size() << endl;
     string orig, dest;
-    cout << "The pipelines connecting the following places can be removed one at a time: "<<endl;
+    cout << "List of pipelines connecting the following places that can be removed one at a time: "<< endl;
 
     for(auto x: res){
         if(x.first[0]=='C')
@@ -651,12 +651,7 @@ void Utils::noUnnecessaryMaxFlow(Graph<string> &g, string code, unordered_map<st
     unordered_map<string, double> flows = maxFlow(g, reservoirs_codes, city_codes);
     before = calculateReceivedSupply(g, city_codes, flows);
 
-    try {
-        Reservoir R = reservoirs_codes.at(code);
-    } catch (const std::out_of_range& e) {
-        cout << "Reservoir does not exist!: " << endl;
-        return;
-    }
+    Reservoir R = reservoirs_codes[code];
 
     cout << "When every Reservoir was functioning, " << before << " city(ies) were not receiving the needed supply." <<endl;
     printNotFullySuppliedCities(g, city_codes, flows);

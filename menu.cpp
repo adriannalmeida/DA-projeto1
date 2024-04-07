@@ -109,6 +109,14 @@ void Menu::failures(){
         cout << "Reservoir Code: ";
         string option;
         cin >> option;
+        while(true){
+            try {
+                Reservoir R = reservoirs.at(option); break;
+            } catch (const std::out_of_range& e) {
+                cout << "Reservoir not in the network! Option: ";
+            }
+            cin >> option;
+        }
         Utils::chooseFailingReservoir(g, option, reservoirs, cities);
         cout<<endl;
         wait();}
@@ -135,7 +143,13 @@ void Menu::pipelines(){
     if(option=="1"){
         cout << "City code: ";
         string option;
-        cin >> option;
+        while (true) {
+            try{City C = cities.at(option);break;}
+            catch(const std::out_of_range& e) {
+                cout << "City not in the network. Option: ";
+            }
+            cin >> option;
+        }
         Utils::pipeFailure(option, g, reservoirs, cities);
         cout<<endl;
         wait();}
@@ -147,13 +161,30 @@ void Menu::pipelines(){
     else if(option == "3"){
         vector<pair<string, string>> pipes;
         bool flag=true;
+        bool isStation, isReservoir, isCity;
         while(flag){
-            cout << "Origin of Pipeline: ";
+            cout << "Code of Pipeline Origin: ";
             string orig;
             cin >> orig;
-            cout << "Destination of Pipeline: ";
+            while(true){
+                try{Station S = stations.at(orig);isStation = true;}
+                catch(const std::out_of_range& e) {isStation = false;}
+                try{Reservoir R = reservoirs.at(orig);isReservoir = true;}
+                catch(const std::out_of_range& e) {isReservoir = false;}
+                if(isReservoir||isStation){ break;}
+                else{cout << "Invalid input. Code of Pipeline Origin: ";cin >> orig;}
+            }
+            cout << "Code of Pipeline Destination: ";
             string dest;
             cin >> dest;
+            while(true){
+                try{Station S = stations.at(dest);isStation = true;}
+                catch(const std::out_of_range& e) {isStation = false;}
+                try{City C = cities.at(dest);isCity = true;}
+                catch(const std::out_of_range& e) {isCity = false;}
+                if(isCity||isStation) { break;}
+                else{cout << "Invalid input. Code of Pipeline Destination: ";cin >> dest;}
+            }
             pipes.push_back(make_pair(orig, dest));
             cout << "Do you want to remove more pipelines?"<<endl;
             cout << "1. Yes\n" << "2. No\n";
@@ -194,6 +225,13 @@ void Menu::pumpingStations(){
         cout << "Pumping Station code: ";
         string option;
         cin >> option;
+        while (true) {
+            try{Station S = stations.at(option);break;}
+            catch(const std::out_of_range& e) {
+                cout << "Pumping Station not in the network. Option: ";
+            }
+            cin >> option;
+        }
         Utils::chooseRemovePumpingStations(g, cities, stations, reservoirs, option);
         cout<<endl;
         wait();
@@ -267,8 +305,15 @@ void Menu::chooseCity(){
 
     if (option == "1") {
         cout << "City code: ";
-        string option;
+        string option; int id; string prefix;
         cin >> option;
+        while (true) {
+            try{City C = cities.at(option);break;}
+            catch(const std::out_of_range& e) {
+                cout << "City not in the network. Option: ";
+            }
+            cin >> option;
+        }
 
         Utils::chooseCityByCode(g, reservoirs, cities, option);
         cout<<endl;
@@ -278,8 +323,10 @@ void Menu::chooseCity(){
         cout << "City name: ";
         string option;
         cin >> option;
-
-        Utils::chooseCityByName(g, reservoirs, cities, option);
+        while (Utils::chooseCityByName(g, reservoirs, cities, option) != 0) {
+            cout << "City not in the network."<< endl << "City name: ";
+            cin >> option;
+        }
         cout<<endl;
         wait();
     }
@@ -289,7 +336,7 @@ void Menu::chooseCity(){
 void Menu::continueM(){
     cout << "Choose one option" << endl;
     cout << "1. Go back to Menu\n" << "2.Quit\n" << endl;
-    cout << "Option: "<<endl;
+    cout << "Option: ";
     string option;
     cin >> option;
 

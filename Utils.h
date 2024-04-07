@@ -94,9 +94,10 @@ public:
      * @param reservoirs_codes A map containing reservoir codes mapped to corresponding Reservoir objects.
      * @param cities_codes A map containing city codes mapped to corresponding City objects.
      * @param city The name of the city to display the flow value for. If "none" is provided, flows for all cities are displayed.
+     * @return 0 if the name corresponds to a city in the network, -1 otherwise.
      * @details This function runs in constant time O(1).
      */
-    static void chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes,
+    static int chooseCityByName(Graph<string> &g, unordered_map<string, Reservoir> &reservoirs_codes,
                                  unordered_map<string, City> &cities_codes, string city);
 
     /**
