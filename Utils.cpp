@@ -206,46 +206,37 @@ void Utils::chooseCityByCode(Graph<string> &g, unordered_map<string, Reservoir> 
 
 void Utils::chooseRemovePumpingStations(Graph<string> &g, unordered_map<string, City> &cities_codes, unordered_map<string, Station> &stations_code, unordered_map<string, Reservoir> &reservoirs_code, string station){
 
-    Vertex<string>* ps;
-    for(auto v: g.getVertexSet()){
+    Vertex<string>* ps = g.findVertex(station);
+    /*for(auto v: g.getVertexSet()){
         if(v->getInfo()==station){
             ps=v;
         }
-    }
+    }*/
 
     unordered_map<string, double> maxiFlow = maxFlow(g, reservoirs_code, cities_codes);
 
 
+    vector<pair<Vertex<string>*, double>> outcomingEdges;
+    for(auto edge: ps->getAdj()){
+        outcomingEdges.push_back(make_pair(edge->getDest(), edge->getWeight()));
+        edge->setWeight(0);
+    }
+
+    unordered_map<string, double> currentFlow = maxFlow(g, reservoirs_code, cities_codes);
 
 
-        vector<pair<Vertex<string>*, double>> outcomingEdges;
-        vector<pair<Vertex<string>*, double>> incomingEdges;
-        for(auto edge: ps->getAdj()){
-            outcomingEdges.push_back(make_pair(edge->getDest(), edge->getWeight()));
+    for(auto oe: outcomingEdges){
+        for(auto &edge: ps->getAdj()){
+            if(edge->getDest() == oe.first){
+                edge->setWeight(oe.second);
+            }
         }
-        for(auto edge: ps->getIncoming()){
-            incomingEdges.push_back(make_pair(edge->getOrig(), edge->getWeight()));
-        }
-
-        string info=ps->getInfo();
-        g.removeVertex(ps->getInfo());
-
-        unordered_map<string, double> currentFlow = maxFlow(g, reservoirs_code, cities_codes);
-
-        g.addVertex(info);
-
-        for(auto edge: outcomingEdges){
-            g.addEdge(info, edge.first->getInfo(), edge.second);
-        }
-
-        for(auto edge: incomingEdges){
-            g.addEdge(edge.first->getInfo(), info, edge.second);
-        }
+    }
 
         int n=maxiFlow.size();
         bool affected=false;
 
-        cout << "Affected cities by " << info<<": "<<endl;
+        cout << "Affected cities by " << ps->getInfo()<<": "<<endl;
         for(auto p : maxiFlow){
             City c = cities_codes[p.first];
             if((p.second != currentFlow[p.first]) && (c.getDemand() > currentFlow[p.first])){
@@ -284,28 +275,25 @@ void Utils::chooseRemovePumpingStations(Graph<string> &g, unordered_map<string, 
     for(auto s: stations){
 
         vector<pair<Vertex<string>*, double>> outcomingEdges;
-        vector<pair<Vertex<string>*, double>> incomingEdges;
+
         for(auto edge: s->getAdj()){
             outcomingEdges.push_back(make_pair(edge->getDest(), edge->getWeight()));
-        }
-        for(auto edge: s->getIncoming()){
-            incomingEdges.push_back(make_pair(edge->getOrig(), edge->getWeight()));
+            edge->setWeight(0);
         }
 
         string info=s->getInfo();
-        g.removeVertex(s->getInfo());
 
         unordered_map<string, double> currentFlow = maxFlow(g, reservoirs_code, cities_codes);
 
-        g.addVertex(info);
+        for(auto eo: outcomingEdges){
+            for(auto &edge: s->getAdj()){
+                if(eo.first == edge->getDest()){
+                    edge->setWeight(eo.second);
+                }
+            }
 
-        for(auto edge: outcomingEdges){
-            g.addEdge(info, edge.first->getInfo(), edge.second);
         }
 
-        for(auto edge: incomingEdges){
-            g.addEdge(edge.first->getInfo(), info, edge.second);
-        }
 
         int n=maxiFlow.size();
         bool affected=false;
