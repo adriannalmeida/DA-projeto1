@@ -1,17 +1,17 @@
 #ifndef PROJETO1_DATAPARSER_H
 #define PROJETO1_DATAPARSER_H
 
+
+#include "data_structures/graph.h"
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <cstdlib>
-#include "Reservoir.h"
-#include "data_structures/graph.h"
 #include <unordered_map>
+#include "Reservoir.h"
 #include "Station.h"
 #include "City.h"
-using namespace std;
+
 /**
  * @file DataParser.h
  * @brief Functions for parsing the given data from CSV Files.

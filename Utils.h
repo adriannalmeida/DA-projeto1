@@ -1,8 +1,16 @@
 #ifndef DA_PROJETO1_UTILS_H
 #define DA_PROJETO1_UTILS_H
 
-#include "DataParser.h"
-
+#include "data_structures/graph.h"
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <unordered_map>
+#include "Reservoir.h"
+#include "Station.h"
+#include "City.h"
+#include <iomanip>
 /**
  * @file Utils.h
  * @brief Declaration if the class Utils.
