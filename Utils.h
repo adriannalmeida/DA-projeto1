@@ -235,8 +235,6 @@ public:
     static vector<pair<pair<string, string>, int>> excessFlow(Graph<string> g);
 
 
-    static void noUnnecessaryMaxFlow(Graph<string> &g, string code, unordered_map<string, Reservoir> &reservoirs_codes, unordered_map<string, City> &city_codes);
-
     /**
      * @brief Simulates the scenario where a reservoir fails and evaluates the impact on the water supply to cities.
      *
